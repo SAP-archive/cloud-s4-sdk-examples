@@ -19,7 +19,7 @@ Runnable example applications that showcase the usage of the SAP S/4HANA Cloud S
  In order to be able to deploy and test the examples, the following requirements need to be fulfilled from the infrastructure perspective: 
  
  Get your free trial [SAP Cloud Platform account](https://account.hanatrial.ondemand.com/register) to be able to run the examples on SAP Cloud Platform.  
- To evaluate the SAP S/4HANA connectivity, ensure availability of an on-premise SAP S/4HANA system.
+ To evaluate the SAP S/4HANA connectivity, ensure that you have access to an SAP S/4HANA system (on-premise or cloud edition).
  
  ## Download and Installation
  
