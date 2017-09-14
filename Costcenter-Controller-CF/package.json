@@ -1,0 +1,29 @@
+{
+  "name": "costcenter-controller-cf",
+  "version": "1.0.0",
+  "description": "Frontend Tests",
+  "scripts": {
+    "ci-e2e": "cd e2e-tests && nightwatch --skiptags=ignore",
+    "e2e": "cd e2e-tests && nightwatch --skiptags=ignore --lauchurl={PLEASE_REPLACE_ME}",
+    "ci-smoke": "cd e2e-tests && nightwatch -e chrome --tags=smoke --skiptags=ignore",
+    "ci-test": "karma start frontend-unit-tests/karma.conf.js --watch=false --single-run=true"
+  },
+  "author": "SAP",
+  "private": true,
+  "devDependencies": {
+    "yargs": "^6.6.0",
+    "chromedriver": "^2.29.0",
+    "cucumber": "^2.2.0",
+    "cucumber-html-report": "^0.6.0",
+    "cucumber-junit": "^1.7.0",
+    "jasmine": "^2.6.0",
+    "karma": "^1.7.0",
+    "karma-chrome-launcher": "^2.1.1",
+    "karma-coverage": "^1.1.1",
+    "karma-jasmine": "^1.1.0",
+    "karma-junit-reporter": "^1.2.0",
+    "karma-openui5": "^0.2.2",
+    "nightwatch": "^0.9.15",
+    "nightwatch-cucumber": "^7.1.7"
+  }
+}

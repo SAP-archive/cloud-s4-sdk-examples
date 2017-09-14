@@ -1,0 +1,52 @@
+<mvc:View controllerName="costcenter_app.controller.costcenters" xmlns:mvc="sap.ui.core.mvc"
+          displayBlock="true" xmlns="sap.m"
+          xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<App>
+		<pages>
+			<Page title="{i18n>title}">
+				<content>
+
+
+					<!-- Wrap new inputs and table in a VBox -->
+					<VBox width="100%" direction="Column" id="__vbox0">
+
+
+						<!-- Add input to create new cost centers -->
+						<HBox width="40%" justifyContent="SpaceAround" alignItems="End" id="__hbox1">
+							<VBox>
+								<Label text="Cost Center ID" />
+								<Input width="100%" id="ccID" />
+							</VBox>
+							<VBox>
+								<Label text="Cost Center Long Text" />
+								<Input width="100%" id="ccLT" />
+							</VBox>
+							<Button text="Create" width="80px" id="__button0" press="createCostCenter" />
+						</HBox>
+
+
+						<!-- Table from Step 7 -->
+						<Table noDataText="No data loaded" items="{costCenter>/}">
+							<columns>
+								<Column hAlign="Left" width="50%">
+									<Label text="Cost Center ID"/>
+								</Column>
+								<Column hAlign="Left" width="50%">
+									<Label text="Description"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<Text  textAlign="Left" text="{costCenter>id}" />
+									<Text  textAlign="Left" text="{costCenter>description}" />
+								</ColumnListItem>
+							</items>
+						</Table>
+					</VBox>
+
+
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

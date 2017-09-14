@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>Cost Center Controller - Unit Tests</name>
+    <description>costcenter-cf-spring - Unit Tests</description>
+
+    <artifactId>costcenter-cf-spring-unit-tests</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <parent>
+        <groupId>com.sap.cloud.sdk.showcase</groupId>
+        <artifactId>costcenter-cf-spring</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <properties>
+        <surefire.skipTests>false</surefire.skipTests>
+        <surefire.forkCount>1</surefire.forkCount>
+        <surefire.include>*</surefire.include>
+        <surefire.exclude/>
+        <surefire.groups/>
+        <surefire.excludedGroups/>
+        <surefire.maxMemorySize>1024m</surefire.maxMemorySize>
+        <surefire.maxPermSize>512m</surefire.maxPermSize>
+        <surefire.defaultLogLevel>warn</surefire.defaultLogLevel>
+
+        <jacoco.destFile>${project.build.directory}/coverage-reports/jacoco.exec</jacoco.destFile>
+        <jacoco.outputDirectory>${project.reporting.outputDirectory}/jacoco</jacoco.outputDirectory>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.sap.cloud.sdk.showcase</groupId>
+            <artifactId>costcenter-cf-spring-application</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sap.cloud.s4hana.cloudplatform</groupId>
+            <artifactId>scp-cf</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sap.cloud.s4hana</groupId>
+            <artifactId>s4hana-all</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sap.cloud.s4hana</groupId>
+            <artifactId>testutil</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sap.cloud.s4hana.quality</groupId>
+            <artifactId>listeners-all</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.9</version>
+                <configuration>
+                    <destFile>${jacoco.destFile}</destFile>
+                    <dataFile>${jacoco.destFile}</dataFile>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>pre-unit-test</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>post-unit-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${jacoco.outputDirectory}</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.20</version>
+                <configuration>
+                    <argLine>@{argLine}
+                        -Xmx${surefire.maxMemorySize}
+                        -XX:MaxPermSize=${surefire.maxPermSize}
+                        -Dorg.slf4j.simpleLogger.defaultLogLevel=${surefire.defaultLogLevel}
+                        -Djava.io.tmpdir=target/arquillian-working-dir/${surefire.forkNumber}/
+                    </argLine>
+                    <skipTests>${surefire.skipTests}</skipTests>
+                    <includes>
+                        <include>${surefire.include}</include>
+                    </includes>
+                    <excludes>
+                        <exclude>${surefire.exclude}</exclude>
+                    </excludes>
+                    <forkCount>${surefire.forkCount}</forkCount>
+                    <reuseForks>false</reuseForks>
+                    <groups>${surefire.groups}</groups>
+                    <excludedGroups>${surefire.excludedGroups}</excludedGroups>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
