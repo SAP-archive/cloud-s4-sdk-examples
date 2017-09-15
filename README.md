@@ -19,7 +19,7 @@ Runnable example applications that showcase the usage of the SAP S/4HANA Cloud S
  In order to be able to deploy and test the examples, the following requirements need to be fulfilled from the infrastructure perspective: 
  
  Get your free trial [SAP Cloud Platform account](https://account.hanatrial.ondemand.com/register) to be able to run the examples on SAP Cloud Platform.  
- To evaluate the SAP S/4HANA connectivity, ensure that you have access to an SAP S/4HANA system (on-premise or cloud edition).
+ To evaluate the SAP S/4HANA connectivity, ensure that you have access to an SAP S/4HANA system (On-Premise or Cloud edition).
  
  ## Download and Installation
  
@@ -47,7 +47,7 @@ brew update
 brew cask install java
 ```
 
-Tip: Install a specific JDK if you like with (e.g., JDK 8)  
+Hint: Install a specific JDK if you like with (e.g., JDK 8)  
 
 ``` brew cask install caskroom/versions/java8```
 - Install Maven  
@@ -59,18 +59,16 @@ brew install maven
 ### Install IDE
 For the initial analysis of the example application, you can just use your command line and a simple text editor. However, for your convenience, you can work with the IDE of your choice.
 
-We recommend to use [Intellij IDEA](https://www.jetbrains.com/idea/#chooseYourEdition) or [Eclipse](https://www.eclipse.org/users/). Follow the installation instructions of corresponding tools to prepare your IDE. In case you use Eclipse, make sure to install the maven plugin for Eclipse.
+We recommend to use [Intellij IDEA](https://www.jetbrains.com/idea/#chooseYourEdition) or [Eclipse](https://www.eclipse.org/users/). Follow the installation instructions of the respective tool to prepare your IDE. In case you use Eclipse, make sure to install the Maven plugin for Eclipse.
 
-When corresponding tools are installed, refer to additonal README files in the projects to proceed with the build and deployment.
+When the IDE is installed, refer to additonal README files in the projects to proceed with the build and deployment procedures.
 
 ## Known Issues
  Currently, there are no known issues.
 
 ## How to obtain support
- If you need any support, have any question or have found a bug, please report it as issue in the repository.
+ If you need any support, have any question, or have found a bug, please report it as an issue in the repository.
 
 ## License
  Copyright (c) 2017 SAP SE or an SAP affiliate company. All rights reserved.
  This file is licensed under the Apache Software License, v. 2 except as noted otherwise in the [LICENSE file](LICENSE).
-
-
