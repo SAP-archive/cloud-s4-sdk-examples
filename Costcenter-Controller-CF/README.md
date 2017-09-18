@@ -1,5 +1,4 @@
 # CostCenter Controller CF
-[![Build Status](http://mo-878278750.mo.sap.corp:8080/buildStatus/icon?job=partner/Costcenter-Controller-CF/master)](http://mo-878278750.mo.sap.corp:8080/job/partner/job/Costcenter-Controller-CF/job/master/)
 
 ## Build
 ```shell
