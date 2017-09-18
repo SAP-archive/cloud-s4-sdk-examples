@@ -29,7 +29,7 @@ Runnable example applications that showcase the usage of the SAP S/4HANA Cloud S
  - Install Chocolatey (a package manager for Windows)  
 ```@powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"```
 
-For more information on Chocolatey and how to use it, visit the following page.
+For more information on Chocolatey and how to use it, visit the [following page](https://chocolatey.org/).
 
 - Install Java Development Kit, if not yet availableInstall a specific JDK (e.g., JDK 8)  
 ``` choco install jdk8```
