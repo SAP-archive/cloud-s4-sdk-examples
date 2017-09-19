@@ -19,11 +19,11 @@
 
     <h3>New features</h3>
     <ul>
-      <li>Add support for SAP Java Connector (JCo) for S/4HANA on-premise connectivity.</li>
-      <li>Add support for “mvn tomee:run” and “mvn jetty:run” in TomEE and Tomcat archetypes for Cloud Foundry.</li>
+      <li>Support SAP Java Connector (JCo) for S/4HANA on-premise connectivity.</li>
+      <li>Support “mvn tomee:run” and “mvn jetty:run” in TomEE and Tomcat archetypes for Cloud Foundry.</li>
     </ul>
 
-    <h3>Breaking changes</h3>
+    <h3>Incompatible changes</h3>
     <ul>
       <li>The S/4HANA virtual data model for OData now uses the prefix “fetch” instead of “get” for navigation properties.</li>
       <li>Lombok now uses scope “provided” instead of “compile”. If your project uses Lombok, make sure to explicitly declare the usage of Lombok with scope “provided”.</li>
