@@ -17,29 +17,31 @@
     <h2 id="version-111">Version 1.1.1</h2>
     <p><em>Coming soon</em></p>
 
-    <p>New features:</p>
+    <h3>New features</h3>
     <ul>
-      <li>Added support for SAP Java Connector (JCo) for S/4HANA on-premise connectivity.</li>
-      <li>Added support for “mvn tomee:run” and “mvn jetty:run” in TomEE and Tomcat archetypes for Cloud Foundry.</li>
+      <li>Add support for SAP Java Connector (JCo) for S/4HANA on-premise connectivity.</li>
+      <li>Add support for “mvn tomee:run” and “mvn jetty:run” in TomEE and Tomcat archetypes for Cloud Foundry.</li>
     </ul>
 
-    <p>Breaking changes:</p>
+    <h3>Breaking changes</h3>
     <ul>
       <li>The S/4HANA virtual data model for OData now uses the prefix “fetch” instead of “get” for navigation properties.</li>
-      <li>Lombok now uses scope “provided” instead of “compile”. If your project uses Lombok, make sure to explicitly declare
-        the usage of Lombok with scope “provided”.</li>
+      <li>Lombok now uses scope “provided” instead of “compile”. If your project uses Lombok, make sure to explicitly declare the usage of Lombok with scope “provided”.</li>
     </ul>
 
-    <p>Changes:</p>
+    <h3>Changes</h3>
     <ul>
-      <li>The DestinationAccessor class now throws DestinationOAuthTokenException instead of pure DestinationAccessException
-        for missing OAuth tokens.</li>
-      <li>The MockUtil class now throws TestConfigurationError instead of ShouldNotHappenException for test configuration issues.</li>
-      <li>The MockUtil class now redirects audit logs to the default test log instead of ignoring them.</li>
-      <li>Improved Javadoc of S/4HANA virtual data model.</li>
+      <li>Add <a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/DestinationType.html">DestinationType</a> to represent different destination types.</li>
+      <li>Add <a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/GenericDestination.html">GenericDestination</a> as generic base interface for all destination types.</li>
+      <li>Add <a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/RfcDestination.html">RfcDestination</a> to represent RFC destinations.</li>
+      <li>Add additional methods to <a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/DestinationAccessor.html">DestinationAccessor</a> for additional destination types.</li>
+      <li><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/DestinationAccessor.html">DestinationAccessor</a> now throws <a hef="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/exception/DestinationOAuthTokenException.html">DestinationOAuthTokenException</a> for missing OAuth tokens.</li>
+      <li><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/testutil/MockUtil.html">MockUtil</a> now throws <a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/testutil/TestConfigurationError.html">TestConfigurationError</a> instead of ShouldNotHappenException for test configuration issues.</li>
+      <li><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/testutil/MockUtil.html">MockUtil</a> now redirects audit logs to the default test log instead of ignoring them.</li>
+      <li>Improve Javadoc of S/4HANA virtual data model.</li>
     </ul>
 
-    <p>Resolved issues:</p>
+    <h3>Resolved issues</h3>
     <ul>
       <li>Fixed an issue with local containers not working due to missing audit logger dependency.</li>
     </ul>
@@ -52,4 +54,5 @@
     </ul>
 
 </body>
+
 </html>
