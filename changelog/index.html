@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>SAP S/4HANA Cloud SDK - Changelog</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style class="anchorjs"></style>
+  <link href="./SAP S_4HANA Cloud SDK _ cloud-s4-sdk-examples_files/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container-lg px-3 my-5 markdown-body">
+
+    <h1 id="changelog">SAP S/4HANA Cloud SDK - Changelog</h1>
+
+    <h2 id="version-111">Version 1.1.1</h2>
+    <p><em>Coming soon</em></p>
+
+    <p>New features:</p>
+    <ul>
+      <li>Added support for SAP Java Connector (JCo) for S/4HANA on-premise connectivity.</li>
+      <li>Added support for “mvn tomee:run” and “mvn jetty:run” in TomEE and Tomcat archetypes for Cloud Foundry.</li>
+    </ul>
+
+    <p>Breaking changes:</p>
+    <ul>
+      <li>The S/4HANA virtual data model for OData now uses the prefix “fetch” instead of “get” for navigation properties.</li>
+      <li>Lombok now uses scope “provided” instead of “compile”. If your project uses Lombok, make sure to explicitly declare
+        the usage of Lombok with scope “provided”.</li>
+    </ul>
+
+    <p>Changes:</p>
+    <ul>
+      <li>The DestinationAccessor class now throws DestinationOAuthTokenException instead of pure DestinationAccessException
+        for missing OAuth tokens.</li>
+      <li>The MockUtil class now throws TestConfigurationError instead of ShouldNotHappenException for test configuration issues.</li>
+      <li>The MockUtil class now redirects audit logs to the default test log instead of ignoring them.</li>
+      <li>Improve Javadoc of S/4HANA virtual data model.</li>
+    </ul>
+
+    <p>Resolved issues:</p>
+    <ul>
+      <li>Fixed issue with missing audit logger in local containers.</li>
+    </ul>
+
+    <h2 id="version-100">Version 1.0.0</h2>
+    <p><em>2017-09-14:</em> <a href="https://search.maven.org/#search%7Cga%7C1%7Cv%3A%221.0.0%22%20AND%20(g%3A%22com.sap.cloud.s4hana%22%20OR%20g%3A%22com.sap.cloud.s4hana.archetypes%22%20OR%20g%3A%22com.sap.cloud.s4hana.cloudplatform%22%20OR%20g%3A%22com.sap.cloud.s4hana.frameworks%22%20OR%20g%3A%22com.sap.cloud.s4hana.plugins%22%20OR%20g%3A%22com.sap.cloud.s4hana.quality%22%20OR%20g%3A%22com.sap.cloud.s4hana.starters%22)">Maven Central</a></p>
+
+    <ul>
+      <li>General availability of the SAP S/4HANA Cloud SDK.</li>
+    </ul>
+
+</body>
+</html>
