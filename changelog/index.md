@@ -1,4 +1,5 @@
 ---
+layout: post
 title: SAP S/4HANA Cloud SDK
 ---
 
