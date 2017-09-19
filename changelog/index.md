@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: changelog
 title: SAP S/4HANA Cloud SDK
 ---
 
