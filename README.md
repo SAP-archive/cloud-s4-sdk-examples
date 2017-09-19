@@ -8,3 +8,7 @@ Runnable example applications that showcase the usage of the SAP S/4HANA Cloud S
 ## Javadoc
 - [1.1.1 (latest)](https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/)
 - [1.0.0](https://sap.github.io/cloud-s4-sdk-examples/docs/1.0.0/javadoc-api/)
+
+## Changelog
+
+An overview of the latest changes can be found [here](CHANGELOG.md).
