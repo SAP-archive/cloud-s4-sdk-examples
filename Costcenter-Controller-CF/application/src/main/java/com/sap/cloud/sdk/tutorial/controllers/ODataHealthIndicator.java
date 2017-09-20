@@ -29,11 +29,11 @@ public class ODataHealthIndicator implements HealthIndicator {
         return Health.up().build();
     }
 
-    private String checkForProblem(final String sapClient) {
+    private String checkForProblem(final SapClient sapClient) {
         try {
             final ErpConfigContext config = new ErpConfigContext(
                     ErpDestination.getDefaultName(),
-                    new SapClient(sapClient),
+                    sapClient,
                     Locale.ENGLISH);
 
             final HealthCheckCommand healthCheckCommand = new HealthCheckCommand(config);
