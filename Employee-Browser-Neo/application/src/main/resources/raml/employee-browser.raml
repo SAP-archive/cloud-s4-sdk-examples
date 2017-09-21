@@ -1,0 +1,76 @@
+#%RAML 0.8
+title: Tutorial API
+version: v1
+baseUri: /api/{version}/rest
+
+schemas:
+  - costCenterList: |
+      {
+        "$schema": "http://json-schema.org/draft-03/schema",
+        "type": "array",
+        "items": { "$ref": "costCenter" }
+      }
+
+  - costCenter: |
+     {
+       "$schema": "http://json-schema.org/draft-03/schema",
+       "type": "object",
+       "javaType": "com.sap.opensap.generated.model.VmCostCenter",
+       "additionalProperties": false,
+       "properties": {
+         "companyCode" : { "type": "string", "required": true },
+         "costCenter" : { "type": "string", "required": true },
+         "description" : { "type": "string", "required": false },
+         "employees" : { "type": "array", "items": { "$ref": "employee" } }
+       }
+     }
+
+  - employee: |
+      {
+        "$schema": "http://json-schema.org/draft-03/schema",
+        "javaType": "com.sap.opensap.generated.model.VmEmployee",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "personIdExternal": { "type": "string", "required": true},
+          "costCenter": { "type": "string", "required": true},
+          "department": { "type": "string" },
+          "division": { "type": "string" },
+          "employmentType": { "type": "string" },
+          "jobTitle": { "type": "string" },
+          "payGrade": { "type": "string" }
+        }
+      }
+
+  - companyCodeList: |
+      {
+        "$schema": "http://json-schema.org/draft-03/schema",
+        "type": "array",
+        "items": { "type": "string" }
+      }
+
+/costcenter-employees:
+  get:
+    queryParameters:
+      companyCode:
+        type: string
+        required: false
+    responses:
+      200:
+        description: List of employees filtered by the supplied companyCode.
+        body:
+          application/json:
+            schema: costCenterList
+      500:
+        description: An unexpected error occurred.
+
+/companycodes:
+  get:
+    responses:
+      200:
+        description: List of available companyCodes for filtering.
+        body:
+          application/json:
+            schema: companyCodeList
+      500:
+        description: An unexpected error occurred.

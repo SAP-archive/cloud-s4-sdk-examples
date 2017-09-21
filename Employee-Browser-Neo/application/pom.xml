@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>employee-browser - Application</name>
+
+    <groupId>com.sap.opensap</groupId>
+    <artifactId>employee-browser-application</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <parent>
+        <groupId>com.sap.cloud.s4hana.starters</groupId>
+        <artifactId>scp-neo-javaee6</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <properties>
+        <!-- if you are behind a proxy use the following two properties to configure your proxy. Default: None -->
+        <proxy.host></proxy.host>
+        <proxy.port></proxy.port>
+        <non.proxy.hosts></non.proxy.hosts>
+
+        <!-- this is the location of your local SCP Neo runtime -->
+        <scp.sdkInstallPath>${project.basedir}/scp/sdk-${scp.sdkVersion}</scp.sdkInstallPath>
+        <scp.sdkLocalServerContentPath>${project.basedir}/localServerContent</scp.sdkLocalServerContentPath>
+        <scp.sdkErpEndpoint>${scp.sdkInstallPath}/server/config_master/service.destinations/destinations/ErpQueryEndpoint</scp.sdkErpEndpoint>
+
+        <!-- Raml Configuration -->
+        <project.build.generated-sources.raml>${project.build.directory}/generated-sources/raml</project.build.generated-sources.raml>
+        <raml.packageName>com.sap.opensap.generated</raml.packageName>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.sap.cloud.s4hana.cloudplatform</groupId>
+            <artifactId>scp-neo</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sap.cloud.s4hana</groupId>
+            <artifactId>s4hana-all</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sap.cloud.s4hana.frameworks</groupId>
+            <artifactId>cxf</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.raml.plugins</groupId>
+                <artifactId>raml-jaxrs-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/raml/</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0" metadata-complete="false">
+
+    <login-config>
+        <auth-method>FORM</auth-method>
+    </login-config>
+
+    <session-config>
+        <session-timeout>20</session-timeout>
+    </session-config>
+
+    <security-role>
+        <role-name>Everyone</role-name>
+    </security-role>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>All SAP Cloud Platform users</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Everyone</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <filter>
+        <filter-name>RestCsrfPreventionFilter</filter-name>
+        <filter-class>org.apache.catalina.filters.RestCsrfPreventionFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>RestCsrfPreventionFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>HttpSecurityHeadersFilter</filter-name>
+        <filter-class>com.sap.cloud.sdk.cloudplatform.security.servlet.HttpSecurityHeadersFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HttpSecurityHeadersFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>HttpCachingHeaderFilter</filter-name>
+        <filter-class>com.sap.cloud.sdk.cloudplatform.security.servlet.HttpCachingHeaderFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HttpCachingHeaderFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <servlet>
+        <display-name>CxfNonSpringJaxrsServlet</display-name>
+        <servlet-name>CxfNonSpringJaxrsServlet</servlet-name>
+        <servlet-class>org.apache.cxf.jaxrs.servlet.CXFNonSpringJaxrsServlet</servlet-class>
+        <init-param>
+            <param-name>jaxrs.serviceClasses</param-name>
+            <param-value>
+                com.sap.opensap.service.EmployeeBrowserService,
+                com.sap.opensap.service.CompanyCodesService
+            </param-value>
+        </init-param>
+        <init-param>
+            <param-name>jaxrs.providers</param-name>
+            <param-value>com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CxfNonSpringJaxrsServlet</servlet-name>
+        <url-pattern>/api/v1/rest/*</url-pattern>
+    </servlet-mapping>
+</web-app>

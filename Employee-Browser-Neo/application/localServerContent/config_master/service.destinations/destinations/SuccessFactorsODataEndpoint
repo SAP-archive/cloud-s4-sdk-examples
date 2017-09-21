@@ -1,0 +1,7 @@
+Name=SuccessFactorsODataEndpoint
+URL=
+TrustAll=FALSE
+Type=HTTP
+Password=
+Authentication=BasicAuthentication
+User=

@@ -1,0 +1,66 @@
+<mvc:View controllerName="employee-browser-frontend.controller.View1"
+		  xmlns:l="sap.ui.layout"
+		  xmlns:mvc="sap.ui.core.mvc"
+		  xmlns="sap.m"
+		  xmlns:core="sap.ui.core"
+		  displayBlock="true">
+	<App>
+		<pages>
+			<Page title="Employee Browser">
+				<content>
+					<VBox width="100%" direction="Column" id="__vbox0">
+
+						<HBox class="sapUiSmallMargin">
+							<ComboBox id="selectorCompanyCode"
+									  items="{ path: 'Filter>/', sorter: { path:'' } }"
+									  placeholder="All company codes"
+									  enabled="false"
+							>
+								<items>
+									<core:Item key="{Filter>}" text="{Filter>}" />
+								</items>
+							</ComboBox>
+							<Button text="Select" press="selectCompanyCode" icon="sap-icon://search" />
+						</HBox>
+
+						<List id="employeeList"
+							  headerText="Employees grouped by company code and cost center"
+							  noDataText="Please select a company code."
+							  items="{
+									path: 'Result>/',
+									sorter: {
+										path: 'companyCode',
+										descending: false,
+										group: true
+									}
+								}">
+							<CustomListItem
+									title="{Result>costCenter}"
+									description="{Result>costCenter}" class="sapUiResponsiveMargin">
+
+								<Panel headerText="Cost center {Result>costCenter} ({Result>description})"
+									   expanded="false"
+									   expandable="true"
+									   width="auto">
+									<List headerText="Employees" items="{Result>employees}" collapsed="true">
+										<ObjectListItem title="{Result>personIdExternal}" type="Active">
+											<firstStatus>
+												<ObjectStatus text="{Result>jobTitle}" />
+											</firstStatus>
+											<attributes>
+												<ObjectAttribute text="Department: {Result>department}" />
+												<ObjectAttribute text="Division: {Result>division}" />
+												<ObjectAttribute text="Employment Type: {Result>employmentType}" />
+												<ObjectAttribute text="Pay Grade: {Result>payGrade}" />
+											</attributes>
+										</ObjectListItem>
+									</List>
+								</Panel>
+							</CustomListItem>
+						</List>
+					</VBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

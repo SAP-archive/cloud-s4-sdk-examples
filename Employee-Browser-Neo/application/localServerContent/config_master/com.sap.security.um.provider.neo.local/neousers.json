@@ -1,0 +1,24 @@
+{
+  "Users": [
+    {
+      "UID": "test",
+      "Password": "{SSHA}vBAopHjqi4GlAVULDVNe1G3aWjoo9k7C5hk\u003d",
+      "Roles": [
+      ],
+      "Attributes": [
+        {
+          "attributeName": "firstname",
+          "attributeValue": "Mark"
+        },
+        {
+          "attributeName": "lastname",
+          "attributeValue": "Whatney"
+        },
+        {
+          "attributeName": "email",
+          "attributeValue": "mark.whatney@nasa.com"
+        }
+      ]
+    }
+  ]
+}
