@@ -30,11 +30,6 @@ public class CreateCostCenterCommand extends ErpCommand<List<ReturnParameter>>
         super(CreateCostCenterCommand.class, configContext);
         this.details = costCenterDetails;
         this.testRun = isTestRun;
-
-        // for now use JSON
-        ConfigurationManager.getConfigInstance().setProperty(
-                BAPI_SERIALIZATION_STRATEGY,
-                S4HanaConfig.RemoteFunctionSerializationStrategy.JSON);
     }
 
     @Override
