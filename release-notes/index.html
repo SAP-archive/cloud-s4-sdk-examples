@@ -43,6 +43,7 @@
       <li>Extend Javadoc for public API of SDK.</li>
       <li>Add Javadoc for S/4HANA virtual data model based on the <a href="https://api.sap.com/">SAP API Business Hub</a>.</li>
       <li>Add explicit Java compiler source and target version 1.7 to Maven archetypes.</li>
+      <li>Add explicit <code>finalName</code> in web descriptor of <code>scp-neo-javaee6</code> archetype.</li>
     </ul>
 
     <h4>Fixed Issues</h4>
@@ -51,7 +52,6 @@
         Fix shutdown of <code>ConnectionManager</code> in <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/latest/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/DestinationsRequestContextListener.html">DestinationsRequestContextListener</a></code>.
       </li>
       <li>Fix building of composite keys in <code>getByKey()</code> methods of the S/4HANA virtual data model for OData.</li>
-      <li>Fix missing <code>finalName</code> in web descriptor of <code>scp-neo-javaee6</code> archetype.</li>
       <li>Fix missing Javadoc creation for Lombok-generated code.</li>
       <li>Fix unused but declared dependencies.</li>
       <li>Fix used but undeclared dependencies.</li>
