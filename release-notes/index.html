@@ -14,48 +14,115 @@
 
     <h1 id="changelog">SAP S/4HANA Cloud SDK - Release Notes</h1>
 
-    <h2 id="version-111">Version 1.1.1</h2>
-    <p><em>Coming soon.</em></p>
+    <!-- Version 1.1.2 -->
 
-    <h3>New Functionality</h3>
-    <ul>
-      <li>Support <a href="https://websmp204.sap-ag.de/~form/handler?_APP=00200682500000002672&_EVENT=DISPLAY&_SCENARIO=01100035870000000122&_HIER_KEY=501100035870000018527&_HIER_KEY=601100035870000225414&_HIER_KEY=601100035870000255982&">SAP Java Connector (JCo)</a> 3.0.17 for S/4HANA on-premise connectivity.</li>
-      <li>Support for <code>mvn tomee:run</code> and <code>mvn jetty:run</code> in TomEE and Tomcat archetypes for Cloud Foundry.</li>
-    </ul>
+    <h2 id="version-112">Version 1.1.2</h2>
+    <p><em>Available October 12, 2017</em></p>
 
-    <h3>Incompatible Changes</h3>
+    <h4>New Functionality</h4>
     <ul>
-      <li>
-        S/4HANA virtual data model for OData now uses prefix “fetch” instead of “get” for navigation properties.<br>
-        For instance, a navigation property that was previously named <code>getItem()</code> is now named <code>fetchItem()</code>.
+      <li>Add <code>toQuery()</code> method to all service classes of the S/4HANA virtual data model for OData.<br>
+        This method generates a service's underlying <code>ODataQuery</code> without executing it.
       </li>
     </ul>
 
-    <h3>Changes</h3>
+    <h4>Incompatible Changes</h4>
     <ul>
-      <li>Add <a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/DestinationType.html">DestinationType</a> to represent different destination types.</li>
-      <li>Add <a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/GenericDestination.html">GenericDestination</a> as generic base interface for all destination types.</li>
-      <li>Add <a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/RfcDestination.html">RfcDestination</a> to represent <a href="https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/e184daba118b46679c6968567bacc98e.html">RFC destinations</a>.</li>
-      <li>Add additional methods to <a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/DestinationAccessor.html">DestinationAccessor</a> for additional destination types.</li>
-      <li><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/DestinationAccessor.html">DestinationAccessor</a> now throws <a hef="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/exception/DestinationOAuthTokenException.html">DestinationOAuthTokenException</a> for missing OAuth tokens.</li>
-      <li><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/testutil/MockUtil.html">MockUtil</a> now throws <a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/testutil/TestConfigurationError.html">TestConfigurationError</a> instead of ShouldNotHappenException for test configuration issues.</li>
-      <li><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/testutil/MockUtil.html">MockUtil</a> now redirects audit logs to the default test log instead of ignoring them.</li>
+      <li>
+        Migrate to Mockito 2.10.0, Mockito 1.x is no longer supported.<br>
+        Details on the incompatible changes can be found <a href="https://github.com/mockito/mockito/wiki/What%27s-new-in-Mockito-2#incompatible">here</a>.
+      </li>
+    </ul>
+
+    <h4>Changes</h4>
+    <ul>
+      <li>
+        Add <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/latest/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/helper/ODataVdmErrorResultHandler.html">ODataVdmErrorResultHandler</a></code> to provide more meaningful OData error messages.
+      </li>
+      <li>Improve javadoc for public API of SDK.</li>
+      <li>Add javadoc to S/4HANA virtual data model for OData based on the <a href="https://api.sap.com/">SAP API Business Hub</a>.</li>
+      <li>Add explicit Java compiler source and target version 1.7 to Maven archetypes.</li>
+      <li>Add default <code>index.html</code> landing page to all archetypes.</li>
+      <li>Add <code>finalName</code> to <code>scp-neo-javaee6</code> archetype.</li>
+    </ul>
+
+    <h4>Fixed Issues</h4>
+    <ul>
+      <li>
+        Fix shutdown of <code>ConnectionManager</code> in <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/latest/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/DestinationsRequestContextListener.html">DestinationsRequestContextListener</a></code>.
+      </li>
+      <li>Fix building of composite keys in <code>getByKey()</code> methods of the S/4HANA virtual data model for OData.</li>
+      <li>Fix missing javadoc for Lombok-generated code.</li>
+      <li>Fix unused but declared dependencies.</li>
+      <li>Fix used but undeclared dependencies.</li>
+    </ul>
+
+    <!-- Version 1.1.1 -->
+
+    <h2 id="version-111">Version 1.1.1</h2>
+    <p><em>Available September 28, 2017</em></p>
+
+    <h4>New Functionality</h4>
+    <ul>
+      <li>
+        Support <a href="https://websmp204.sap-ag.de/~form/handler?_APP=00200682500000002672&_EVENT=DISPLAY&_SCENARIO=01100035870000000122&_HIER_KEY=501100035870000018527&_HIER_KEY=601100035870000225414&_HIER_KEY=601100035870000255982&">SAP Java Connector (JCo)</a> 3.0.17 for S/4HANA on-premise connectivity.
+      </li>
+      <li>Support <code>mvn tomee:run</code> and <code>mvn jetty:run</code> in TomEE and Tomcat archetypes for Cloud Foundry.</li>
+    </ul>
+
+    <h4>Incompatible Changes</h4>
+    <ul>
+        <li>
+          Use prefix <code>fetch</code> instead of <code>get</code> for OData navigation properties in S/4HANA virtual data model.<br>
+          For instance, a property that was previously named <code>getItem()</code> is now called <code>fetchItem()</code>.
+        </li>
+    </ul>
+
+    <h4>Changes</h4>
+    <ul>
+      <li>
+        Add <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/DestinationType.html">DestinationType</a></code> 
+        to represent different destination types.
+      </li>
+      <li>
+        Add <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/GenericDestination.html">GenericDestination</a></code> 
+        as generic base interface for all destination types.
+      </li>
+      <li>
+        Add <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/RfcDestination.html">RfcDestination</a></code> 
+        to represent <a href="https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/e184daba118b46679c6968567bacc98e.html">RFC destinations</a>.
+      </li>
+      <li>
+        Add additional methods to 
+        <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/DestinationAccessor.html">DestinationAccessor</a></code> 
+        for additional destination types.
+      </li>
+      <li>
+        <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/DestinationAccessor.html">DestinationAccessor</a></code> now throws <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/exception/DestinationOAuthTokenException.html">DestinationOAuthTokenException</a></code> for missing OAuth tokens.
+      </li>
+      <li>
+          <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/testutil/MockUtil.html">MockUtil</a></code> now throws <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/testutil/TestConfigurationError.html">TestConfigurationError</a></code> instead of <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/exception/ShouldNotHappenException.html">ShouldNotHappenException</a></code> for test configuration issues.
+      </li>
+      <li>
+        <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/testutil/MockUtil.html">MockUtil</a></code> now redirects audit logs to the default test log instead of ignoring them.
+      </li>
       <li>Improve Javadoc of S/4HANA virtual data model.</li>
     </ul>
 
-    <h3>Resolved Issues</h3>
+    <h4>Fixed Issues</h4>
     <ul>
-      <li>Fixed Lombok using scope <code>compile</code> instead of <code>provided</code>.</li>
-      <li>Fixed issue with local containers not working due to missing audit logger dependency.</li>
+      <li>Fix Lombok using scope <code>compile</code> instead of <code>provided</code>.</li>
+      <li>Fix issue with local containers not working due to missing audit logger dependency.</li>
     </ul>
 
+    <!-- Version 1.0.0 -->
+
     <h2 id="version-100">Version 1.0.0</h2>
-    <p><em>2017-09-14:</em> <a href="https://search.maven.org/#search%7Cga%7C1%7Cv%3A%221.0.0%22%20AND%20(g%3A%22com.sap.cloud.s4hana%22%20OR%20g%3A%22com.sap.cloud.s4hana.archetypes%22%20OR%20g%3A%22com.sap.cloud.s4hana.cloudplatform%22%20OR%20g%3A%22com.sap.cloud.s4hana.frameworks%22%20OR%20g%3A%22com.sap.cloud.s4hana.plugins%22%20OR%20g%3A%22com.sap.cloud.s4hana.quality%22%20OR%20g%3A%22com.sap.cloud.s4hana.starters%22)">Maven Central</a></p>
+    <p><em>September 14, 2017</em> - <a href="https://search.maven.org/#search%7Cga%7C1%7Cv%3A%221.0.0%22%20AND%20(g%3A%22com.sap.cloud.s4hana%22%20OR%20g%3A%22com.sap.cloud.s4hana.archetypes%22%20OR%20g%3A%22com.sap.cloud.s4hana.cloudplatform%22%20OR%20g%3A%22com.sap.cloud.s4hana.frameworks%22%20OR%20g%3A%22com.sap.cloud.s4hana.plugins%22%20OR%20g%3A%22com.sap.cloud.s4hana.quality%22%20OR%20g%3A%22com.sap.cloud.s4hana.starters%22)">Maven Central</a></p>
 
     <ul>
       <li>General availability of the SAP S/4HANA Cloud SDK.</li>
     </ul>
 
 </body>
-
 </html>
