@@ -19,6 +19,11 @@
     <h2 id="version-112">Version 1.1.2</h2>
     <p><em>Available October 12, 2017</em></p>
 
+    <div class="alert alert-warning">
+      <strong>Compatibility Note:</strong> This version uses Mockito 2.10.0, Mockito 1.x is no longer supported.
+      <p>Details on the incompatible changes can be found <a href="https://github.com/mockito/mockito/wiki/What%27s-new-in-Mockito-2#incompatible">here</a>.</p>
+    </div>
+
     <h4>New Functionality</h4>
     <ul>
       <li>Add <code>toQuery()</code> method to all service classes of the S/4HANA virtual data model for OData.<br>
@@ -27,15 +32,7 @@
       <li>
         Add <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/latest/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/helper/ODataVdmErrorResultHandler.html">ODataVdmErrorResultHandler</a></code> to provide more meaningful OData error messages.
       </li>
-      <li>Add <code>index.html</code> landing page mapped to <code>/</code> to all archetypes.</li>
-    </ul>
-
-    <h4>Incompatible Changes</h4>
-    <ul>
-      <li>
-        Migrate to Mockito 2.10.0, Mockito 1.x is no longer supported.<br>
-        Details on the incompatible changes can be found <a href="https://github.com/mockito/mockito/wiki/What%27s-new-in-Mockito-2#incompatible">here</a>.
-      </li>
+      <li>Add default <code>index.html</code> to web application root of all archetypes.</li>
     </ul>
 
     <h4>Improvements</h4>
@@ -62,6 +59,11 @@
     <h2 id="version-111">Version 1.1.1</h2>
     <p><em>Available September 28, 2017</em></p>
 
+    <div class="alert alert-warning">
+      <strong>Compatibility Note:</strong> OData navigation properties in S/4HANA virtual data model now use prefix <code>fetch</code> instead of <code>get</code>.
+      <p>For example, a property that was previously named <code>getItem()</code> is now called <code>fetchItem()</code>.</p>
+    </div>
+
     <h4>New Functionality</h4>
     <ul>
       <li>
@@ -85,14 +87,6 @@
         for additional destination types.
       </li>
       <li>Support <code>mvn tomee:run</code> and <code>mvn jetty:run</code> in TomEE and Tomcat archetypes for Cloud Foundry.</li>
-    </ul>
-
-    <h4>Incompatible Changes</h4>
-    <ul>
-      <li>
-        Use prefix <code>fetch</code> instead of <code>get</code> for OData navigation properties in S/4HANA virtual data model.<br>
-        For instance, a property that was previously named <code>getItem()</code> is now called <code>fetchItem()</code>.
-      </li>
     </ul>
 
     <h4>Improvements</h4>
