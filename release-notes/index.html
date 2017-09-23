@@ -24,6 +24,10 @@
       <li>Add <code>toQuery()</code> method to all service classes of the S/4HANA virtual data model for OData.<br>
         This method generates a service's underlying <code>ODataQuery</code> without executing it.
       </li>
+      <li>
+        Add <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/latest/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/helper/ODataVdmErrorResultHandler.html">ODataVdmErrorResultHandler</a></code> to provide more meaningful OData error messages.
+      </li>
+      <li>Add <code>index.html</code> landing page mapped to <code>/</code> to all archetypes.</li>
     </ul>
 
     <h4>Incompatible Changes</h4>
@@ -36,14 +40,9 @@
 
     <h4>Changes</h4>
     <ul>
-      <li>
-        Add <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/latest/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/helper/ODataVdmErrorResultHandler.html">ODataVdmErrorResultHandler</a></code> to provide more meaningful OData error messages.
-      </li>
-      <li>Improve javadoc for public API of SDK.</li>
-      <li>Add javadoc to S/4HANA virtual data model for OData based on the <a href="https://api.sap.com/">SAP API Business Hub</a>.</li>
+      <li>Improve Javadoc for public API of SDK.</li>
+      <li>Improve Javadoc to S/4HANA virtual data model for OData based on the <a href="https://api.sap.com/">SAP API Business Hub</a>.</li>
       <li>Add explicit Java compiler source and target version 1.7 to Maven archetypes.</li>
-      <li>Add default <code>index.html</code> landing page to all archetypes.</li>
-      <li>Add <code>finalName</code> to <code>scp-neo-javaee6</code> archetype.</li>
     </ul>
 
     <h4>Fixed Issues</h4>
@@ -52,7 +51,8 @@
         Fix shutdown of <code>ConnectionManager</code> in <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/latest/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/DestinationsRequestContextListener.html">DestinationsRequestContextListener</a></code>.
       </li>
       <li>Fix building of composite keys in <code>getByKey()</code> methods of the S/4HANA virtual data model for OData.</li>
-      <li>Fix missing javadoc for Lombok-generated code.</li>
+      <li>Fix missing <code>finalName</code> in web descriptor of <code>scp-neo-javaee6</code> archetype.</li>
+      <li>Fix missing Javadoc creation for Lombok-generated code.</li>
       <li>Fix unused but declared dependencies.</li>
       <li>Fix used but undeclared dependencies.</li>
     </ul>
@@ -67,19 +67,6 @@
       <li>
         Support <a href="https://websmp204.sap-ag.de/~form/handler?_APP=00200682500000002672&_EVENT=DISPLAY&_SCENARIO=01100035870000000122&_HIER_KEY=501100035870000018527&_HIER_KEY=601100035870000225414&_HIER_KEY=601100035870000255982&">SAP Java Connector (JCo)</a> 3.0.17 for S/4HANA on-premise connectivity.
       </li>
-      <li>Support <code>mvn tomee:run</code> and <code>mvn jetty:run</code> in TomEE and Tomcat archetypes for Cloud Foundry.</li>
-    </ul>
-
-    <h4>Incompatible Changes</h4>
-    <ul>
-        <li>
-          Use prefix <code>fetch</code> instead of <code>get</code> for OData navigation properties in S/4HANA virtual data model.<br>
-          For instance, a property that was previously named <code>getItem()</code> is now called <code>fetchItem()</code>.
-        </li>
-    </ul>
-
-    <h4>Changes</h4>
-    <ul>
       <li>
         Add <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/DestinationType.html">DestinationType</a></code> 
         to represent different destination types.
@@ -97,6 +84,19 @@
         <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/DestinationAccessor.html">DestinationAccessor</a></code> 
         for additional destination types.
       </li>
+      <li>Support <code>mvn tomee:run</code> and <code>mvn jetty:run</code> in TomEE and Tomcat archetypes for Cloud Foundry.</li>
+    </ul>
+
+    <h4>Incompatible Changes</h4>
+    <ul>
+      <li>
+        Use prefix <code>fetch</code> instead of <code>get</code> for OData navigation properties in S/4HANA virtual data model.<br>
+        For instance, a property that was previously named <code>getItem()</code> is now called <code>fetchItem()</code>.
+      </li>
+    </ul>
+
+    <h4>Changes</h4>
+    <ul>
       <li>
         <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/DestinationAccessor.html">DestinationAccessor</a></code> now throws <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/exception/DestinationOAuthTokenException.html">DestinationOAuthTokenException</a></code> for missing OAuth tokens.
       </li>
