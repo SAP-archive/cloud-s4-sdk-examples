@@ -1,0 +1,35 @@
+<mvc:View controllerName="sdk-tutorial-frontend.controller.View1"
+    xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true" xmlns="sap.m">
+    <App>
+        <pages>
+            <Page title="Cost Center Explorer">
+                <content>
+                    <!-- Add input to create new cost centers -->
+                    <HBox width="500px" justifyContent="SpaceAround"
+                        alignItems="End" id="__hbox1">
+                        <VBox>
+                            <Label text="Cost Center ID" />
+                            <Input width="100%" id="inputCostCenterId" />
+                        </VBox>
+                        <VBox>
+                            <Label text="Cost Center Long Text" />
+                            <Input width="100%"
+                                id="inputCostCenterDescription" />
+                        </VBox>
+                        <Button text="Create" width="80px" id="__button0"
+                            press="createCostCenter" />
+                    </HBox>
+
+
+                    <!-- Add this between the content tags -->
+                    <List headerText="Cost Centers" items="{costCenter>/}">
+                        <StandardListItem
+                            title="{costCenter>costCenterDescription}"
+                            description="{costCenter>costCenterID}" />
+                    </List>
+                </content>
+            </Page>
+        </pages>
+    </App>
+</mvc:View>

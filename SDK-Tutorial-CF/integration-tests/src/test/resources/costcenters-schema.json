@@ -1,0 +1,14 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Simple CostCenter List",
+    "type": "array",
+    "items": {
+        "title": "CostCenter Item",
+        "type": "object",
+        "javaType": "com.sap.cloud.sdk.tutorial.CostCenterDetails",
+        "required": [
+            "costCenterID",
+            "companyCode"
+        ]
+    }
+}

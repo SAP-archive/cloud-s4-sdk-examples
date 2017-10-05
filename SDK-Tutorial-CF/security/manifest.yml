@@ -1,0 +1,15 @@
+---
+applications:
+- name: approuter
+  host: approuter-<your-subdomain>
+  path: approuter
+  memory: 128M
+  buildpack: nodejs_buildpack
+  env:
+    TENANT_HOST_PATTERN: 'approuter-(.*).cfapps.sap.hana.ondemand.com'
+    destinations: '[
+        {"name":"cost-center-api", "url" :"https://URL-to-backend/", "forwardAuthToken": true},
+        {"name":"cost-center-frontend", "url" :"https://URL-to-frontend/"}
+      ]'
+  services:
+  - your-uaa-service-instance

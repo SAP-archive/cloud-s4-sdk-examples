@@ -1,0 +1,13 @@
+{
+    "welcomeFile": "index.html",
+    "routes": [
+        {
+            "source": "^/costcenters",
+            "destination": "cost-center-api"
+        },
+        {
+            "source": "/",
+            "destination": "cost-center-frontend"
+        }
+    ]
+}

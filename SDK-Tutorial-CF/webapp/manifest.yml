@@ -1,0 +1,6 @@
+---
+applications:
+- name: sdk-tutorial-frontend
+  random-route: true
+  memory: 64M
+  buildpack: staticfile_buildpack
