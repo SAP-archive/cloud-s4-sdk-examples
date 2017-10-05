@@ -1,11 +1,11 @@
 {
-  "erp": {
-    "default": "ERP_TEST_SYSTEM",
-    "systems": [
-      {
-        "alias": "ERP_TEST_SYSTEM",
-        "uri": "https://URL"
-      }
-    ]
-  }
+    "erp": {
+        "default": "ERP_TEST_SYSTEM",
+        "systems": [
+            {
+                "alias": "ERP_TEST_SYSTEM",
+                "uri": "https://URL"
+            }
+        ]
+    }
 }

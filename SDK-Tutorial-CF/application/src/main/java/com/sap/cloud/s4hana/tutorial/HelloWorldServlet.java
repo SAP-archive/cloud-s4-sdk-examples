@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
 
-@WebServlet("/hello")
+@WebServlet( "/hello" )
 public class HelloWorldServlet extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
@@ -19,7 +19,8 @@ public class HelloWorldServlet extends HttpServlet
 
     @Override
     protected void doGet( final HttpServletRequest request, final HttpServletResponse response )
-        throws ServletException, IOException
+        throws ServletException,
+            IOException
     {
         logger.info("I am running!");
         response.getWriter().write("Hello World!");

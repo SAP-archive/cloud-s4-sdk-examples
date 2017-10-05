@@ -1,35 +1,35 @@
 <!DOCTYPE HTML>
 <html>
 
-	<head>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta charset="UTF-8">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta charset="UTF-8">
 
-		<title>sdk-tutorial-frontend</title>
+<title>sdk-tutorial-frontend</title>
 
-		<script id="sap-ui-bootstrap"
-			src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
-			data-sap-ui-libs="sap.m"
-			data-sap-ui-theme="sap_belize"
-			data-sap-ui-compatVersion="edge"
-			data-sap-ui-resourceroots='{"sdk-tutorial-frontend": "./"}'>
-		</script>
+<script id="sap-ui-bootstrap"
+    src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+    data-sap-ui-libs="sap.m" data-sap-ui-theme="sap_belize"
+    data-sap-ui-compatVersion="edge"
+    data-sap-ui-resourceroots='{"sdk-tutorial-frontend": "./"}'>
+    
+</script>
 
-		<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
 
-		<script>
-			sap.ui.getCore().attachInit(function() {
-				new sap.m.Shell({
-					app: new sap.ui.core.ComponentContainer({
-						height : "100%",
-						name : "sdk-tutorial-frontend"
-					})
-				}).placeAt("content");
-			});
-		</script>
-	</head>
+<script>
+    sap.ui.getCore().attachInit(function() {
+        new sap.m.Shell({
+            app : new sap.ui.core.ComponentContainer({
+                height : "100%",
+                name : "sdk-tutorial-frontend"
+            })
+        }).placeAt("content");
+    });
+</script>
+</head>
 
-	<body class="sapUiBody" id="content">
-	</body>
+<body class="sapUiBody" id="content">
+</body>
 
 </html>

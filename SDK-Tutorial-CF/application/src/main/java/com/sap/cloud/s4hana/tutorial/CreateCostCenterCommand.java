@@ -26,9 +26,9 @@ public class CreateCostCenterCommand extends ErpCommand<List<ReturnParameter>>
     private final String description;
 
     public CreateCostCenterCommand(
-            @NonNull final ErpConfigContext configContext,
-            @NonNull final String id,
-            @NonNull final String description )
+        @NonNull final ErpConfigContext configContext,
+        @NonNull final String id,
+        @NonNull final String description )
     {
         super(CreateCostCenterCommand.class, configContext);
         this.id = id;
@@ -36,27 +36,30 @@ public class CreateCostCenterCommand extends ErpCommand<List<ReturnParameter>>
     }
 
     @Override
-    protected List<ReturnParameter> run() throws Exception {
+    protected List<ReturnParameter> run()
+        throws Exception
+    {
         final ControllingArea controllingArea = ControllingArea.of("A000"); // ERP type "CACCD"
 
-        final CostCenterCreateInput costCenterInput = CostCenterCreateInput
+        final CostCenterCreateInput costCenterInput =
+            CostCenterCreateInput
                 .builder()
                 .costcenter(CostCenter.of(id))
                 .name(id)
                 .descript(description)
                 .validFrom(new LocalDate())
                 .validTo(new LocalDate().plusYears(1))
-                .currency(CurrencyKey.of("EUR"))                    // ERP type "WAERS"
+                .currency(CurrencyKey.of("EUR")) // ERP type "WAERS"
                 .costcenterType(IndicatorForCostCenterType.of("E")) // ERP type "KOSAR"
-                .personInCharge(CostCenterManager.of("USER"))       // ERP type "VERAK"
-                .costctrHierGrp(SetId.of("0001"))                   // ERP type "SETNR"
-                .compCode(CompanyCode.of("1010"))                   // ERP type "BUKRS"
-                .profitCtr(ProfitCenter.of("YB101"))                // ERP type "PRCTR"
+                .personInCharge(CostCenterManager.of("USER")) // ERP type "VERAK"
+                .costctrHierGrp(SetId.of("0001")) // ERP type "SETNR"
+                .compCode(CompanyCode.of("1010")) // ERP type "BUKRS"
+                .profitCtr(ProfitCenter.of("YB101")) // ERP type "PRCTR"
                 .build();
 
         return CostCenterService
-                .createMultiple(controllingArea, costCenterInput)
-                .execute(getConfigContext())
-                .getMessages();
+            .createMultiple(controllingArea, costCenterInput)
+            .execute(getConfigContext())
+            .getMessages();
     }
 }

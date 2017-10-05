@@ -2,10 +2,10 @@ package com.sap.cloud.s4hana.tutorial;
 
 import java.util.Collections;
 import java.util.List;
- 
+
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
- 
+
 import com.sap.cloud.sdk.cloudplatform.cache.CacheKey;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataException;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataExceptionType;
@@ -15,12 +15,11 @@ import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.ReadCostCenterDataNam
 import com.sap.cloud.sdk.s4hana.datamodel.odata.services.ReadCostCenterDataService;
 
 import lombok.NonNull;
- 
+
 public class GetCachedCostCentersCommand extends CachingErpCommand<List<CostCenter>>
 {
-    private static final Cache<CacheKey, List<CostCenter>> cache =
-        CacheBuilder.newBuilder().build();
- 
+    private static final Cache<CacheKey, List<CostCenter>> cache = CacheBuilder.newBuilder().build();
+
     public GetCachedCostCentersCommand( @NonNull final ErpConfigContext configContext )
     {
         super(GetCachedCostCentersCommand.class, configContext);
@@ -31,27 +30,33 @@ public class GetCachedCostCentersCommand extends CachingErpCommand<List<CostCent
     {
         return cache;
     }
- 
+
     @Override
-    protected List<CostCenter> runCacheable() throws ODataException {
+    protected List<CostCenter> runCacheable()
+        throws ODataException
+    {
         try {
-            final List<CostCenter> costCenters = ReadCostCenterDataService.getAllCostCenter()
-                    .select(CostCenter.COST_CENTER_I_D,
-                            CostCenter.STATUS,
-                            CostCenter.COMPANY_CODE,
-                            CostCenter.CATEGORY,
-                            CostCenter.COST_CENTER_DESCRIPTION)
+            final List<CostCenter> costCenters =
+                ReadCostCenterDataService
+                    .getAllCostCenter()
+                    .select(
+                        CostCenter.COST_CENTER_I_D,
+                        CostCenter.STATUS,
+                        CostCenter.COMPANY_CODE,
+                        CostCenter.CATEGORY,
+                        CostCenter.COST_CENTER_DESCRIPTION)
                     .execute(getConfigContext());
-                     
+
             return costCenters;
         }
-        catch( final Exception e) {
+        catch( final Exception e ) {
             throw new ODataException(ODataExceptionType.OTHER, "Failed to get CostCenters from OData command.", e);
         }
     }
 
     @Override
-    protected List<CostCenter> getFallback() {
+    protected List<CostCenter> getFallback()
+    {
         return Collections.emptyList();
     }
 }
