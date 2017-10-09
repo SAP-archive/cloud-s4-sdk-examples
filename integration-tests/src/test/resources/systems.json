@@ -1,0 +1,13 @@
+{
+  "erp": {
+    "default": "ERP_001",
+    "systems": [
+      {
+        "alias": "ERP_001",
+        "systemId": "ERP",
+        "uri": "https://URL-to-S4HANA",
+        "sapClient": "001"
+      }
+    ]
+  }
+}
