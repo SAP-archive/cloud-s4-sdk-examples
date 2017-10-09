@@ -12,8 +12,7 @@ Runnable example applications that showcase the usage of the SAP S/4HANA Cloud S
 - Employee Browser (Integration with S/4HANA and SuccessFactors)
 
  ### SAP S/4HANA Cloud SDK Javadoc
-- [1.1.1 (latest)](https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/)
-- [1.0.0](https://sap.github.io/cloud-s4-sdk-examples/docs/1.0.0/javadoc-api/)
+- [Latest version](https://sap.github.io/cloud-s4-sdk-examples/docs/latest/javadoc-api/)
 
  ## Requirements
  
