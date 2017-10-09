@@ -5,17 +5,22 @@ import org.slf4j.Logger;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import com.netflix.hystrix.HystrixThreadPoolProperties;
+import com.sap.cloud.sdk.cloudplatform.cache.CacheKey;
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
 import com.sap.cloud.sdk.frameworks.hystrix.HystrixUtil;
-import com.sap.cloud.sdk.s4hana.connectivity.ErpCommand;
+import com.sap.cloud.sdk.s4hana.connectivity.CachingErpCommand;
 import com.sap.cloud.sdk.s4hana.connectivity.ErpConfigContext;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.BusinessPartnerNamespace.BusinessPartner;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.services.BusinessPartnerService;
 
-public class GetBusinessPartnersCommand extends ErpCommand<List<BusinessPartner>>
+public class GetBusinessPartnersCommand extends CachingErpCommand<List<BusinessPartner>>
 {
     private static final Logger logger = CloudLoggerFactory.getLogger(GetBusinessPartnersCommand.class);
+    
+    private Cache<CacheKey, List<BusinessPartner>> cache = CacheBuilder.newBuilder().build();
 
     protected GetBusinessPartnersCommand( final ErpConfigContext configContext )
     {
@@ -29,7 +34,13 @@ public class GetBusinessPartnersCommand extends ErpCommand<List<BusinessPartner>
     }
 
     @Override
-    protected List<BusinessPartner> run()
+    protected Cache<CacheKey, List<BusinessPartner>> getCache()
+    {
+        return cache;
+    }
+
+    @Override
+    protected List<BusinessPartner> runCacheable()
         throws Exception
     {
         return BusinessPartnerService.getAllBusinessPartner()
