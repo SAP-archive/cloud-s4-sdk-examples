@@ -11,19 +11,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.net.URL;
 import java.net.URISyntaxException;
 
 import com.sap.cloud.sdk.cloudplatform.connectivity.ProxyConfiguration;
-import com.sap.cloud.sdk.s4hana.connectivity.ErpEdition;
-import com.sap.cloud.sdk.s4hana.connectivity.ErpRelease;
-import com.sap.cloud.sdk.s4hana.serialization.SapClient;
-import com.sap.cloud.sdk.testutil.ErpSystem;
+import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
 import com.sap.cloud.sdk.testutil.MockUtil;
-import com.sap.cloud.sdk.testutil.TestSystem;
 
 import static com.jayway.restassured.RestAssured.when;
 import static org.hamcrest.Matchers.*;
@@ -32,7 +27,7 @@ import static org.hamcrest.Matchers.*;
 public class BusinessPartnerServiceTest
 {
     private static final MockUtil mockUtil = new MockUtil();
-    private static final Logger logger = LoggerFactory.getLogger(BusinessPartnerServiceTest.class);
+    private static final Logger logger = CloudLoggerFactory.getLogger(BusinessPartnerServiceTest.class);
 
     @ArquillianResource
     private URL baseUrl;
