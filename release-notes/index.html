@@ -14,7 +14,7 @@
     <h1>SAP S/4HANA Cloud SDK – Release Notes</h1>
 
     <a href="https://www.sap.com/s4sdk" class="svg">
-      <object data="logo.svg" type="image/svg+xml" width="150px"></object>
+      <object data="logo.svg" type="image/svg+xml" width="140px"></object>
     </a>
 
     <!-- Version 1.2.0 -->
@@ -25,15 +25,14 @@
 
     <p>
       <div class="alert alert-warning">
-        <strong>Compatibility Note:</strong> This version removes the starter parent modules.
-        The <code>scp-neo-javaee6</code> archetype therefore no longer use any starter parent.
-        Projects relying on a starter parent should declare required Maven properties and plugins explicitly.
+        <strong>Compatibility Note:</strong> This version removes all starter parent modules, including their use in the <code>scp-neo-javaee6</code> archetype.
+        <p>It is recommended for Maven projects using starter parents to migrate to an explicit configuration of properties and plugins.</p>
       </div>
     </p>
 
     <p>
       <div class="alert alert-info">
-        <strong>Deprecation Note:</strong> Retrieving <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.2.0/javadoc-api/com/sap/cloud/sdk/s4hana/connectivity/ErpSystemInfo.html">ErpSystemInfo</a></code> via the <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.2.0/javadoc-api/com/sap/cloud/sdk/s4hana/connectivity/ErpEndpoint.html">ErpEndpoint</a></code> is now deprecated.
+        <strong>Deprecation Note:</strong> This version deprecates the obsolete functionality of retrieving <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.2.0/javadoc-api/com/sap/cloud/sdk/s4hana/connectivity/ErpSystemInfo.html">ErpSystemInfo</a></code>.
       </div>
     </p>  
 
@@ -54,7 +53,7 @@
       <li>Improve exception handling for SOAP-based remote function module invocation.</li>
       <li>Improve key handling with <code>ByKeyFluentHelper</code> constructors.</li>
       <li>Remove final on some classes (e.g., <code>ErpEndpoint</code>) to enable more convenient mocking.</li>
-      <li>Remove JSON building duration in <code>QueryExecutionMeasurements</code> and measure it as request building duration.</li>
+      <li>Remove JSON building duration in <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.2.0/javadoc-api/com/sap/cloud/sdk/s4hana/connectivity/QueryExecutionMeasurements.html">QueryExecutionMeasurements</a></code> to be measured as request building duration.</li>
     </ul>
 
     <h4>Fixed Issues</h4>
