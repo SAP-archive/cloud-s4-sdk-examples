@@ -10,7 +10,8 @@ import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
 import com.sap.cloud.sdk.frameworks.hystrix.HystrixUtil;
 import com.sap.cloud.sdk.s4hana.connectivity.ErpCommand;
 import com.sap.cloud.sdk.s4hana.connectivity.ErpConfigContext;
-import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.BusinessPartnerNamespace.BusinessPartner;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.BusinessPartner;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.services.DefaultBusinessPartnerService;
 
 public class GetBusinessPartnersCommand extends ErpCommand<List<BusinessPartner>>
 {
@@ -31,8 +32,11 @@ public class GetBusinessPartnersCommand extends ErpCommand<List<BusinessPartner>
     protected List<BusinessPartner> run()
         throws Exception
     {
-        // TODO: implement
-        return null;
+        return new DefaultBusinessPartnerService().getAllBusinessPartner()
+            .select(BusinessPartner.BUSINESS_PARTNER,
+                BusinessPartner.BUSINESS_PARTNER_NAME)
+            .filter(BusinessPartner.BUSINESS_PARTNER_CATEGORY.eq("2"))
+            .execute(getConfigContext());
     }
 
     @Override
