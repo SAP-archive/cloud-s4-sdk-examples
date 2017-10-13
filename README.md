@@ -1,6 +1,6 @@
 # Develop an S/4HANA Extension App on SAP Cloud Platform Cloud Foundry using the S/4HANA Cloud SDK
 This repository contains learning materials for developing your first SAP S/4HANA Extension App using the [SAP S/4HANA Cloud SDK](https://www.sap.com/s4sdk)
-* Corresponding presentation: [PDF](https://raw.githubusercontent.com/SAP/cloud-s4-sdk-examples/blob/learning/20171013_Partner%20Lecture%20Session_SDK.pdf)
+* Corresponding presentation: [PDF](https://github.com/SAP/cloud-s4-sdk-examples/raw/learning/20171013_Partner%20Lecture%20Session_SDK.pdf)
 
 ## Step A
 ```
