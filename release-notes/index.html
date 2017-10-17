@@ -31,7 +31,7 @@
             It is strongly encouraged for Maven projects using starter parents to migrate to explicit configuration of properties and plugins.
           </li>
           <li>
-            This version adds the argument <code>trustStorePassword</code> to <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.2.0/javadoc-api/com/sap/cloud/sdk/testutil/MockUtil.html#mockDestination(java.lang.String,%20java.net.URI,%20com.sap.cloud.sdk.cloudplatform.connectivity.AuthenticationType,%20com.sap.cloud.sdk.cloudplatform.connectivity.ProxyType,%20com.sap.cloud.sdk.cloudplatform.connectivity.ProxyConfiguration,%20java.util.List,%20java.security.KeyStore,%20java.lang.String,%20java.lang.Boolean,%20java.security.KeyStore,%20java.lang.String,%20java.util.Map)">mockDestination()</a></code> and <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.2.0/javadoc-api/com/sap/cloud/sdk/testutil/MockUtil.html#mockErpDestination(java.lang.String,%20com.sap.cloud.sdk.testutil.ErpSystem,%20com.sap.cloud.sdk.cloudplatform.security.Credentials,%20com.sap.cloud.sdk.cloudplatform.connectivity.AuthenticationType,%20com.sap.cloud.sdk.cloudplatform.connectivity.ProxyType,%20com.sap.cloud.sdk.cloudplatform.connectivity.ProxyConfiguration,%20java.util.List,%20java.security.KeyStore,%20java.lang.String,%20java.lang.Boolean,%20java.security.KeyStore,%20java.lang.String,%20java.util.Map)">mockErpDestination()</a></code>. 
+            This version adds the argument <code>trustStorePassword</code> to <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.2.0/javadoc-api/com/sap/cloud/sdk/testutil/MockUtil.html#mockDestination(java.lang.String,%20java.net.URI,%20com.sap.cloud.sdk.cloudplatform.connectivity.AuthenticationType,%20com.sap.cloud.sdk.cloudplatform.connectivity.ProxyType,%20com.sap.cloud.sdk.cloudplatform.connectivity.ProxyConfiguration,%20java.util.List,%20java.security.KeyStore,%20java.lang.String,%20java.lang.Boolean,%20java.security.KeyStore,%20java.lang.String,%20java.util.Map)">mockDestination()</a></code> and <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.2.0/javadoc-api/com/sap/cloud/sdk/testutil/MockUtil.html#mockErpDestination(java.lang.String,%20com.sap.cloud.sdk.testutil.ErpSystem,%20com.sap.cloud.sdk.cloudplatform.security.Credentials,%20com.sap.cloud.sdk.cloudplatform.connectivity.AuthenticationType,%20com.sap.cloud.sdk.cloudplatform.connectivity.ProxyType,%20com.sap.cloud.sdk.cloudplatform.connectivity.ProxyConfiguration,%20java.util.List,%20java.security.KeyStore,%20java.lang.String,%20java.lang.Boolean,%20java.security.KeyStore,%20java.lang.String,%20java.util.Map)">mockErpDestination()</a></code>.
             To migrate to these methods, set <code>trustStorePassword</code> to <code>null</code> where ever previous versions of these methods were called.</li>
           </li>
         </ul>
@@ -42,7 +42,13 @@
       <div class="alert alert-info">
         <strong>Deprecation Note:</strong> This version deprecates the obsolete functionality of retrieving <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.2.0/javadoc-api/com/sap/cloud/sdk/s4hana/connectivity/ErpSystemInfo.html">ErpSystemInfo</a></code>.
       </div>
-    </p>  
+    </p>
+
+    <h4>Known Issues</h4>
+    <ul>
+      <li>The <code>scp-neo-maven-plugin</code> in the <code>scp-neo-javaee6</code> archetype uses a non-existing version.
+        Please use version <code>1.2.0</code> instead of the declared version <code>1.2.0-SNAPSHOT</code> when generating a new project from this archetype.</li>
+    </ul>
 
     <h4>New Functionality</h4>
     <ul>
@@ -126,20 +132,20 @@
         Support of <a href="https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/d917276b236f45f9960442bebf262dab.html">SAP Java Connector API</a> 3.0.17 for RFC on-premise connectivity to S/4HANA.
       </li>
       <li>
-        Add <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/DestinationType.html">DestinationType</a></code> 
+        Add <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/DestinationType.html">DestinationType</a></code>
         to represent different destination types.
       </li>
       <li>
-        Add <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/GenericDestination.html">GenericDestination</a></code> 
+        Add <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/GenericDestination.html">GenericDestination</a></code>
         as generic base interface for all destination types.
       </li>
       <li>
-        Add <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/RfcDestination.html">RfcDestination</a></code> 
+        Add <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/RfcDestination.html">RfcDestination</a></code>
         to represent <a href="https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/e184daba118b46679c6968567bacc98e.html">RFC destinations</a>.
       </li>
       <li>
-        Add additional methods to 
-        <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/DestinationAccessor.html">DestinationAccessor</a></code> 
+        Add additional methods to
+        <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/DestinationAccessor.html">DestinationAccessor</a></code>
         for additional destination types.
       </li>
       <li>Support additional properties within the <code>destinations</code> environment variable. For details, see <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.1.1/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/ScpCfDestinationFacade.html">ScpCfDestinationFacade</a></code>.</li>
