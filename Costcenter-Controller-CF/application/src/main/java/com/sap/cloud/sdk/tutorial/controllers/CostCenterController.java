@@ -16,11 +16,13 @@ import java.util.Locale;
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
 import com.sap.cloud.sdk.s4hana.connectivity.ErpConfigContext;
 import com.sap.cloud.sdk.s4hana.connectivity.ErpDestination;
+import com.sap.cloud.sdk.s4hana.datamodel.bapi.structures.CostCenterCreateInput;
 import com.sap.cloud.sdk.s4hana.datamodel.bapi.structures.ReturnParameter;
+import com.sap.cloud.sdk.s4hana.datamodel.bapi.types.ControllingArea;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.ReadCostCenterDataNamespace.CostCenter;
 import com.sap.cloud.sdk.s4hana.serialization.SapClient;
 import com.sap.cloud.sdk.tutorial.command.CreateCostCenterCommand;
 import com.sap.cloud.sdk.tutorial.command.GetCostCenterCommand;
-import com.sap.cloud.sdk.tutorial.models.CostCenterDetails;
 
 @RestController
 public class CostCenterController
@@ -36,12 +38,12 @@ public class CostCenterController
     }
 
     @RequestMapping( value = "api/v1/rest/client/{sapClient:[\\d]+}/costcenters", method = RequestMethod.GET )
-    public ResponseEntity<List<CostCenterDetails>> getCostCenter(
+    public ResponseEntity<List<CostCenter>> getCostCenter(
             @PathVariable final String sapClient )
     {
         try {
             final GetCostCenterCommand getCostCenterCommand = new GetCostCenterCommand(getErpConfigContext(sapClient));
-            final List<CostCenterDetails> costCenterDetails = getCostCenterCommand.execute();
+            final List<CostCenter> costCenterDetails = getCostCenterCommand.execute();
 
             return ResponseEntity.ok(costCenterDetails);
         }
@@ -51,15 +53,16 @@ public class CostCenterController
         }
     }
 
-    @RequestMapping( value = "api/v1/rest/client/{sapClient:[\\d]+}/costcenters", method = RequestMethod.POST )
+    @RequestMapping( value = "api/v1/rest/client/{sapClient:[\\d]+}/controllingarea/{controllingArea:[\\w]+}/costcenters", method = RequestMethod.POST )
     public ResponseEntity<List<ReturnParameter>> postCostCenter(
             @PathVariable final String sapClient,
-            @RequestBody final CostCenterDetails details,
+            @PathVariable final ControllingArea controllingArea,
+            @RequestBody final CostCenterCreateInput input,
             @RequestParam(defaultValue = "false") final boolean testRun )
     {
         try {
             final ErpConfigContext context = getErpConfigContext(sapClient);
-            final List<ReturnParameter> result = new CreateCostCenterCommand(context, details, testRun).execute();
+            final List<ReturnParameter> result = new CreateCostCenterCommand(context, controllingArea, input, testRun).execute();
 
             // before returning, reset cache for future get-command execution
             new GetCostCenterCommand(context).resetCache();

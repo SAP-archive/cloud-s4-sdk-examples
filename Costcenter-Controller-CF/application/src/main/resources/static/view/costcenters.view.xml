@@ -37,8 +37,8 @@
 							</columns>
 							<items>
 								<ColumnListItem>
-									<Text  textAlign="Left" text="{costCenter>id}" />
-									<Text  textAlign="Left" text="{costCenter>description}" />
+									<Text  textAlign="Left" text="{costCenter>costCenterID}" />
+									<Text  textAlign="Left" text="{costCenter>costCenterDescription}" />
 								</ColumnListItem>
 							</items>
 						</Table>

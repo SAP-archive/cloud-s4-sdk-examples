@@ -18,7 +18,7 @@ public class HelloWorldServlet extends HttpServlet
     private static final Logger logger = CloudLoggerFactory.getLogger(HelloWorldServlet.class);
 
     @Override
-    protected void doGet(final HttpServletRequest request, final HttpServletResponse response )
+    public void doGet(final HttpServletRequest request, final HttpServletResponse response)
         throws ServletException,
             IOException
     {

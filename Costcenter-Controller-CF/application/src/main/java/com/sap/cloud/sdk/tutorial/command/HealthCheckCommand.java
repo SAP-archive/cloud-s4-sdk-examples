@@ -6,10 +6,10 @@ import com.google.common.cache.CacheBuilder;
 import java.util.concurrent.TimeUnit;
 
 import com.sap.cloud.sdk.cloudplatform.cache.CacheKey;
-import com.sap.cloud.sdk.odatav2.connectivity.ODataQueryBuilder;
 import com.sap.cloud.sdk.s4hana.connectivity.CachingErpCommand;
 import com.sap.cloud.sdk.s4hana.connectivity.ErpConfigContext;
-import com.sap.cloud.sdk.tutorial.models.CostCenterDetails;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.ReadCostCenterDataNamespace.CostCenter;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.services.ReadCostCenterDataService;
 
 public class HealthCheckCommand extends CachingErpCommand<Boolean>
 {
@@ -30,13 +30,11 @@ public class HealthCheckCommand extends CachingErpCommand<Boolean>
 
     @Override
     protected Boolean runCacheable() throws Exception {
-        return !ODataQueryBuilder
-                .withEntity("/sap/opu/odata/sap/FCO_PI_COST_CENTER", "CostCenterCollection")
-                .select("CostCenterID")
+        return !ReadCostCenterDataService
+                .getAllCostCenter()
                 .top(1)
-                .build()
+                .select(CostCenter.COST_CENTER_I_D)
                 .execute(getConfigContext())
-                .asList(CostCenterDetails.class)
                 .isEmpty();
     }
 

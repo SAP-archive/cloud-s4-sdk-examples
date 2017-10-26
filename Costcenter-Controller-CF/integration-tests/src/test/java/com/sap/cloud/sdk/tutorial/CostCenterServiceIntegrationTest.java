@@ -1,9 +1,10 @@
 package com.sap.cloud.sdk.tutorial;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Maps;
+import com.google.gson.Gson;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.joda.time.Period;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -19,15 +20,12 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.Map;
+
 import com.sap.cloud.sdk.cloudplatform.servlet.Executable;
-import com.sap.cloud.sdk.s4hana.datamodel.bapi.types.CompanyCode;
-import com.sap.cloud.sdk.s4hana.datamodel.bapi.types.ControllingArea;
-import com.sap.cloud.sdk.s4hana.datamodel.bapi.types.CostCenter;
-import com.sap.cloud.sdk.s4hana.datamodel.bapi.types.ProfitCenter;
 import com.sap.cloud.sdk.s4hana.serialization.SapClient;
 import com.sap.cloud.sdk.testutil.MockUtil;
 import com.sap.cloud.sdk.tutorial.controllers.CostCenterController;
-import com.sap.cloud.sdk.tutorial.models.CostCenterDetails;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(CostCenterController.class)
@@ -37,8 +35,8 @@ public class CostCenterServiceIntegrationTest
 
     private static final String DEMO_COSTCENTER_ID = generateId(); // 10 chars
     private static final String DEMO_CONTROLLING_AREA = "A000";
-    private static final String DEMO_VALID_FROM = CostCenterDetails.asDateString("2016-04-01");
-    private static final String DEMO_VALID_TO = CostCenterDetails.asDateString("2016-05-01");
+    private static final LocalDate DEMO_VALID_FROM = new LocalDate(2016,4,1);
+    private static final LocalDate DEMO_VALID_TO = new LocalDate(2016,5,1);
 
     private static final MockUtil mockSdk = new MockUtil();
 
@@ -57,8 +55,7 @@ public class CostCenterServiceIntegrationTest
         mockSdk.mockErpDestination();
     }
 
-    private static String generateId()
-    {
+    private static String generateId() {
         return "T"
                 + StringUtils.leftPad(
                 Long.toString(new DateTime().minus(Period.years(45)).getMillis(), 36).toUpperCase(),
@@ -66,18 +63,19 @@ public class CostCenterServiceIntegrationTest
                 '0');
     }
 
-    private String getNewCostCenterAsJson(final String costCenterId) throws JsonProcessingException {
-        return new ObjectMapper().writeValueAsString(new CostCenterDetails()
-                .setId(new CostCenter(costCenterId))
-                .setPersonResponsible("USER")
-                .setControllingArea(new ControllingArea(DEMO_CONTROLLING_AREA))
-                .setValidFrom(DEMO_VALID_FROM)
-                .setValidTo(DEMO_VALID_TO)
-                .setCostCenterGroup(COST_CENTER_GROUP)
-                .setCategory(COST_CENTER_CATEGORY)
-                .setCompanyCode(new CompanyCode(COMPANY_CODE))
-                .setProfitCenter(new ProfitCenter(PROFIT_CENTER))
-                .setDescription("hello meeting"));
+    private String getNewCostCenterAsJson(final String costCenterId) {
+        final Map<String, Object> values = Maps.newHashMap();
+        values.put("costcenter", costCenterId);
+        values.put("name", costCenterId);
+        values.put("personInCharge", "USER");
+        values.put("validFrom", DEMO_VALID_FROM.toDateTimeAtStartOfDay().getMillis());
+        values.put("validTo", DEMO_VALID_TO.toDateTimeAtStartOfDay().getMillis());
+        values.put("costcenterType", COST_CENTER_CATEGORY);
+        values.put("costctrHierGrp", COST_CENTER_GROUP);
+        values.put("compCode", COMPANY_CODE);
+        values.put("profitCtr", PROFIT_CENTER);
+        values.put("description", "demo");
+        return new Gson().toJson(values);
     }
 
 
@@ -100,7 +98,7 @@ public class CostCenterServiceIntegrationTest
         final SapClient sapClient = mockSdk.getErpSystem().getSapClient();
 
         final String newCostCenterJson = getNewCostCenterAsJson(EXISTING_COSTCENTER_ID);
-        // {"sapClient":"715","controllingArea":"A000","validFrom":...}
+        // {"costcenter":"012346578","description":"demo","validFrom":...}
 
         // cost center already exists in database
         mockSdk.requestContextExecutor().execute(new Executable() {
@@ -108,7 +106,7 @@ public class CostCenterServiceIntegrationTest
             public void execute() throws Exception {
                 mockMvc
                     .perform(MockMvcRequestBuilders
-                        .request(HttpMethod.POST, "/api/v1/rest/client/"+sapClient+"/costcenters")
+                        .request(HttpMethod.POST, "/api/v1/rest/client/"+sapClient+"/controllingarea/"+DEMO_CONTROLLING_AREA+"/costcenters")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .content(newCostCenterJson))
@@ -128,7 +126,7 @@ public class CostCenterServiceIntegrationTest
         final String newCostCenterJson = getNewCostCenterAsJson(DEMO_COSTCENTER_ID);
 
         final RequestBuilder newCostCenterRequest = MockMvcRequestBuilders
-                .request(HttpMethod.POST, "/api/v1/rest/client/"+sapClient+"/costcenters")
+                .request(HttpMethod.POST, "/api/v1/rest/client/"+sapClient+"/controllingarea/"+DEMO_CONTROLLING_AREA+"/costcenters")
                 .param("testRun", "true")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
