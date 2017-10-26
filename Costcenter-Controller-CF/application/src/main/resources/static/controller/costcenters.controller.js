@@ -16,7 +16,7 @@ sap.ui.define([
             var id = this.getView().byId("ccID").getValue();
             var description = this.getView().byId("ccLT").getValue();
 
-            CostCenterService.createCostCenter(id, description, "715").then(function (costCenters) {
+            CostCenterService.createCostCenter(id, description, "SAPCLIENT-NUMBER").then(function (costCenters) {
                 that.loadCostCenters();
             })
                 .fail(function () {
@@ -26,7 +26,7 @@ sap.ui.define([
 
         loadCostCenters: function () {
             var that = this;
-            CostCenterService.getCostCenters("715").then(function (costCenters) {
+            CostCenterService.getCostCenters("SAPCLIENT-NUMBER").then(function (costCenters) {
                 costCenters = costCenters
                     .filter(function (a) {
                         return a.status != "DELETED";
@@ -41,6 +41,6 @@ sap.ui.define([
 
         onInit: function () {
             this.loadCostCenters();
-        },
+        }
     });
 });

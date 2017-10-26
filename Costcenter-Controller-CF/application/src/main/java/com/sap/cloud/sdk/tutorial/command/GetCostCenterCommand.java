@@ -2,33 +2,27 @@ package com.sap.cloud.sdk.tutorial.command;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import org.slf4j.Logger;
 
 import java.util.List;
 
 import com.sap.cloud.sdk.cloudplatform.cache.CacheKey;
-import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
-import com.sap.cloud.sdk.odatav2.connectivity.ODataQuery;
-import com.sap.cloud.sdk.odatav2.connectivity.ODataQueryBuilder;
-import com.sap.cloud.sdk.odatav2.connectivity.ODataQueryResult;
 import com.sap.cloud.sdk.s4hana.connectivity.CachingErpCommand;
 import com.sap.cloud.sdk.s4hana.connectivity.ErpConfigContext;
 import com.sap.cloud.sdk.s4hana.connectivity.exception.QueryExecutionException;
-import com.sap.cloud.sdk.tutorial.models.CostCenterDetails;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.ReadCostCenterDataNamespace.CostCenter;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.services.ReadCostCenterDataService;
 
 
-public class GetCostCenterCommand extends CachingErpCommand<List<CostCenterDetails>> {
-    private static final Logger logger = CloudLoggerFactory.getLogger(GetCostCenterCommand.class);
-
+public class GetCostCenterCommand extends CachingErpCommand<List<CostCenter>> {
     public GetCostCenterCommand(final ErpConfigContext configContext) {
         super(GetCostCenterCommand.class, configContext);
     }
 
-    private static final Cache<CacheKey, List<CostCenterDetails>> cache =
+    private static final Cache<CacheKey, List<CostCenter>> cache =
             CacheBuilder.newBuilder().concurrencyLevel(10).build();
 
     @Override
-    protected Cache<CacheKey, List<CostCenterDetails>> getCache() {
+    protected Cache<CacheKey, List<CostCenter>> getCache() {
         return cache;
     }
 
@@ -38,21 +32,17 @@ public class GetCostCenterCommand extends CachingErpCommand<List<CostCenterDetai
     }
 
     @Override
-    protected List<CostCenterDetails> runCacheable() throws QueryExecutionException {
+    protected List<CostCenter> runCacheable() throws QueryExecutionException {
         try {
-            final ODataQuery query = ODataQueryBuilder
-                .withEntity("/sap/opu/odata/sap/FCO_PI_COST_CENTER", "CostCenterCollection")
-                .select("CostCenterID",
-                        "CostCenterDescription",
-                        "Status",
-                        "CompanyCode",
-                        "Category",
-                        "ValidityStartDate",
-                        "ValidityEndDate")
-                .build();
-
-            final ODataQueryResult result = query.execute(getErpEndpoint());
-            return result.asList(CostCenterDetails.class);
+            return ReadCostCenterDataService.getAllCostCenter().select(
+                    CostCenter.COST_CENTER_I_D,
+                    CostCenter.COST_CENTER_DESCRIPTION,
+                    CostCenter.STATUS,
+                    CostCenter.COMPANY_CODE,
+                    CostCenter.CATEGORY,
+                    CostCenter.VALIDITY_START_DATE,
+                    CostCenter.VALIDITY_END_DATE
+            ).execute(getConfigContext());
         } catch (final Exception e) {
             throw new QueryExecutionException("Failed to get CostCenters from OData by using cached command.", e);
         }

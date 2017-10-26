@@ -10,26 +10,27 @@ sap.ui.define([], function () {
                 });
         },
         createCostCenter: function (id, text, sapClient) {
+            // Target controlling area for new cost center
+            var controllingArea = "A000";
+
             // Create cost center object containing all predefined attributes
             var costCenter = {
-                "controllingArea": "A000",
-                "validFrom": "/Date(1451606400000)/",
-                "validTo": "/Date(1483142400000)/",
-                "name": "Cost Center 01",
-                "category": "E",
-                "personResponsible": "USER",
-                "costCenterGroup": "0001",
-                "companyCode": "1010",
-                "profitCenter": "YB101"
+                "costcenter" : id,
+                "descript" : text,
+                "validFrom": 1451606400000,
+                "validTo": 1483142400000,
+                "name": id + " - " + text,
+                "currency" : "EUR",
+                "costcenterType": "E",          // Cost center category
+                "personInCharge": "USER",       // Person responsible
+                "costctrHierGrp": "0001",       // Cost center hierarchy group
+                "compCode": "1010",             // Company code
+                "profitCtr": "YB101"            // Profit center
             };
-
-            costCenter.id = id;
-            costCenter.description = text;
-            costCenter.sapClient = sapClient;
 
             return jQuery.ajax({
                 type: "POST",
-                url: "/api/v1/rest/client/" + sapClient + "/costcenters",
+                url: "/api/v1/rest/client/" + sapClient + "/controllingarea/"+controllingArea+"/costcenters",
                 data: JSON.stringify(costCenter),
                 contentType: "application/json"
             })
