@@ -5,13 +5,12 @@ import lombok.Data;
 import java.util.List;
 
 import com.sap.cloud.sdk.result.ElementName;
-import com.sap.cloud.sdk.s4hana.serialization.CostCenter;
 
 @Data
 public class JobDetails
 {
     @ElementName( "costCenter" )
-    private CostCenter costCenter;
+    private String costCenter;
 
     @ElementName( "department" )
     private String department;
