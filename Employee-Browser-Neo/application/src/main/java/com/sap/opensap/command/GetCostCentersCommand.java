@@ -8,16 +8,15 @@ import java.util.List;
 
 import com.sap.cloud.sdk.cloudplatform.cache.CacheKey;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataException;
-import com.sap.cloud.sdk.odatav2.connectivity.ODataProperty;
-import com.sap.cloud.sdk.odatav2.connectivity.ODataQueryBuilder;
-import com.sap.cloud.sdk.odatav2.connectivity.ODataType;
 import com.sap.cloud.sdk.s4hana.connectivity.CachingErpCommand;
 import com.sap.cloud.sdk.s4hana.connectivity.ErpConfigContext;
-import com.sap.opensap.datamodel.s4.CostCenterDetails;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.helper.ExpressionFluentHelper;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.ReadCostCenterDataNamespace.CostCenter;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.services.ReadCostCenterDataService;
 
-public class GetCostCentersCommand extends CachingErpCommand<List<CostCenterDetails>> // Circuit Breaker + Bulkhead Pattern
+public class GetCostCentersCommand extends CachingErpCommand<List<CostCenter>> // Circuit Breaker + Bulkhead Pattern
 {
-    private static final Cache<CacheKey, List<CostCenterDetails>> cache =
+    private static final Cache<CacheKey, List<CostCenter>> cache =
             CacheBuilder.newBuilder().concurrencyLevel(10).build();
 
     private final String companyCode;
@@ -29,7 +28,7 @@ public class GetCostCentersCommand extends CachingErpCommand<List<CostCenterDeta
     }
 
     @Override
-    protected Cache<CacheKey, List<CostCenterDetails>> getCache()
+    protected Cache<CacheKey, List<CostCenter>> getCache()
     {
         return cache;
     }
@@ -41,18 +40,17 @@ public class GetCostCentersCommand extends CachingErpCommand<List<CostCenterDeta
     }
 
     @Override
-    protected List<CostCenterDetails> runCacheable()
+    protected List<CostCenter> runCacheable()
             throws ODataException
     {
-        ODataQueryBuilder builder =
-            ODataQueryBuilder.withEntity("/sap/opu/odata/sap/FCO_PI_COST_CENTER", "CostCenterCollection")
-                    .select("CostCenterID", "CompanyCode", "CostCenterDescription");
+        ExpressionFluentHelper<CostCenter> filter = companyCode == null
+                ? CostCenter.COMPANY_CODE.ne("")
+                : CostCenter.COMPANY_CODE.eq(companyCode);
 
-        if( companyCode != null ) {
-            builder.filter(ODataProperty.field("CompanyCode").eq(ODataType.of(companyCode)));
-        }
-
-        List<CostCenterDetails> costCenters = builder.build().execute(getErpEndpoint()).asList(CostCenterDetails.class);
-        return costCenters;
+        return ReadCostCenterDataService
+                .getAllCostCenter()
+                .select(CostCenter.COST_CENTER_I_D, CostCenter.COMPANY_CODE, CostCenter.COST_CENTER_DESCRIPTION)
+                .filter(filter)
+                .execute(getConfigContext());
     }
 }

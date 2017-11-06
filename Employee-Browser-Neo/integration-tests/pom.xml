@@ -5,23 +5,85 @@
     <modelVersion>4.0.0</modelVersion>
 
     <name>employee-browser - Integration Tests</name>
-
-    <groupId>com.sap.opensap</groupId>
     <artifactId>employee-browser-integration-tests</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
 
     <parent>
-        <groupId>com.sap.cloud.s4hana.starters</groupId>
-        <artifactId>scp-neo-javaee6-tests</artifactId>
-        <version>1.0.0</version>
+        <groupId>com.sap.opensap</groupId>
+        <artifactId>employee-browser</artifactId>
+        <version>1.2.0-SNAPSHOT</version>
     </parent>
+
+    <properties>
+        <surefire.skipTests>false</surefire.skipTests>
+        <surefire.forkCount>1</surefire.forkCount>
+        <surefire.include>*</surefire.include>
+        <surefire.exclude />
+        <surefire.groups />
+        <surefire.excludedGroups />
+        <surefire.maxMemorySize>1024m</surefire.maxMemorySize>
+        <surefire.maxPermSize>512m</surefire.maxPermSize>
+        <surefire.defaultLogLevel>warn</surefire.defaultLogLevel>
+
+        <jacoco.destFile>${project.build.directory}/coverage-reports/jacoco.exec</jacoco.destFile>
+        <jacoco.outputDirectory>${project.reporting.outputDirectory}/jacoco</jacoco.outputDirectory>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- fix transitive dependency version conflicts between:
+                    - org.jboss.arquillian.junit:arquillian-junit-container
+                    - org.apache.openejb:arquillian-tomee-embedded
+                    - org.apache.openejb:tomee-jaxrs
+             -->
+            <dependency>
+                <groupId>org.jboss.shrinkwrap.descriptors</groupId>
+                <artifactId>shrinkwrap-descriptors-api-base</artifactId>
+                <version>2.0.0-alpha-6</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.shrinkwrap.descriptors</groupId>
+                <artifactId>shrinkwrap-descriptors-spi</artifactId>
+                <version>2.0.0-alpha-6</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>2.6</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>3.2.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.xbean</groupId>
+                <artifactId>xbean-asm5-shaded</artifactId>
+                <version>4.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.xbean</groupId>
+                <artifactId>xbean-finder-shaded</artifactId>
+                <version>4.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-api</artifactId>
+                <version>2.7.18</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-impl</artifactId>
+                <version>2.2.7</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
             <groupId>com.sap.opensap</groupId>
             <artifactId>employee-browser-application</artifactId>
             <classifier>classes</classifier>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.2.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -39,13 +101,17 @@
             <artifactId>testutil</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>com.sap.cloud.s4hana.quality</groupId>
             <artifactId>listeners-all</artifactId>
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>com.jayway.restassured</groupId>
             <artifactId>rest-assured</artifactId>
@@ -64,75 +130,78 @@
         </dependency>
         <dependency>
             <groupId>org.apache.openejb</groupId>
-            <artifactId>tomee-embedded</artifactId>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-jdk14</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.openejb</groupId>
             <artifactId>tomee-jaxrs</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.7.9</version>
+                    <configuration>
+                        <destFile>${jacoco.destFile}</destFile>
+                        <dataFile>${jacoco.destFile}</dataFile>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>pre-unit-test</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>post-unit-test</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${jacoco.outputDirectory}</outputDirectory>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.20</version>
+                    <configuration>
+                        <argLine>@{argLine}
+                            -Xmx${surefire.maxMemorySize}
+                            -XX:MaxPermSize=${surefire.maxPermSize}
+                            -Dorg.slf4j.simpleLogger.defaultLogLevel=${surefire.defaultLogLevel}
+                            -Djava.io.tmpdir=target/arquillian-working-dir/${surefire.forkNumber}/
+                        </argLine>
+                        <skipTests>${surefire.skipTests}</skipTests>
+                        <includes>
+                            <include>${surefire.include}</include>
+                        </includes>
+                        <excludes>
+                            <exclude>${surefire.exclude}</exclude>
+                        </excludes>
+                        <forkCount>${surefire.forkCount}</forkCount>
+                        <reuseForks>false</reuseForks>
+                        <groups>${surefire.groups}</groups>
+                        <excludedGroups>${surefire.excludedGroups}</excludedGroups>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
         <plugins>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.9</version>
-                <configuration>
-                    <destFile>${jacoco.destFile}</destFile>
-                    <dataFile>${jacoco.destFile}</dataFile>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>pre-unit-test</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>post-unit-test</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${jacoco.outputDirectory}</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.20</version>
-                <configuration>
-                    <argLine>@{argLine}
-                        -Xmx${surefire.maxMemorySize}
-                        -XX:MaxPermSize=${surefire.maxPermSize}
-                        -Dorg.slf4j.simpleLogger.defaultLogLevel=${surefire.defaultLogLevel}
-                        -Djava.io.tmpdir=target/arquillian-working-dir/${surefire.forkNumber}/
-                    </argLine>
-                    <skipTests>${surefire.skipTests}</skipTests>
-                    <includes>
-                        <include>${surefire.include}</include>
-                    </includes>
-                    <excludes>
-                        <exclude>${surefire.exclude}</exclude>
-                    </excludes>
-                    <forkCount>${surefire.forkCount}</forkCount>
-                    <reuseForks>false</reuseForks>
-                    <groups>${surefire.groups}</groups>
-                    <excludedGroups>${surefire.excludedGroups}</excludedGroups>
-                </configuration>
             </plugin>
         </plugins>
     </build>
