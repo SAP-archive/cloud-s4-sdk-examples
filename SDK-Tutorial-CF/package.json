@@ -11,7 +11,7 @@
     "devDependencies": {
         "yargs": "^6.6.0",
         "chromedriver": "^2.29.0",
-        "cucumber": "^2.2.0",
+        "cucumber": "^3.0.3",
         "cucumber-html-report": "^0.6.0",
         "cucumber-junit": "^1.7.0",
         "jasmine": "^2.6.0",
@@ -22,6 +22,6 @@
         "karma-junit-reporter": "^1.2.0",
         "karma-openui5": "^0.2.2",
         "nightwatch": "^0.9.15",
-        "nightwatch-cucumber": "^7.1.7"
+        "nightwatch-cucumber": "^8.2.2"
     }
 }

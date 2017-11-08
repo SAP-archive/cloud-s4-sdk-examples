@@ -17,7 +17,7 @@
             <dependency>
                 <groupId>com.sap.cloud.s4hana</groupId>
                 <artifactId>sdk-bom</artifactId>
-                <version>1.1.1</version>
+                <version>1.3.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -25,7 +25,13 @@
     </dependencyManagement>
 
     <properties>
-        <!-- file encoding -->
+        <java.version>1.7</java.version>
+
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.testSource>${java.version}</maven.compiler.testSource>
+        <maven.compiler.testTarget>${java.version}</maven.compiler.testTarget>
+
         <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -51,6 +57,12 @@
                         </goals>
                         <configuration>
                             <rules>
+                                <requireMavenVersion>
+                                    <version>3.3.9</version>
+                                </requireMavenVersion>
+                                <requireJavaVersion>
+                                    <version>${java.version}</version>
+                                </requireJavaVersion>
                                 <reactorModuleConvergence />
                             </rules>
                             <fail>true</fail>

@@ -11,7 +11,8 @@ import com.sap.cloud.s4hana.tutorial.GetCostCentersCommand;
 import com.sap.cloud.sdk.cloudplatform.servlet.Executable;
 import com.sap.cloud.sdk.s4hana.connectivity.ErpConfigContext;
 import com.sap.cloud.sdk.s4hana.connectivity.ErpDestination;
-import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.ReadCostCenterDataNamespace;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.readcostcenterdata.CostCenter;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.services.DefaultReadCostCenterDataService;
 import com.sap.cloud.sdk.s4hana.serialization.SapClient;
 import com.sap.cloud.sdk.testutil.MockUtil;
 
@@ -29,13 +30,11 @@ public class GetCostCentersCommandTest
         mockUtil.mockErpDestination();
     }
 
-    private
-        List<ReadCostCenterDataNamespace.CostCenter>
-        getCostCenters( final String destination, final SapClient sapClient )
+    private List<CostCenter> getCostCenters( final String destination, final SapClient sapClient )
     {
         final ErpConfigContext configContext = new ErpConfigContext(destination, sapClient, Locale.ENGLISH);
 
-        return new GetCostCentersCommand(configContext).execute();
+        return new GetCostCentersCommand(new DefaultReadCostCenterDataService(), configContext).execute();
     }
 
     @Test

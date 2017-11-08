@@ -18,6 +18,8 @@ import java.net.URISyntaxException;
 
 import com.sap.cloud.s4hana.tutorial.CostCenterServlet;
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
+import com.sap.cloud.sdk.s4hana.datamodel.bapi.services.DefaultCostCenterService;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.services.DefaultReadCostCenterDataService;
 import com.sap.cloud.sdk.testutil.MockUtil;
 
 import static com.jayway.restassured.RestAssured.given;
@@ -34,7 +36,10 @@ public class CostCenterServiceTest
     @Deployment
     public static WebArchive createDeployment()
     {
-        return TestUtil.createDeployment(CostCenterServlet.class);
+        return TestUtil.createDeployment(
+            CostCenterServlet.class,
+            DefaultReadCostCenterDataService.class,
+            DefaultCostCenterService.class);
     }
 
     @BeforeClass

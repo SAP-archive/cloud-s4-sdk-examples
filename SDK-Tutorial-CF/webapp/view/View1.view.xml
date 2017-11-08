@@ -3,7 +3,7 @@
     displayBlock="true" xmlns="sap.m">
     <App>
         <pages>
-            <Page title="Cost Center Explorer">
+            <Page showHeader="false">
                 <content>
                     <!-- Add input to create new cost centers -->
                     <HBox width="500px" justifyContent="SpaceAround"

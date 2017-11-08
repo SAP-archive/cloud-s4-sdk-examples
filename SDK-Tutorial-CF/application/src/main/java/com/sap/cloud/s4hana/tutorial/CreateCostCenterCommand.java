@@ -7,6 +7,7 @@ import org.joda.time.LocalDate;
 import com.sap.cloud.sdk.s4hana.connectivity.ErpCommand;
 import com.sap.cloud.sdk.s4hana.connectivity.ErpConfigContext;
 import com.sap.cloud.sdk.s4hana.datamodel.bapi.services.CostCenterService;
+import com.sap.cloud.sdk.s4hana.datamodel.bapi.services.DefaultCostCenterService;
 import com.sap.cloud.sdk.s4hana.datamodel.bapi.structures.CostCenterCreateInput;
 import com.sap.cloud.sdk.s4hana.datamodel.bapi.structures.ReturnParameter;
 import com.sap.cloud.sdk.s4hana.datamodel.bapi.types.CompanyCode;
@@ -22,15 +23,19 @@ import lombok.NonNull;
 
 public class CreateCostCenterCommand extends ErpCommand<List<ReturnParameter>>
 {
+    private final CostCenterService service;
+
     private final String id;
     private final String description;
 
     public CreateCostCenterCommand(
+        @NonNull final CostCenterService service,
         @NonNull final ErpConfigContext configContext,
         @NonNull final String id,
         @NonNull final String description )
     {
         super(CreateCostCenterCommand.class, configContext);
+        this.service = service;
         this.id = id;
         this.description = description;
     }
@@ -57,9 +62,6 @@ public class CreateCostCenterCommand extends ErpCommand<List<ReturnParameter>>
                 .profitCtr(ProfitCenter.of("YB101")) // ERP type "PRCTR"
                 .build();
 
-        return CostCenterService
-            .createMultiple(controllingArea, costCenterInput)
-            .execute(getConfigContext())
-            .getMessages();
+        return service.createMultiple(controllingArea, costCenterInput).execute(getConfigContext()).getMessages();
     }
 }

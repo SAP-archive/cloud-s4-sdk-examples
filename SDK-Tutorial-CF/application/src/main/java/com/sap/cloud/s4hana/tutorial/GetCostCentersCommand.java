@@ -10,14 +10,16 @@ import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
 import com.sap.cloud.sdk.frameworks.hystrix.HystrixUtil;
 import com.sap.cloud.sdk.s4hana.connectivity.ErpCommand;
 import com.sap.cloud.sdk.s4hana.connectivity.ErpConfigContext;
-import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.ReadCostCenterDataNamespace.CostCenter;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.readcostcenterdata.CostCenter;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.services.ReadCostCenterDataService;
 
 public class GetCostCentersCommand extends ErpCommand<List<CostCenter>>
 {
     private static final Logger logger = CloudLoggerFactory.getLogger(GetCostCentersCommand.class);
 
-    protected GetCostCentersCommand( final ErpConfigContext configContext )
+    private final ReadCostCenterDataService service;
+
+    protected GetCostCentersCommand( final ReadCostCenterDataService service, final ErpConfigContext configContext )
     {
         super(
             HystrixUtil
@@ -26,6 +28,7 @@ public class GetCostCentersCommand extends ErpCommand<List<CostCenter>>
                     HystrixUtil.getDefaultErpCommandProperties().withExecutionTimeoutInMilliseconds(5000))
                 .andThreadPoolPropertiesDefaults(HystrixThreadPoolProperties.Setter().withCoreSize(20)),
             configContext);
+        this.service = service;
     }
 
     @Override
@@ -33,10 +36,10 @@ public class GetCostCentersCommand extends ErpCommand<List<CostCenter>>
         throws Exception
     {
         final List<CostCenter> costCenters =
-            ReadCostCenterDataService
+            service
                 .getAllCostCenter()
                 .select(
-                    CostCenter.COST_CENTER_I_D,
+                    CostCenter.COST_CENTER_ID,
                     CostCenter.STATUS,
                     CostCenter.COMPANY_CODE,
                     CostCenter.CATEGORY,
