@@ -25,7 +25,7 @@
     </p>
 
     <div class="alert alert-success">
-      <strong>Coming soon:</strong> This release updates the virtual data model to the S/4HANA Cloud 1711 release. Stay tuned for more details!
+      <strong>Coming soon:</strong> This release will update the SDK's VDM to S/4HANA Cloud 1711. Stay tuned for more details!
     </div>
 
     <!-- Version 1.3.0 -->
@@ -41,12 +41,14 @@
         <strong>Compatibility Notes:</strong>
         <ul>
           <li>
-            Static references to virtual data model service classes are no longer supported. Instantiate the classes with <code>new</code>, 
-            or inject them if using a JSR 330 compliant framework. This simplifies testing and extensibility.
+            Static references to virtual data model service classes are no longer supported. 
+            To migrate, instantiate classes with <code>new</code> or inject them if using a JSR 330 compliant framework. 
+            This simplifies testing and extensibility. 
+            Each service class provides a default implementation starting with prefix <code>"Default"</code>.
           </li>
           <li>
-            Setter methods on entity objects return
-            <code>void</code> instead of instance
+            Setter methods on entity objects return <code>void</code> instead of the instance itself.
+            Use the <code>builder()</code> methods instead.
           </li>
         </ul>
 
@@ -55,8 +57,8 @@
 
     <h4>New Functionality</h4>
     <ul>
-      <li>OData virtual data model allows creating, updating, and deleting entities. The VDM service classes are enhanced by
-        additional methods (e.g.
+      <li>OData virtual data model allows creating, updating, and deleting entities. 
+        The VDM service classes are enhanced by additional methods (e.g.
         <code>createBusinessPartner</code> in class
         <code>BusinessPartnerService</code>).</li>
       <li>OData virtual data model receives two new
@@ -69,20 +71,21 @@
             <code>execute</code> without any parameter. In this case the default
             <code>ErpConfigContext</code> is considered.</li>
         </ul>
-        <li>Introduce builder pattern for OData virtual data model which simplifies instance creation leveraging the fluent
-          pattern.</li>
+        <li>Introduce builder pattern for OData virtual data model which simplifies instance creation leveraging the fluent pattern.</li>
           <li>OData virtual data model allows custom field extensions for read access. If an OData service returns entities 
             with additional values, they can be read by accessing the <code>getField</code> method of the derived entity class.
-            <code>hasField</code> and <code>getFieldNames</code> can be used to browse the raw data.</li>
+            <code>hasField</code> and <code>getFieldNames</code> can be used to determine which fields are available.</li>
     </ul>
 
     <h4>Improvements</h4>
     <ul>
-      <li>Virtual data model service classes can be instantiated using dependency injection.</li>
-      <li>Since mocking has become easier, you can decouple your tests and make them independent from an S/4HANA downstream system.</li>
-      <li>Setter methods on entity objects return
-        <code>void</code> instead of instance.</li>
-      <li>Improved javadoc of
+      <li>Virtual data model service classes can now be instantiated using dependency injection. 
+        This simplifies testing and mocking, allowing tests to be independent from an S/4HANA downstream system.
+      </li>
+      <li>Setter methods on entity objects return <code>void</code> instead of instance.
+        Use the respective <code>builder()</code> methods instead.
+      </li>
+      <li>Improve Javadoc of
         <code>ErpEndpoint</code> and
         <code>ErpConfigContext</code>.</li>
     </ul>
