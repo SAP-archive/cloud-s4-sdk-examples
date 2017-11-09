@@ -3,7 +3,10 @@ package com.sap.cloud.s4hana.tutorial;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.restassured.internal.mapper.ObjectMapperType;
+
+import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.ByteArrayAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 
 import com.sap.cloud.sdk.cloudplatform.connectivity.DestinationsRequestContextListener;
@@ -21,7 +24,8 @@ public class TestUtil
             .addClass(RequestContextServletFilter.class)
             .addClass(TenantRequestContextListener.class)
             .addClass(DestinationsRequestContextListener.class)
-            .addAsManifestResource("arquillian.xml");
+            .addAsManifestResource("arquillian.xml")
+            .addAsWebInfResource(new ByteArrayAsset("<beans/>".getBytes()), ArchivePaths.create("beans.xml"));
     }
 
     public static ObjectMapperType objectMapperType()

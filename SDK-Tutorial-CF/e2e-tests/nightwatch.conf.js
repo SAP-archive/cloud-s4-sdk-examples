@@ -1,7 +1,7 @@
 const argv = require("yargs").argv;
 
 require('nightwatch-cucumber')({
-    cucumberArgs: ['--require', 'timeout.js', '--require', 'features/step_definitions', '--format', 'pretty', '--format', 'json:../s4hana_pipeline/reports/e2e/cucumber.json', 'features']
+    cucumberArgs: ['--require', 'timeout.js', '--require', 'features/step_definitions', '--format', 'json:../s4hana_pipeline/reports/e2e/cucumber.json', 'features']
 })
 
 var chromeOptionsArgs = ["--no-sandbox" , "window-size=1400,1000"]

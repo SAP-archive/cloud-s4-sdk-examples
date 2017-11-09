@@ -12,7 +12,8 @@ import com.sap.cloud.sdk.odatav2.connectivity.ODataException;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataExceptionType;
 import com.sap.cloud.sdk.s4hana.connectivity.CachingErpCommand;
 import com.sap.cloud.sdk.s4hana.connectivity.ErpConfigContext;
-import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.ReadCostCenterDataNamespace.CostCenter;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.readcostcenterdata.CostCenter;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.services.DefaultReadCostCenterDataService;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.services.ReadCostCenterDataService;
 
 import lombok.NonNull;
@@ -51,10 +52,10 @@ public class GetCostCentersByCompanyCodeCommand extends CachingErpCommand<List<C
     {
         try {
             final List<CostCenter> costCenters =
-                ReadCostCenterDataService
+                new DefaultReadCostCenterDataService()
                     .getAllCostCenter()
                     .select(
-                        CostCenter.COST_CENTER_I_D,
+                        CostCenter.COST_CENTER_ID,
                         CostCenter.STATUS,
                         CostCenter.COMPANY_CODE,
                         CostCenter.CATEGORY,
