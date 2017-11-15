@@ -1,11 +1,15 @@
-# Develop an S/4HANA Extension App on SAP Cloud Platform Cloud Foundry using the S/4HANA Cloud SDK
+# Develop an S/4HANA Extension App on SAP Cloud Platform Cloud Foundry using the SAP S/4HANA Cloud SDK
 This repository contains learning materials for developing your first SAP S/4HANA Extension App using the [SAP S/4HANA Cloud SDK](https://www.sap.com/s4sdk)
 * Corresponding presentation: [PDF](https://raw.githubusercontent.com/SAP/cloud-s4-sdk-examples/blob/learning/20171013_Partner%20Lecture%20Session_SDK.pdf)
 
 ## Step A
 ```
-mvn archetype:generate '-DarchetypeGroupId=com.sap.cloud.s4hana.archetypes' '-DarchetypeArtifactId=scp-cf-tomee' '-DarchetypeVersion=1.1.2'
+mvn archetype:generate '-DarchetypeGroupId=com.sap.cloud.s4hana.archetypes' '-DarchetypeArtifactId=scp-cf-tomee' '-DarchetypeVersion=1.3.0'
 ```
+The example uses the following parameters for the archetype:
+* groupId: com.sap.cloud.s4hana.tutorial
+* artifactId: s4sdk-learning
+* unqieHostname: choose your own host name that is unique across SAP Cloud Platform
 
 ## Step B
 * https://cloudplatform.sap.com/try.html

@@ -1,0 +1,6 @@
+target/
+bin/
+.project
+.settings/
+.classpath
+s4hana_pipeline/
