@@ -22,11 +22,54 @@
     <h2 id="version-140">Version 1.4.0</h2>
     <p>
       <em>Available November 23, 2017</em>
+<!--      <a href="https://search.maven.org/#search%7Cga%7C1%7Cv%3A%221.4.0%22%20AND%20(g%3A%22com.sap.cloud.s4hana%22%20OR%20g%3A%22com.sap.cloud.s4hana.archetypes%22%20OR%20g%3A%22com.sap.cloud.s4hana.cloudplatform%22%20OR%20g%3A%22com.sap.cloud.s4hana.frameworks%22%20OR%20g%3A%22com.sap.cloud.s4hana.plugins%22%20OR%20g%3A%22com.sap.cloud.s4hana.quality%22)">Maven Central</a> -->
+    </p>
+    
+    <p>
+      <div class="alert alert-warning">
+        <strong>Compatibility Notes:</strong>
+        <ul>
+            <li>As part of the update to the OData virtual data model (VDM) for SAP S/4HANA Cloud 1711, the name or package of some service, entity and helper classes has changed.
+            The <a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.4.0/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/services/package-summary.html">Javadoc of the VDM</a> documents the new names.</li>
+        </ul>
+
+      </div>
     </p>
 
-    <div class="alert alert-success">
-      <strong>Coming soon:</strong> This release will update the SDK's VDM to S/4HANA Cloud 1711. Stay tuned for more details!
-    </div>
+    <h4>New Functionality</h4>
+    <ul>
+        <li>
+            This version updates the OData virtual data model to the <a href="https://news.sap.com/sap-s4hana-cloud-1711-release-highlights/">newest release 1711 of SAP S/4HANA Cloud</a>. This includes:
+            <ul>
+                <li>Almost 40 completely new services 
+                    (available from package 
+                    <a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.4.0/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/services/package-summary.html">
+                        com.sap.cloud.sdk.s4hana.datamodel.odata.services</a>),</li>
+                <li>More than 300 new operations,</li>
+                <li>More than 100 new entity types.</li>
+            </ul>
+            The SDK supports all OData services listed in the <a href="https://api.sap.com/shell/discover/contentpackage/SAPS4HANACloud">SAP API Business Hub for SAP S/4HANA Cloud</a>.
+        </li>
+        <li>Allow to transparently use an additional destination for RFC connections to a system that is already connected via HTTP.
+            By default, this destination is expected to have the suffix <code>_RFC</code>, for example, <code>ErpQueryEndpoint_RFC</code>.
+            See the explanation of the different options for the <a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.4.0/javadoc-api/com/sap/cloud/sdk/s4hana/connectivity/ErpConfigContext.html">ErpConfigContext</a>.</li>
+    </ul>
+
+    <h4>Improvements</h4>
+    <ul>
+        <li>Expand existing virtual data model with new operations and properties (see above).</li>
+        <li>Improve Javadoc of existing virtual data model classes based on information from SAP API Business Hub.</li>
+        <li>Provide additional user and tenant information on SAP Cloud Platform, Cloud Foundry.</li>
+        <li>Maven archetypes for Cloud Foundry use Java version 8 by default.</li>
+    </ul>
+
+    <h4>Fixed Issues</h4>
+    <ul>
+        <li>Serialize boolean properties according to OData specification.</li>
+        <li>Increase timeout of <code>cx-server</code> script.</li>
+        <li>Select methods on virtual data model fluent helpers can be mocked.</li>
+    </ul>
+
 
     <!-- Version 1.3.0 -->
 
