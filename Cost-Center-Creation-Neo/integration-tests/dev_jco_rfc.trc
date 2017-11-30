@@ -1,0 +1,23 @@
+
+**** Error file opened at 20171130 140938 Central European Time Rel. 3.0.17 (2017-07-17) [721.913]
+Error:  >Thu Nov 30 14:09:38,799<    RfcException:
+	message: Connect to SAP gateway failed
+Connection parameters: TYPE=A DEST=ErpQueryEndpoint ASHOST=ldciqw133 SYSNR=00 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       hostname 'ldciqw133' unknown
+TIME        Thu Nov 30 14:09:38 2017
+RELEASE     721
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -2
+MODULE      ninti.c
+LINE        897
+DETAIL      NiPGetHostByName: 'ldciqw133' not found
+SYSTEM CALL getaddrinfo
+COUNTER     2
+
+	return code: RFC_FAILURE (1)
+	error group: 102
+	key: RFC_ERROR_COMMUNICATION
+
