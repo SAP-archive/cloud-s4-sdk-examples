@@ -1,0 +1,7 @@
+Name=ErpQueryEndpoint
+URL=
+TrustAll=FALSE
+Type=HTTP
+Password=
+Authentication=BasicAuthentication
+User=

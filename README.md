@@ -10,6 +10,7 @@ Runnable example applications that showcase the usage of the SAP S/4HANA Cloud S
 - Cost Center Manager App
 - Cost Center Manager App as explained in the [tutorials](https://blogs.sap.com/2017/05/10/first-steps-with-sap-s4hana-cloud-sdk/)
 - Employee Browser (Integration with S/4HANA and SuccessFactors)
+- Cost Center Creation Tool
 
  ### SAP S/4HANA Cloud SDK Javadoc
 - [Latest version](https://sap.github.io/cloud-s4-sdk-examples/docs/latest/javadoc-api/)
