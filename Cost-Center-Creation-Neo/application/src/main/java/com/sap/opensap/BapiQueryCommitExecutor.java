@@ -19,22 +19,15 @@ import com.sap.cloud.sdk.s4hana.connectivity.rfc.BapiQueryResult;
 public class BapiQueryCommitExecutor {
 
     private final BapiQuery queryToExecute;
-    private final String jCoDestinationName;
 
     private static final String ROLLBACK_BAPI_NAME = "BAPI_TRANSACTION_ROLLBACK";
-
     private static final String COMMIT_BAPI_NAME = "BAPI_TRANSACTION_COMMIT";
 
-    public BapiQueryCommitExecutor(BapiQuery queryToExecute) {
-        this.queryToExecute = queryToExecute;
-        this.jCoDestinationName = ErpDestination.getDefaultName();
-    }
-
     public BapiQueryResult execute(ErpEndpoint erpEndpoint) throws QueryExecutionException {
-        @Nullable BapiQueryResult queryResult = null;
+        BapiQueryResult queryResult = null;
 
         try {
-            final JCoDestination jCoDestination = JCoDestinationManager.getDestination(jCoDestinationName);
+            final JCoDestination jCoDestination = JCoDestinationManager.getDestination(erpEndpoint.getDestinationName());
 
             JCoContext.begin(jCoDestination);
 
