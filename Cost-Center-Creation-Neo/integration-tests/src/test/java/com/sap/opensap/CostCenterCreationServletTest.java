@@ -46,7 +46,16 @@ public class CostCenterCreationServletTest
     @Test
     public void testService()
     {
-        final String body = given().get("/cost-center-creation?controllingArea=0001&costCenterIndex=3&numberOfCreations=3&namingPrefix=MA&namingSuffixStartCounter=1").body().asString();
+        final String body = given()
+                .param("controllingArea", "0001")
+                .param("costCenterIndex", "3")
+                .param("numberOfCreations", "2")
+                .param("namingPrefix", "TEST")
+                .param("namingSuffixStartCounter", "1")
+                .get("/cost-center-creation")
+                .body()
+                .asString();
+
         assertThat(body).containsIgnoringCase("Cost Centers created successfully.");
     }
 }

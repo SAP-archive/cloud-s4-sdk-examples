@@ -6,7 +6,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
 public class RequestParameters {
     private String controllingArea;
     private int costCenterIndex;
