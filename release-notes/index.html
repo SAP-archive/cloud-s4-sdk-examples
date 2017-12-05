@@ -17,10 +17,11 @@
       <object data="logo.svg" type="image/svg+xml" width="150px"></object>
     </a>
     
+    <!-- Template new releases -->
     <!-- Version 1.X.X -->
 <!--
     <div>
-        <h2 id="version-140">Version 1.X.X</h2>
+        <h2 id="version-1XX">Version 1.X.X</h2>
         <p>
           <em>Month 00, 2017</em> - 
           <a href="https://search.maven.org/#search%7Cga%7C1%7Cv%3A%221.X.X%22%20AND%20(g%3A%22com.sap.cloud.s4hana%22%20OR%20g%3A%22com.sap.cloud.s4hana.archetypes%22%20OR%20g%3A%22com.sap.cloud.s4hana.cloudplatform%22%20OR%20g%3A%22com.sap.cloud.s4hana.frameworks%22%20OR%20g%3A%22com.sap.cloud.s4hana.plugins%22%20OR%20g%3A%22com.sap.cloud.s4hana.quality%22)">Maven Central</a>
@@ -55,7 +56,7 @@
     <!-- Version 1.5.0 -->
 
     <div>
-        <h2 id="version-140">Version 1.5.0</h2>
+        <h2 id="version-150">Version 1.5.0</h2>
         <p>
           <em>December 7, 2017</em> - 
           <a href="https://search.maven.org/#search%7Cga%7C1%7Cv%3A%221.5.0%22%20AND%20(g%3A%22com.sap.cloud.s4hana%22%20OR%20g%3A%22com.sap.cloud.s4hana.archetypes%22%20OR%20g%3A%22com.sap.cloud.s4hana.cloudplatform%22%20OR%20g%3A%22com.sap.cloud.s4hana.frameworks%22%20OR%20g%3A%22com.sap.cloud.s4hana.plugins%22%20OR%20g%3A%22com.sap.cloud.s4hana.quality%22)">Maven Central</a>
@@ -65,24 +66,39 @@
           <div class="alert alert-warning">
             <strong>Compatibility Notes:</strong>
             <ul>
-                <li></li>
+                <li>The methods for handling custom fields introduced in <a href="#version-130">version 1.3.0</a> have been renamed from <code>getField</code> to <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.5.0/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/helper/Entity.html#getCustomField-com.sap.cloud.sdk.s4hana.datamodel.odata.helper.EntityField-">getCustomField</a></code> (<code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.5.0/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/helper/Entity.html#hasCustomField-com.sap.cloud.sdk.s4hana.datamodel.odata.helper.EntityField-">hasCustomField</a></code>, <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.5.0/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/helper/Entity.html#getCustomFieldNames--">getCustomFieldNames</a></code>) in order to clearly indicate that they deal with custom fields (i.e., extensions in S/4HANA).</li>
             </ul>
           </div>
         </p>
 
         <h4>New Functionality</h4>
         <ul>
-            <li></li>
+            <li>
+                Provide navigation properties as part of OData virtual data model (VDM) for S/4HANA.
+                <ul>
+                    <li>Retrieve values of navigation properties of an entity via <code>get[NavigationProperty]OrNull</code> and <code>get[NavigationProperty]OrFetch</code> (examples: <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.5.0/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/namespaces/businesspartner/BusinessPartner.html#getBusinessPartnerAddressOrFetch--">BusinessPartner.getBusinessPartnerAddressOrFetch</a></code> and <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.5.0/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/namespaces/businesspartner/BusinessPartner.html#getBusinessPartnerAddressOrNull--">BusinessPartner.getBusinessPartnerAddressOrNull</a></code>).</li>
+                    <li>Modify navigation property values via <code>set[NavigationProperty]</code> (to overwrite) and, in case of 1:n associations, <code>add[NavigationProperty]</code> (examples: <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.5.0/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/namespaces/businesspartner/BusinessPartner.html#setBusinessPartnerAddress-java.util.List-">BusinessPartner.setBusinessPartnerAddress</a></code> and <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.5.0/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/namespaces/businesspartner/BusinessPartner.html#addBusinessPartnerAddress-com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.BusinessPartnerAddress...-">BusinessPartner.addBusinessPartnerAddress</a></code>).</li>
+                </ul>
+            </li>
+            <li>Support deep insert via VDM by leveraging navigation properties</li>
+            <li>
+                Allow to modify values of custom fields.
+                <ul>
+                    <li>Set the value of a custom field of an entity using <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.5.0/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/helper/Entity.html#setCustomField-java.lang.String-java.lang.Object-">setCustomField</a></code>.</li>
+                    <li>Custom fields of entities thus modified are sent to S/4HANA as part of create or update operations and persisted (if the custom field exists in the S/4HANA Cloud system).</li>
+                </ul>
+            </li>
         </ul>
 
         <h4>Improvements</h4>
         <ul>
-            <li></li>
+            <li>The <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.5.0/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/helper/ODataVdmErrorResultHandler.html">ODataVdmErrorResultHandler</a></code> used by default in all VDM operations exposes more information about exceptions that occur during calls of the VDM.</li>
+            <li>Method <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.5.0/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/helper/Entity.html#getCustomFields--">getCustomFields<a/></code> returns a map of all custom fields of an entity and their values.</a</li>
         </ul>
 
         <h4>Fixed Issues</h4>
         <ul>
-            <li></li>
+            <li>Adjust default memory provisioned for applications generated by <a href="https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22scp-cf-tomee%22">scp-cf-tomee</a>, <a href="https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22scp-cf-tomcat%22">scp-cf-tomcat</a>, or <a href="https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22scp-cf-spring%22">scp-cf-spring archetypes</a> to ensure sufficient memory and metaspace.</li>
         </ul>
     </div>
 
