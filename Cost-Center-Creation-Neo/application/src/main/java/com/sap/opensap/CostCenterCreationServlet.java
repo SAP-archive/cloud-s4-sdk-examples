@@ -1,7 +1,6 @@
 package com.sap.opensap;
 
 import org.joda.time.LocalDate;
-import org.slf4j.Logger;
 
 import javax.annotation.Nullable;
 import javax.servlet.ServletException;
@@ -13,8 +12,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
-
 import com.sap.cloud.sdk.s4hana.connectivity.ErpEndpoint;
 import com.sap.cloud.sdk.s4hana.connectivity.exception.QueryExecutionException;
 import com.sap.cloud.sdk.s4hana.connectivity.rfc.BapiQuery;
@@ -24,15 +21,13 @@ import com.sap.cloud.sdk.s4hana.connectivity.rfc.Table;
 @WebServlet("/cost-center-creation")
 public class CostCenterCreationServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static final Logger logger = CloudLoggerFactory.getLogger(CostCenterCreationServlet.class);
 
     @Override
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
         final PrintWriter writer = response.getWriter();
 
-        @Nullable
-        RequestParameters reqParameters = null;
+        RequestParameters reqParameters;
         try {
             reqParameters = fetchParametersFromRequest(request);
         } catch (IllegalArgumentException e) {
@@ -56,7 +51,7 @@ public class CostCenterCreationServlet extends HttpServlet {
 
             writer.write("Reference Cost Center: " + detailedCostCenter.toString() + "\n");
 
-            final BapiQueryResult resultCreate = createCostCenterCopies(reqParameters, erpEndpoint, detailedCostCenter);
+            final BapiQueryResult resultCreate = createCostCenterCopy(reqParameters, erpEndpoint, detailedCostCenter);
 
             if (resultCreate.wasSuccessful()) {
                 writer.write("Cost Centers created successfully.");
@@ -68,7 +63,7 @@ public class CostCenterCreationServlet extends HttpServlet {
         }
     }
 
-    private BapiQueryResult createCostCenterCopies(final RequestParameters reqParameters, final ErpEndpoint erpEndpoint, final CostCenter detailedCostCenter) throws QueryExecutionException {
+    private BapiQueryResult createCostCenterCopy(final RequestParameters reqParameters, final ErpEndpoint erpEndpoint, final CostCenter detailedCostCenter) throws QueryExecutionException {
         final BapiQuery queryCreate = new BapiQuery("BAPI_COSTCENTER_CREATEMULTIPLE", true)
                 .withExporting("CONTROLLINGAREA", "BAPI0012_GEN-CO_AREA", reqParameters.getControllingArea())
                 .withTableAsReturn("BAPIRET2");
@@ -90,7 +85,7 @@ public class CostCenterCreationServlet extends HttpServlet {
                     .end();
         }
 
-        return queryCreate.execute(erpEndpoint);
+        return new BapiQueryCommitExecutor(queryCreate).execute(erpEndpoint);
     }
 
     private CostCenter retrieveCostCenterDetails(final RequestParameters reqParameters, final ErpEndpoint erpEndpoint, final List<CostCenter> costCenterList) throws QueryExecutionException {
