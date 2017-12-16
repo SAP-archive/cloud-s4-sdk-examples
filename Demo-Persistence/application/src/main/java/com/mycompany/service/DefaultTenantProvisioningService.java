@@ -30,7 +30,7 @@ public class DefaultTenantProvisioningService implements TenantProvisioningServi
     @Autowired
     private DataSource dataSource;
 
-    private static final Pattern TENANT_PATTERN2 = Pattern.compile("[\\w&&[^\\d]][\\w]*");
+    private static final Pattern TENANT_PATTERN = Pattern.compile("[\\w&&[^\\d]][\\w]*");
 
     private static final Logger logger = LoggerFactory.getLogger(DefaultTenantProvisioningService.class);
 
@@ -82,6 +82,6 @@ public class DefaultTenantProvisioningService implements TenantProvisioningServi
     }
 
     private boolean isValidTenantId(final String tenantId) {
-        return tenantId != null && TENANT_PATTERN2.matcher(tenantId).matches();
+        return tenantId != null && TENANT_PATTERN.matcher(tenantId).matches();
     }
 }
