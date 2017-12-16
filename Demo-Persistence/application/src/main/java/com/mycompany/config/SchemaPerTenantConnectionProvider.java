@@ -1,6 +1,7 @@
 package com.mycompany.config;
 
 
+import com.mycompany.util.TenantUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class SchemaPerTenantConnectionProvider implements MultiTenantConnectionP
     public Connection getConnection(final String tenantIdentifier) throws SQLException {
         final Connection connection = this.getAnyConnection();
         try {
-            connection.createStatement().execute("SET SCHEMA '" + tenantIdentifier + "'");
+            connection.setSchema(TenantUtil.createSchemaName(tenantIdentifier));
         } catch (SQLException e) {
             throw new HibernateException("Could not alter JDBC connection to specified schema [" + tenantIdentifier + "]",
                     e);
@@ -45,7 +46,7 @@ public class SchemaPerTenantConnectionProvider implements MultiTenantConnectionP
     @Override
     public void releaseConnection(final String tenantIdentifier, final Connection connection) throws SQLException {
         try {
-            connection.createStatement().execute("SET SCHEMA '" + defaultTenant + "'");
+            connection.setSchema(TenantUtil.createSchemaName(defaultTenant));
         } catch (SQLException e) {
             throw new HibernateException("Could not alter JDBC connection to specified schema [" + tenantIdentifier + "]",
                     e);
