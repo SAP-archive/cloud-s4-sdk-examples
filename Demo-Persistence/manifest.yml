@@ -11,5 +11,4 @@ applications:
   env:
     TARGET_RUNTIME: main
     JBP_CONFIG_SAPJVM_MEMORY_SIZES: 'metaspace:96m..'
-    JBP_CONFIG_REPOSITORY: '[ default_repository_root: "http://xs2repo.cfapps.cf-spring.ondemand.com" ]'
-    destinations: '[{name: "ErpQueryEndpoint", url: "https://myerp.com", username: "user", password: "pass"}]'
+    SPRING_PROFILES_ACTIVE: cloud

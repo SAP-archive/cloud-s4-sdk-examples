@@ -29,68 +29,31 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
-        <!-- SDK dependencies -->
-        <dependency>
-            <groupId>com.sap.cloud.s4hana.cloudplatform</groupId>
-            <artifactId>scp-cf</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.sap.cloud.s4hana</groupId>
-            <artifactId>s4hana-all</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.sap.cloud.s4hana</groupId>
             <artifactId>testutil</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.sap.cloud.s4hana.frameworks</groupId>
-            <artifactId>cxf</artifactId>
+            <groupId>com.sap.cloud.s4hana.quality</groupId>
+            <artifactId>listeners-all</artifactId>
+            <scope>test</scope>
         </dependency>
 
-        <!-- Spring dependencies -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>1.5.2.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>4.3.7.RELEASE</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-test</artifactId>
-            <version>1.5.2.RELEASE</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-test-autoconfigure</artifactId>
-            <version>1.5.2.RELEASE</version>
             <scope>test</scope>
-        </dependency>
-
-        <!-- General dependencies -->
-        <dependency>
-            <groupId>postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>9.4.1208-jdbc42-atlassian-hosted</version>
-        </dependency>
-        <dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-core</artifactId>
-            <version>3.5.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 

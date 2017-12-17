@@ -28,10 +28,6 @@
             <artifactId>s4hana-all</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.sap.cloud.s4hana</groupId>
-            <artifactId>testutil</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.sap.cloud.s4hana.frameworks</groupId>
             <artifactId>cxf</artifactId>
         </dependency>

@@ -36,5 +36,4 @@ public class TenantProvisioningController {
         logger.info("Tenant callback service was called with method DELETE for tenant {}.", tenantId);
         tenantProvisioningService.unsubscribeTenant(tenantId);
     }
-
 }

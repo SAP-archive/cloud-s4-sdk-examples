@@ -10,7 +10,6 @@ server:
 multitenant:
   defaultTenant: public
 
-
 spring:
   jpa:
     generate-ddl: true

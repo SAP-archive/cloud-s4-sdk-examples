@@ -56,19 +56,6 @@ public class CostCenterServiceIntegrationTest
         mockSdk.mockCurrentTenant(TENANT_ID_1);
     }
 
-
-    @Test
-    public void testHelloService() throws Exception {
-        mockSdk.requestContextExecutor().execute(new Executable() {
-            @Override
-            public void execute() throws Exception {
-                final ResultActions action = mockMvc.perform(MockMvcRequestBuilders
-                        .get("/hello"));
-                action.andExpect(MockMvcResultMatchers.status().isOk());
-            }
-        });
-    }
-
     @Test
     public void testHttpGet() throws Exception {
         mockSdk.requestContextExecutor().execute(new Executable() {
