@@ -1,0 +1,20 @@
+logging:
+  level:
+    com.mycompany: DEBUG
+    com.sap.cloud.sdk: INFO
+    root: WARN
+
+server:
+  port: 8080
+
+multitenant:
+  defaultTenant: public
+
+spring:
+  jpa:
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    url: jdbc:postgresql://localhost:5432/testdb
+    username: postgres
+    password: admin

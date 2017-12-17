@@ -1,0 +1,14 @@
+---
+applications:
+
+- name: jpaexample
+  memory: 768M
+  host: jpaexample-26102017
+  path: application/target/persistence-application.jar
+  buildpack: sap_java_buildpack
+  services:
+  - mydb
+  env:
+    TARGET_RUNTIME: main
+    JBP_CONFIG_SAPJVM_MEMORY_SIZES: 'metaspace:96m..'
+    SPRING_PROFILES_ACTIVE: cloud

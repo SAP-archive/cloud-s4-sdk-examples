@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: i042557
+      changes:
+        - createTable:
+            tableName: costcenterforecast
+            columns:
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: forecast
+                  type: float
