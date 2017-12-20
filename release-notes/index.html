@@ -26,7 +26,7 @@
           <em>Month 00, 2017</em> - 
           <a href="https://search.maven.org/#search%7Cga%7C1%7Cv%3A%221.X.X%22%20AND%20(g%3A%22com.sap.cloud.s4hana%22%20OR%20g%3A%22com.sap.cloud.s4hana.archetypes%22%20OR%20g%3A%22com.sap.cloud.s4hana.cloudplatform%22%20OR%20g%3A%22com.sap.cloud.s4hana.frameworks%22%20OR%20g%3A%22com.sap.cloud.s4hana.plugins%22%20OR%20g%3A%22com.sap.cloud.s4hana.quality%22)">Maven Central</a>
         </p>
-        
+
         <p>
           <div class="alert alert-warning">
             <strong>Compatibility Notes:</strong>
@@ -52,6 +52,69 @@
         </ul>
     </div>
 -->
+<!-- <code><a href=""></a></code> <code></code> <li></li> -->
+
+    <!-- Version 1.6.0 -->
+
+    <div>
+        <h2 id="version-160">Version 1.6.0</h2>
+        <p>
+          <em>December 21, 2017</em> -
+          <a href="https://search.maven.org/#search%7Cga%7C1%7Cv%3A%221.6.0%22%20AND%20(g%3A%22com.sap.cloud.s4hana%22%20OR%20g%3A%22com.sap.cloud.s4hana.archetypes%22%20OR%20g%3A%22com.sap.cloud.s4hana.cloudplatform%22%20OR%20g%3A%22com.sap.cloud.s4hana.frameworks%22%20OR%20g%3A%22com.sap.cloud.s4hana.plugins%22%20OR%20g%3A%22com.sap.cloud.s4hana.quality%22)">Maven Central</a>
+        </p>
+
+        <p>
+          <div class="alert alert-warning">
+            <strong>Compatibility Notes:</strong>
+            <ul>
+                <li>Builder methods for navigation properties have been renamed from <code>to[NavigationProperty]</code> to <code>[navigationProperty]</code> in order to improve readability.</li>
+                <li>Methods of the VDM such as <em>select</em> or <em>filter</em> that before expected a generic <code>EntityField</code> instance now expect entity type-specific instances, for example, <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.6.0/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/namespaces/businesspartner/BusinessPartnerField.html">BusinessPartnerField</a></code> (only relevant if you used your own EntityField instances, for example, to represent custom fields).</li>
+                <li>Previously malformed acronyms in field names have been fixed, resulting in changed names of variables available from entity types (example: <code>BusinessPartner.BUSINESS_PARTNER_U_U_ID</code> has been renamed to <code>BusinessPartner.BUSINESS_PARTNER_UUID</code>).</li>
+            </ul>
+          </div>
+        </p>
+
+        <h4>New Functionality</h4>
+        <ul>
+            <li>Support type-safe <em>expand</em> for OData queries with the S/4HANA Virtual Data Model (VDM).
+                <ul>
+                    <li>The <em>expand</em> functionality is integrated into the <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.6.0/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/helper/FluentHelperRead.html#select-SelectableT...-">select</a></code> method of fluent helpers. Please note that there is no separate expand method.</li>
+                    <li>The fields to select from the expanded entities can be specified in the same manner.</li>
+                    <li>Example with the <a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.6.0/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/services/BusinessPartnerService.html">business partner service</a>: use
+                    <pre>
+getAllBusinessPartner().select(
+    BusinessPartner.TO_BUSINESS_PARTNER_ROLE,
+    BusinessPartner.TO_BUSINESS_PARTNER_ADDRESS.select(BusinessPartnerAddress.COUNTRY)
+)</pre>
+                    to retrieve all business partners with their roles (all fields of role) and the country field of their addresses.</li>
+                </ul>
+            </li>
+            <li>SAP Cloud Platform Cloud Foundry: Retrieve destinations including credentials from <a href="https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/7e306250e08340f89d6c103e28840f30.html">destination service (beta)</a> and support basic authentication flows via the <a href="https://blogs.sap.com/2017/09/19/deep-dive-3-cloud-platform-abstractions-in-the-sap-s4hana-cloud-sdk/">Cloud Platform abstractions</a> that were already available on SAP Cloud Platform Neo.</li>
+        </ul>
+
+        <h4>Improvements</h4>
+        <ul>
+            <li>Improve usability of builder methods for navigation properties of VDM entities. Use, for example, <code>BusinessPartner.builder().businessPartnerAddress(...)</code> to add addresses while constructing an entity.</li>
+            <li>The methods for modifying navigation properties, <code>set[NavigationProperty]</code> and <code>add[NavigationProperty]</code>, no longer attempt to fetch the associated entities first.</li>
+            <li>Add method to VDM objects to <a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.6.0/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/helper/VdmObject.html#setCustomField-com.sap.cloud.sdk.s4hana.datamodel.odata.helper.EntityField-FieldT-">set a custom field</a> using an EntityField object and a type-safe value.</li>
+            <li>Improve Javadoc for classes dealing with BAPI and RFC queries (see packages <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.6.0/javadoc-api/com/sap/cloud/sdk/s4hana/connectivity/rfc/package-summary.html">com.sap.cloud.sdk.s4hana.connectivity.rfc</a></code> and <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.6.0/javadoc-api/com/sap/cloud/sdk/result/package-summary.html">com.sap.cloud.sdk.result</a></code>).</li>
+            <li>Rename method <code>doCommit</code> in BapiQuery and RfcQuery to <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.6.0/javadoc-api/com/sap/cloud/sdk/s4hana/connectivity/rfc/BapiQuery.html#isPerformingTransactionalCommit--">isPerformingTransactionalCommit</a></code>. <code>doCommit</code> is now deprecated.</li>
+            <li>Retrieve <a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.6.0/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/GenericDestination.html">generic destinations</a> (in addition to RFC and HTTP) from the Destination Facade on both Neo and Cloud Foundry, introduce MAIL and LDAP as <a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.6.0/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/DestinationType.html">additional destination types</a>.</li>
+            <li>Add <a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.6.0/javadoc-api/com/sap/cloud/sdk/cloudplatform/cache/CacheKey.html#newBestEffortIsolatedKey--">best effort isolated cache key</a> to CacheKey and a method <a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.6.0/javadoc-api/com/sap/cloud/sdk/cloudplatform/cache/CacheKey.html#newEquallyIsolatedKey-com.sap.cloud.sdk.cloudplatform.cache.CacheKey-">newEquallyIsolatedKey</a> to retrieve a cache key with same level of isolation as a given cache key.</li>
+            <li>Add <a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.6.0/javadoc-api/com/sap/cloud/sdk/frameworks/hystrix/HystrixUtil.html#getBestEffortIsolatedKey-java.lang.Class-">best effort isolated command key</a> to HystrixUtil, used as default by CachingCommand.</li>
+        </ul>
+
+        <h4>Fixed Issues</h4>
+        <ul>
+            <li>Fix compiler warning about unsafe varargs for select methods in the VDM.</li>
+            <li>Fix malformed acronym names for fields in the VDM.</li>
+            <li>Fix bug with transaction handling for BAPI queries to SAP S/4HANA on premise.</li>
+            <li>Fix failing deserialization of date and time fields into <code>LocalDate</code> and <code>LocalTime</code> when accessing BAPI and RFM results.</li>
+            <li>Fix issues with audit logging in <a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.6.0/javadoc-api/com/sap/cloud/sdk/frameworks/togglz/AuditLoggingStateRepository.html"><code>AuditLoggingStateRepository</code></a> (Togglz integration).</li>
+            <li>Fix some issues where input streams were not closed properly before.</li>
+            <li>Rename <code>AutorizationApiDestination</code> to <code>AuthorizationApiDestination</code>.</li>
+        </ul>
+    </div>
     
     <!-- Version 1.5.0 -->
 
