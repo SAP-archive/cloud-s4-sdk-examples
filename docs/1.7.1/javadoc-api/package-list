@@ -3,6 +3,7 @@ com.sap.cloud.s4hana.quality.pmd.rules
 com.sap.cloud.sdk.cloudplatform
 com.sap.cloud.sdk.cloudplatform.auditlog
 com.sap.cloud.sdk.cloudplatform.cache
+com.sap.cloud.sdk.cloudplatform.concurrency
 com.sap.cloud.sdk.cloudplatform.connectivity
 com.sap.cloud.sdk.cloudplatform.connectivity.exception
 com.sap.cloud.sdk.cloudplatform.exception
@@ -152,6 +153,7 @@ com.sap.cloud.sdk.testutil
 com.sap.cloud.sdk.testutil.rules
 com.sap.cloud.sdk.typeconverter
 com.sap.cloud.sdk.typeconverter.exception
+com.sap.marmolata.hcp.backend
 com.sap.security.auth.service
 com.sap.security.um.service.api
 liquibase.ext.logging.slf4j
