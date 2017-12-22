@@ -30,7 +30,7 @@ public class DefaultTenantProvisioningService implements TenantProvisioningServi
     @Autowired
     private DataSource dataSource;
 
-    private static final Pattern TENANT_PATTERN = Pattern.compile("[\\w&&[^\\d]][\\w]*");
+    private static final Pattern TENANT_PATTERN = Pattern.compile("[-\\w]+");
 
     private static final Logger logger = LoggerFactory.getLogger(DefaultTenantProvisioningService.class);
 
