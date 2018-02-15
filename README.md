@@ -7,10 +7,13 @@ Runnable example applications that showcase the usage of the SAP S/4HANA Cloud S
 
  This repository contains example projects that demonstrate, how developers can use SAP S/4HANA Cloud SDK components to build extensions for SAP S/4HANA on SAP Cloud Platform.  
  ### The following applications are included:
-- Cost Center Manager App
-- Cost Center Manager App as explained in the [tutorials](https://blogs.sap.com/2017/05/10/first-steps-with-sap-s4hana-cloud-sdk/)
-- Employee Browser (Integration with S/4HANA and SuccessFactors)
-- Cost Center Creation Tool
+- [Cost Center Manager App with Spring Boot](https://github.com/SAP/cloud-s4-sdk-examples/tree/master/Costcenter-Controller-CF)
+- [Cost Center Manager App with Java EE](https://github.com/SAP/cloud-s4-sdk-examples/tree/master/SDK-Tutorial-CF) 
+- [Business Partner App](https://github.com/SAP/cloud-s4-sdk-examples/tree/learning) as explained in the [tutorials](https://blogs.sap.com/2017/05/10/first-steps-with-sap-s4hana-cloud-sdk/)
+- [Employee Browser (Integration with S/4HANA and SuccessFactors)](https://github.com/SAP/cloud-s4-sdk-examples/tree/master/Employee-Browser-Neo)
+- [Cost Center Creation Tool](https://github.com/SAP/cloud-s4-sdk-examples/tree/master/Cost-Center-Creation-Neo)
+- [Multi-tenant persistence with PostgreSQL and Spring Boot](https://github.com/SAP/cloud-s4-sdk-examples/tree/master/Demo-Persistence)
+- [S/4HANA - SAP Cloud Platform, Cloud Foundry connectivity ](https://github.com/SAP/cloud-s4-sdk-examples/tree/master/S4-Connectivity)
 
  ### SAP S/4HANA Cloud SDK Javadoc
 - [Latest version](https://sap.github.io/cloud-s4-sdk-examples/docs/latest/javadoc-api/)
