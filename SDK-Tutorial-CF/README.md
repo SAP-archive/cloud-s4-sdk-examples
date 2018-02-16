@@ -17,7 +17,6 @@ mvn clean package -Dtest.credentials=/path/to/credentials.yml
 mvn clean package -Dmaven.test.skip=true
 ```
 * Afterwards, deploy to Cloud Foundry as explained in [step 3](https://blogs.sap.com/2017/05/19/step-3-with-sap-s4hana-cloud-sdk-helloworld-on-scp-cloudfoundry/)
- * This will use a random route, different to what is explained in the tutorial.
  * If you want a specific host name, put your unique hostname into _manifest.yml_ and remove the `random-route: true` property
 * Backend security is disabled to make getting started easier. Follow [step 7](https://blogs.sap.com/2017/07/18/step-7-with-sap-s4hana-cloud-sdk-secure-your-application-on-sap-cloud-platform-cloudfoundry/) of our tutorial series and re-enable the security in the _web.xml_ file by un-commenting the respective lines.
 
