@@ -60,8 +60,74 @@
           <li></li>
       </ul>
   </div>
+
 -->
-<!-- <code><a href=""></a></code> <code></code> <li></li> -->
+<!-- Visual Studio Code: select content, Ctrl+Alt+Space > link | code | link+code -->
+
+  <!-- Version 1.9.2 -->
+  <div>
+      <h2 id="version-192">Version 1.9.2</h2>
+      <p>
+        <em>February 15, 2018</em> -
+        <a href="https://search.maven.org/#search%7Cga%7C1%7Cv%3A%221.9.2%22%20AND%20(g%3A%22com.sap.cloud.s4hana%22%20OR%20g%3A%22com.sap.cloud.s4hana.datamodel%22%20OR%20g%3A%22com.sap.cloud.s4hana.archetypes%22%20OR%20g%3A%22com.sap.cloud.s4hana.cloudplatform%22%20OR%20g%3A%22com.sap.cloud.s4hana.frameworks%22%20OR%20g%3A%22com.sap.cloud.s4hana.plugins%22%20OR%20g%3A%22com.sap.cloud.s4hana.quality%22)">Maven Central</a>
+      </p>
+
+      <p>
+        <div class="alert alert-warning">
+          <strong>Compatibility Notes:</strong>
+          <ul>
+            <li><b>Important note:</b> To improve consistency and ease of use, this version renames many packages and services within the <a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.9.2/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/services/package-summary.html">SAP S/4HANA Virtual Data Model (VDM) for OData services</a>.<br/> 
+            It is most likely that code using the VDM classes needs to be adapted by adjusting the package and class names. We renamed the services according to the rules outlined in the following list.<br />
+            For each change to the name of a service interface, the names of the corresponding default implementation class (same name as interface, but prefixed with "Default") and of the package under <code>com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.*</code> (same name as interface, but in lower case and without suffix "Service") have also been changed. In detail, the following changes have been made:<ul>
+                <li>Remove prefixes from services that describe the supported operations (as those tend to change from version to version). For example, rename <code><span style="text-decoration: line-through">CreateAndUpdate</span>CommercialProjectsService</code> to <code>CommercialProjectService</code>.</li>
+                <li>Remove similar redundant prefixes such as "Process" or "Manage". For example, rename <code><span style="text-decoration: line-through">Process</span>SalesOrderService</code> to <code>SalesOrderService</code>.</li>
+                <li>Rename plural forms to singular to improve consistency. For example, rename <code>ProcessPurchaseOrder<span style="text-decoration: line-through">s</span>Service</code> to <code>PurchaseOrderService</code>.</li>
+                <li>Rename further services as follows: <code>ReadCostCenterDataService</code> to <code>CostCenterService</code>, <code>BillOfMaterialMaintainService</code> to <code>BillOfMaterialsService</code>, <code>ReadGorlAccountService</code> to <code>GeneralLedgerAccountService</code>, <code>ManageWorkforceAvailabiltyService</code> to <code>WorkforceAvailabilityService</code>, <code>EnableExternalJobSchedulerIntegrationService</code> to <code>ExternalJobSchedulerIntegration</code>, <code>ReadAndUpdatePirsService</code> to <code>PlannedIndependentRequirementService</code>.</li>
+              </ul></li>
+              <li>We also refactored the VDM classes for BAPI services to more accurately represent the single value-typed parameters of those BAPIs, thereby increasing readability and type-safety.<br />
+              Many types that represent a single value have been changed and added, for example <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.9.2/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/bapi/types/CostCenterCategory.html">CostCenterCategory</a></code>. They are used as types of parameters of BAPI service methods. The functional scope of the fluent API has not changed. In order to update your application, please exchange the old class names with the new ones, suggested by your IDE. You still use the same primitive parameter values used to contruct those single value types.</li>
+              <li>The <code>EjbUtil</code> helper class has been deprecated, as its functionality is no longer required in newer JavaEE containers.</li>
+          </ul>
+        </div>
+      </p>
+
+      <h4>New Functionality</h4>
+      <ul>
+          <li>
+              This version updates the OData virtual data model to the <a href="https://news.sap.com/sap-s-4hana-cloud-1802-release-highlights/">newest release 1802 of SAP S/4HANA Cloud</a>.
+              This includes completely new services (available as usual from package <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.9.2/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/services/package-summary.html">com.sap.cloud.sdk.s4hana.datamodel.odata.services</a></code>), new operations in previously existing services, and new entity types.
+              The SDK supports all OData services listed in the <a href="https://api.sap.com/shell/discover/contentpackage/SAPS4HANACloud">SAP API Business Hub for SAP S/4HANA Cloud</a>.
+          </li>
+          <li>Support for AppToAppSSO authentication in destination service (beta) on SAP Cloud Platform Cloud Foundry.</li>
+          <li>Support <a href="https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/f16df12fab9f4fe1b8a4122f0fd54b6e.html">SAP Cloud Connector location ID</a> on SAP Cloud Platform Neo.</li>
+          <li>Introduce a new module <code><a href="https://search.maven.org/#search%7Cga%7C1%7C(g%3A%22com.sap.cloud.s4hana.frameworks%22%20AND%20a%3A%22spring-web%22)">com.sap.cloud.s4hana.frameworks:spring-web</a></code> that provides a ready-to-use <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.9.2/javadoc-api/com/sap/cloud/sdk/frameworks/spring/response/SpringExceptionMapper.html">exception mapper for Spring applications</a></code>. The exception mapper logs all unhandled exceptions with a reference ID and fills the response with the error description, without the stacktrace.</li>
+      </ul>
+
+      <h4>Improvements</h4>
+      <ul>
+          <li>The environment variable <code>destinations</code> so far available for Cloud Foundry-based applications can now be used independent of the underlying Cloud platform environment, enabling consistent local testing of connectivity across environments.</li>
+          <li>Set the <code>random-route</code> property by default in <code>manifest.yml</code> by default as part of all Cloud Foundry archetypes, so that the question for a unique hostname is not needed anymore.</li>
+          <li>Improve Javadoc in <code>frameworks.*</code> packages.</li>
+          <li>Update several dependencies:<ul>
+            <li>Update Lombok to 1.16.20.</li>
+            <li>Update Gson to 2.8.2.</li>
+            <li>Update commons-lang3 to 3.7.</li>
+            <li>Update commons-text to 1.2.</li>
+            <li>Update wiremock to 2.14.0.</li>
+            <li>Remove dependencies to commons-io and commons-collections4 by relying on Guava.</li>
+            <li>Reduce dependencies to commons-lang3 and commons-codec of certain modules by relying on Guava.</li>
+          </ul></li>
+          <li>Move <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.9.2/javadoc-api/com/sap/cloud/sdk/frameworks/jaxrs/GsonMessageBodyProvider.html">GsonMessageBodyProvider</a></code> to a separate <code><a href="https://search.maven.org/#search%7Cga%7C1%7C(g%3A%22com.sap.cloud.s4hana.frameworks%22%20AND%20a%3A%22jaxrs-gson%22)">com.sap.cloud.s4hana.frameworks:jaxrs-gson</a></code> module to avoid conflicts with other providers like Jackson.</li>
+      </ul>
+
+      <h4>Fixed Issues</h4>
+      <ul>
+          <li>Fix bug appearing on SAP Cloud Platform Neo, where running in non-container managed threads would always use the tenant context of the provider, not the consumer account. Upgrading to this version from the previous version is highly recommended when using the SDK in a multi-tenant application in the Neo environment.</li>
+          <li>Fix deserialization of complex type properties in OData VDM entities.</li>
+          <li>Fix deserialization of OData VDM entities that contain properties of type <code>Edm.Binary</code>.</li>
+          <li>Use the fully qualified name of the service implemention class as value of the <code>@Named</code> annotation to avoid conflicts between service classes using the same names in the VDM for OData and BAPI.</li>
+      </ul>
+  </div>
 
   <!-- Version 1.8.0 -->
 
@@ -73,10 +139,10 @@
       </p>
 
       <p>
-        <div class="alert alert-danger">
+        <div class="alert alert-warning">
           <strong>Known Issues:</strong>
           <ul>
-              <li>Using version 1.8.0 is <em>NOT</em> recommended for a multi-tenant application in the Neo environment of SAP Cloud Platform: This version has a bug that manifests only in the Neo environment of SAP Cloud Platform where running in non-container managed threads would always use the tenant context of the provider, not the consumer account. We plan to fix this bug in the next release. Applications running in the Cloud Foundry environment are not affected by this bug.</li>
+              <li>Using version 1.8.0 is <em>NOT</em> recommended for a multi-tenant application in the Neo environment of SAP Cloud Platform; consumers are instead recommended to update to <a href="#version-192">version 1.9.2</a>. Version 1.8.0 has a bug that manifests only in the Neo environment of SAP Cloud Platform where running in non-container managed threads would always use the tenant context of the provider, not the consumer account. <a href="#version-192">Version 1.9.2</a> fixes this bug. Applications running in the Cloud Foundry environment are not affected by this bug.</li>
           </ul>
         </div>
       </p>
