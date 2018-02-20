@@ -1,4 +1,6 @@
 const argv = require("yargs").argv;
+const seleniumServer = require('selenium-server');
+const geckodriver = require("geckodriver");
 
 require('nightwatch-cucumber')({
     cucumberArgs: ['--require', 'timeout.js', '--require', 'features/step_definitions', '--format', 'pretty', '--format', 'json:../s4hana_pipeline/reports/e2e/cucumber.json', 'features']
@@ -18,33 +20,32 @@ const options = {
     disable_colors: false,
     globals_path: "external.globals.js",
     selenium: {
-        start_process: false,
+        "start_process": true,
+        "server_path": seleniumServer.path,
+        "log_path": "",
+        "port": 4444,
+        "cli_args": {
+            "webdriver.gecko.driver": geckodriver.path
+        }
     },
     test_settings: {
         default: {
             launch_url : argv.lauchurl,
-            selenium_port: 9515,
+            selenium_port: 4444,
             selenium_host: '127.0.0.1',
-            default_path_prefix: "",
+            default_path_prefix: "/wd/hub",
             desiredCapabilities: {
-                browserName: "chrome",
+                browserName: "firefox",
                 javascriptEnabled: true,
                 acceptSslCerts: true,
-                chromeOptions: {
-                    args: chromeOptionsArgs
-                }
+                acceptInsecureCerts: true,
+                marionette: true
             },
             globals: {
                 abortOnAssertionFailure : true,
                 retryAssertionTimeout: 10000,
                 waitForConditionTimeout: 10000,
                 asyncHookTimeout : 10000
-            },
-            screenshots : {
-                enabled : true,
-                on_failure : true,
-                on_error : true,
-                path: '../s4hana_pipeline/reports/e2e/screenshots'
             }
         }
     }
