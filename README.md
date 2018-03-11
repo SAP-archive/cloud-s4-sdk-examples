@@ -14,6 +14,7 @@ Runnable example applications that showcase the usage of the SAP S/4HANA Cloud S
 - [Cost Center Creation Tool](https://github.com/SAP/cloud-s4-sdk-examples/tree/master/Cost-Center-Creation-Neo)
 - [Multi-tenant persistence with PostgreSQL and Spring Boot](https://github.com/SAP/cloud-s4-sdk-examples/tree/master/Demo-Persistence)
 - [S/4HANA - SAP Cloud Platform, Cloud Foundry connectivity ](https://github.com/SAP/cloud-s4-sdk-examples/tree/master/S4-Connectivity)
+- [App2App Calls in SAP Cloud Platform, Cloud Foundry with S/4HANA Cloud SDK](https://github.com/SAP/cloud-s4-sdk-examples/tree/master/App2App)
 
  ### SAP S/4HANA Cloud SDK Javadoc
 - [Latest version](https://sap.github.io/cloud-s4-sdk-examples/docs/latest/javadoc-api/)
