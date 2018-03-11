@@ -1,0 +1,12 @@
+---
+applications:
+- name: approuter-converter
+  host: approuter-converter-p2000211447trial
+  path: approuter
+  memory: 96M
+  buildpack: nodejs_buildpack
+  env:
+    TENANT_HOST_PATTERN: 'approuter-converter-(.*).cfapps.eu10.hana.ondemand.com'
+    destinations: '[{"name":"app-destination", "url" :"https://converter-p2000211447trial.cfapps.eu10.hana.ondemand.com", "forwardAuthToken": true}]'
+  services:
+    - xsuaa-converter

@@ -1,0 +1,333 @@
+#!/bin/bash
+
+script_url='https://raw.githubusercontent.com/SAP/cloud-s4-sdk-pipeline-docker/master/s4sdk-jenkins-master/cx-server/cx-server'
+container_name='s4sdk-jenkins-master'
+
+function log_error()
+{
+	echo -e "\033[1;31m[Error]\033[0m $1" >&2
+}
+
+function assert_config_set()
+{
+	if [ -z "${!1}" ]; then
+		log_error "Config parameter '$1' not set."; exit 1;
+	fi
+}
+
+function is_update_available()
+{
+	echo -n "Checking for newer version of this script on github (${script_url})... "
+	newest_version="$(curl --max-time 10 -s -f ${script_url})"
+	if [ $? -ne 0 ]; then
+		echo ""
+		log_error 'Failed to check for new version of this script.'
+		return 1
+	fi
+
+	if [ ! -f 'cx-server' ]; then
+		echo ""
+		log_error 'Failed to read current cx-server version. For the update check to work, make sure to call this script from within its folder.'
+	fi
+	this_version="$(<cx-server)"
+
+	if [ "${this_version}" != "${newest_version}" ]; then
+		echo " detected newer version. Storing it in file 'cx-server.update'."
+		echo "${newest_version}" > 'cx-server.update'
+		return 0
+	else
+		echo "no newer version detected."
+		return 1
+	fi
+}
+
+function get_container_id()
+{
+	local container_id=$(docker ps --filter "name=${container_name}" -q)
+	echo "${container_id}"
+}
+
+function is_container_status()
+{
+	#set -x
+	local container_id=$(docker ps --filter "name=${container_name}" --filter "status=${1}" -q)
+	if [ -z "${container_id}" ]; then
+		false
+	else
+		true
+	fi
+}
+
+function retry()
+{
+	local attempts=$1
+	shift
+	local delay=$1
+	shift
+	local expected_status_code=$1
+	shift
+	local i
+
+	for ((i=0; i < attempts; i++)); do
+		echo -n "."
+		#set -x
+		eval "${*} 1> /dev/null"
+		if [ $? -eq "${expected_status_code}" ]; then
+			echo " success."
+			return 0
+		fi
+		sleep $delay
+	done
+
+	log_error "Command \"$*\" failed ${attempts} times."
+	false
+}
+
+function trace_execution()
+{
+	echo -e "\033[1m>>\033[0m $*"
+}
+
+function run()
+{
+	trace_execution $*
+	eval $*
+	return $?
+}
+
+function wait_for_started() {
+	echo -n "Waiting for the S/4HANA Cloud SDK Cx server to start"
+	retry 120 1 0 curl -s "http://localhost:${http_port}/api/json"
+}
+
+function get_image_environment_variable()
+{
+	cmd='echo $'"$2"
+	
+	env_value="$(docker run --rm --entrypoint /bin/bash ${1} -c "${cmd}")"
+	if [ $? -ne 0 ]; then
+		log_error "Failed to extract environment variable '$2' from image '$1'"; exit 1;
+	fi
+
+	echo "${env_value}"
+}
+
+function print_config()
+{
+	echo "   - jenkins_home=${jenkins_home}"
+	if [ ! -z "${x_java_opts}" ]; then
+		echo "   - x_java_opts=${x_java_opts}"
+	fi
+	if [ ! -z "${http_proxy}" ]; then
+		echo "   - http_proxy=${http_proxy}"
+	fi
+	if [ ! -z "${https_proxy}" ]; then
+		echo "   - https_proxy=${https_proxy}"
+	fi
+	if [ ! -z "${no_proxy}" ]; then
+		echo "   - no_proxy=${no_proxy}"
+	fi
+}
+
+### Start of Script
+
+if is_update_available; then
+		echo ""
+		echo -e "\033[1mPlease run 'cx-server update' to update this script to its newest version.\033[0m"
+		echo ""
+fi
+
+source server.cfg
+if [ $? -ne 0 ]; then
+	log_error 'Failed to load config from server.cfg file.'
+	exit 1
+fi
+
+# ensure that docker is installed
+command -v docker > /dev/null 2>&1 || { echo >&2 "Docker does not seem to be installed. Please install docker and ensure that the docker command is included in \$PATH."; exit 1; }
+
+
+if [ "$1" == "start" ]; then
+	# check if jenkins is running and abort if yes
+	container_id="$(get_container_id)"
+	if [ ! -z "$container_id" ]; then
+		log_error "The S/4HANA Cloud SDK Cx server is already running in container id '${container_id}'."
+		exit 1;
+	fi
+
+	customDockerfileDir="custom_image"
+	if [ -e "${customDockerfileDir}/Dockerfile" ]; then
+		echo "Custom Dockerfile in '${customDockerfileDir} 'detected..."
+		echo "Starting **customized** docker container for S/4HANA Cloud SDK Cx Server."
+		echo "Parameters:"
+		echo "   - http_port=${http_port}"
+		echo "   - jenkins_home=${jenkins_home}"
+		print_config
+		echo ""
+		
+		assert_config_set "http_port"
+
+		image_name="s4sdk/jenkins-master-customized"
+
+		run "docker build -t ${image_name} ${customDockerfileDir}"
+		if [ $? -ne "0" ]; then
+			log_error "Failed to build custom Dockerfile."
+			exit $?;
+		fi
+	else
+		echo "Starting docker container for S/4HANA Cloud SDK Cx Server."
+		echo "Parameters:"
+		echo "   - http_port=${http_port}"
+		echo "   - docker_registry=${docker_registry}"
+		echo "   - docker_image=${docker_image}"
+		print_config
+		echo ""
+
+		assert_config_set "http_port"
+		assert_config_set "docker_image"
+		assert_config_set "jenkins_home"
+
+		if [ ! -z "${docker_registry}" ]; then
+			image_name="${docker_registry}/${docker_image}"
+		else
+			image_name="${docker_image}"
+		fi
+
+		run "docker pull ${image_name}"
+		if [ $? -ne "0" ]; then
+			log_error "Failed to pull '$image_name'."
+			exit $?;
+		fi
+	fi
+
+	# check if exited and start if yes
+	if is_container_status "exited"; then
+		echo "Container was stopped. Restarting stopped instance..."
+		run "docker start ${container_name}"
+		if [ $? -ne "0" ]; then
+			log_error "Failed to start existing cx-server container."
+			exit $?;
+		fi
+
+		wait_for_started
+
+		exit $?
+	fi
+
+	# determine docker gid
+	docker_gid=$(getent group docker | cut -d: -f3)
+
+	if [ -z "${docker_gid}" ]; then
+		log_error "Failed to determine gid of 'docker'. Container might not be able to spawn sibling containers via docker socket.";
+		user_parameter="-u 1000"
+	else
+		user_parameter="-u 1000:${docker_gid}"
+	fi
+
+	# get JAVA_OPTS
+	environment_variable_parameters=""
+	if [ ! -z "${x_java_opts}" ]; then
+		container_java_opts="$(get_image_environment_variable ${image_name} JAVA_OPTS)"
+		effective_java_opts="-e JAVA_OPTS=\"${container_java_opts} ${x_java_opts}\""
+		environment_variable_parameters="${environment_variable_parameters} ${effective_java_opts}"
+	fi
+
+	if [ ! -z "${http_proxy}" ]; then
+		environment_variable_parameters="${environment_variable_parameters} -e HTTP_PROXY=\"${http_proxy}\" -e http_proxy=\"${http_proxy}\""
+	fi
+
+	if [ ! -z "${https_proxy}" ]; then
+		environment_variable_parameters="${environment_variable_parameters} -e HTTPS_PROXY=\"${https_proxy}\" -e https_proxy=\"${https_proxy}\""
+	fi
+
+	if [ ! -z "${no_proxy}" ]; then
+		environment_variable_parameters="${environment_variable_parameters} -e no_proxy=\"${no_proxy}\""
+	fi
+
+	mount_parameters="-v /var/run/docker.sock:/var/run/docker.sock -v ${jenkins_home}:/var/jenkins_home"
+
+	# start container
+	run "docker run ${user_parameter} --name $container_name -d -p ${http_port}:8080 ${mount_parameters} ${environment_variable_parameters} ${image_name}"
+	if [ $? -ne "0" ]; then
+		log_error "Failed to start new cx-server container."
+		exit $?;
+	fi
+
+	wait_for_started
+
+elif [ "$1" == "stop" ]; then
+	container_id="$(get_container_id)"
+	if [ -z "${container_id}" ]; then
+		log_error "The S/4HANA Cloud SDK Cx server is not running."; exit 1;
+	fi
+
+	echo -n "Jenkins username (leave empty for unprotected server): "
+	read -r user_name
+	
+	user_and_pass=""
+	if [ ! -z "${user_name}" ]; then
+		echo -n "Password for ${user_name}: "
+		read -r -s password
+		user_and_pass="-u '${user_name}:${password}'"
+	fi
+
+	echo ""
+	echo "Initiating safe shutdown..."
+	
+	exitCmd="run docker exec ${container_id} curl -w '%{http_code}' -o /dev/null -s ${user_and_pass} -X POST 'http://localhost:8080/safeExit'"
+	output="$(${exitCmd})"
+	returnValue=$?
+
+	#echo $returnValue
+
+	if [ ! -z "${password}" ]; then
+		echo "${output//${password}/******}"
+	else
+		echo "${output}"
+	fi
+
+	if [ "${returnValue}" -eq "401" ]; then
+		log_error "Wrong credentials."; exit 1;
+	fi
+	echo -n "Waiting for running jobs to finish..."
+	retry 360 5 0 "(eval ${exitCmd}) > /dev/null 2>&1; is_container_status 'exited'"
+
+	#echo "Stopping container ${container_id}..."
+	#run "docker stop --time=60 ${container_id}"
+	exit $?;
+
+elif [ "$1" == "remove" ]; then
+	if ! is_container_status "exited" ; then
+		log_error "The S/4HANA Cloud SDK Cx server container ($container_name) is not in state 'exited'."; exit 1;
+	fi
+	run "docker rm ${container_name}"
+
+	exit $?
+
+elif [ "$1" == "update" ]; then
+	is_update_available > /dev/null 2>&1
+	if [ ! -f 'cx-server.update' ]; then
+		log_error 'Update file not found.'
+		exit 1;
+	else
+		chmod -x cx-server
+		mv cx-server cx-server.old
+		mv cx-server.update cx-server
+		chmod +x cx-server
+		echo "Successfully updated cx-server script."
+		exit 0;
+	fi
+else
+	echo ""
+	echo "Usage: cx-server [COMMAND]"
+	echo ""
+	echo "Tool for controlling the lifecycle of the S/4HANA Cloud SDK Cx server."
+	echo "Use server.cfg for customizing parameters."
+	echo ""
+	echo "Commands:"
+	echo "   start   Starts the server container using the configured parameters for jenkins_home, docker_registry, docker_image, http_port."
+	echo "   stop    Stops the running server container."
+	echo "   remove  Removes a stopped server container. A subsequent call of 'start' will instantiate a fresh container."
+	echo "   update  Updates this script to its newest version from github."
+
+fi

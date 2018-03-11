@@ -1,0 +1,12 @@
+---
+applications:
+- name: approuter-exchangerate
+  host: approuter-exchangerate-p2000211073trial
+  path: approuter
+  memory: 96M
+  buildpack: nodejs_buildpack
+  env:
+    TENANT_HOST_PATTERN: 'approuter-exchangerate-(.*).cfapps.eu10.hana.ondemand.com'
+    destinations: '[{"name":"app-destination", "url" :"https://exchangerate-p2000211073trial.cfapps.eu10.hana.ondemand.com", "forwardAuthToken": true}]'
+  services:
+    - xsuaa-exchangerate

@@ -1,0 +1,20 @@
+{
+  "xsappname": "converter-p2000211447trial",
+  "tenant-mode": "shared",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Display",
+      "description": "display"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "Viewer",
+      "description": "Required to view things in our solution",
+      "scope-references"     : [
+        "$XSAPPNAME.Display"
+      ]
+    }
+  ],
+  "foreign-scope-references": ["$ACCEPT_GRANTED_SCOPES"]
+}

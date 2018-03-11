@@ -1,0 +1,20 @@
+{
+  "xsappname": "exchangerate-p2000211073trial",
+  "tenant-mode": "shared",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Display",
+      "description": "display",
+	  "granted-apps": ["$XSAPPNAME(application,0df4dc96-606c-458c-9acc-94a5ff4152ea,converter)"]
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "Viewer",
+      "description": "Required to view things in our solution",
+      "scope-references"     : [
+        "$XSAPPNAME.Display"
+      ]
+    }
+  ]
+}
