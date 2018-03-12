@@ -31,13 +31,6 @@ public class ExchangeRateServlet extends HttpServlet
         final Tenant currentTenant = TenantAccessor.getCurrentTenant();
         final User currentUser = UserAccessor.getCurrentUser();
 
-        // TODO enable info level
-        /*
-        logger.info("Exchange rates - called application: \n");
-        logger.info("Current tenant: %s \n", currentTenant);
-        logger.info("Current user: %s \n", currentUser);
-        */
-
         System.out.println("Exchange rate - called application: \n");
         System.out.printf("Current tenant: %s \n", currentTenant);
         System.out.printf("Current user: %s \n", currentUser);
