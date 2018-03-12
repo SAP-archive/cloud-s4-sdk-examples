@@ -35,13 +35,6 @@ public class ConverterServlet extends HttpServlet
         final Tenant currentTenant = TenantAccessor.getCurrentTenant();
         final User currentUser = UserAccessor.getCurrentUser();
 
-        // TODO enable info level
-        /*
-        logger.info("Converter - caller application: \n");
-        logger.info("Current tenant: %s \n", currentTenant);
-        logger.info("Current user: %s \n", currentUser);
-         */
-
         System.out.println("Converter - caller application: \n");
         System.out.printf("Current tenant: %s \n", currentTenant);
         System.out.printf("Current user: %s \n", currentUser);
