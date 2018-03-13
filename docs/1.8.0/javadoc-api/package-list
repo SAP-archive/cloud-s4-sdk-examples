@@ -31,6 +31,9 @@ com.sap.cloud.sdk.frameworks.eclipselink
 com.sap.cloud.sdk.frameworks.hystrix
 com.sap.cloud.sdk.frameworks.javaee
 com.sap.cloud.sdk.frameworks.javaee.servlet.response.mapper
+com.sap.cloud.sdk.frameworks.jaxrs
+com.sap.cloud.sdk.frameworks.jaxrs.response
+com.sap.cloud.sdk.frameworks.jaxrs.response.mapper
 com.sap.cloud.sdk.frameworks.liquibase
 com.sap.cloud.sdk.frameworks.togglz
 com.sap.cloud.sdk.frameworks.togglz.exception
