@@ -12,4 +12,3 @@ applications:
     SAP_JWT_TRUST_ACL: '[{"clientid" : "*", "identityzone" : "*"}]'
   services:
     - xsuaa-exchangerate
-    - destination-exchangerate
