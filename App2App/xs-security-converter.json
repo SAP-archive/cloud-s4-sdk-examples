@@ -12,9 +12,9 @@
       "name": "Viewer",
       "description": "Required to view things in our solution",
       "scope-references"     : [
-        "$XSAPPNAME.Display"
+        "$XSAPPNAME.Display",
+		    "$XSAPPNAME(application,6b3dc481-3ebb-4f28-854e-b6ff0beac7d8,exchangerate).Display"
       ]
     }
-  ],
-  "foreign-scope-references": ["$ACCEPT_GRANTED_SCOPES"]
+  ]
 }
