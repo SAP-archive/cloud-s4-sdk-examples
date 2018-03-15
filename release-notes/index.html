@@ -62,7 +62,43 @@
   </div>
 
 -->
-<!-- Visual Studio Code: select content, Ctrl+Alt+Space > link | code | link+code -->
+<!-- Visual Studio Code: select content, Ctrl+Shift+Space > link | code | link+code -->
+
+  <!-- Version 1.9.3 -->
+
+  <div>
+      <h2 id="version-193">Version 1.9.3</h2>
+      <p>
+        <em>March 15, 2018</em> -
+        <a href="https://search.maven.org/#search%7Cga%7C1%7Cv%3A%221.9.3%22%20AND%20(g%3A%22com.sap.cloud.s4hana%22%20OR%20g%3A%22com.sap.cloud.s4hana.datamodel%22%20OR%20g%3A%22com.sap.cloud.s4hana.archetypes%22%20OR%20g%3A%22com.sap.cloud.s4hana.cloudplatform%22%20OR%20g%3A%22com.sap.cloud.s4hana.frameworks%22%20OR%20g%3A%22com.sap.cloud.s4hana.plugins%22%20OR%20g%3A%22com.sap.cloud.s4hana.quality%22)">Maven Central</a>
+      </p>
+
+      <p>
+        <div class="alert alert-warning">
+          <strong>Compatibility Notes:</strong>
+          <ul>
+              <li>This release updates the dependency to the SAP Cloud Platform SDK for service development to version 1.13.1. In the SAP S/4HANA Cloud SDK, this library is mostly used internally in the SAP S/4HANA virtual data model (VDM) for OData services. You may be using the library directly when manually constructing OData requests, for example, using the <code>ODataQueryBuilder</code>. Please find the <a href="https://help.sap.com/viewer/8be3667edfd34d71a80afe9f7f2b42a9/Cloud/en-US/842ce86726fc44a3beb8cc2b02a27f26.html">release notes of the SAP Cloud Platform SDK for service development at help.sap.com</a>.</li>
+          </ul>
+        </div>
+      </p>
+
+      <h4>New Functionality</h4>
+      <ul>
+          <li>Introduce logical operators to the fluent API of the VDM for <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.9.3/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/helper/ExpressionFluentHelper.html#or-com.sap.cloud.sdk.s4hana.datamodel.odata.helper.ExpressionFluentHelper-">or</a></code> and <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.9.3/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/helper/ExpressionFluentHelper.html#not-com.sap.cloud.sdk.s4hana.datamodel.odata.helper.ExpressionFluentHelper-">not</a></code> to support complex filter expressions (together with the already previously existing <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.9.3/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/helper/ExpressionFluentHelper.html#and-com.sap.cloud.sdk.s4hana.datamodel.odata.helper.ExpressionFluentHelper-">and</a></code> operator).</li>
+      </ul>
+
+      <h4>Improvements</h4>
+      <ul>
+          <li>Update to version 1.13.1 of SAP Cloud Platform SDK for service development.</li>
+          <li>Improve error messages when looking up destinations fails on SAP Cloud Platform Cloud Foundry.</li>
+      </ul>
+
+      <h4>Fixed Issues</h4>
+      <ul>
+          <li>Properly escape HTML in Javadoc of the VDM.</li>
+          <li>Fix issue where options for Catalina were not correctly set depending on the operating system during local deployment with the <code>scp-neo-maven-plugin</code>.</li>
+      </ul>
+  </div>
 
   <!-- Version 1.9.2 -->
   <div>
@@ -191,7 +227,7 @@
   <div>
       <h2 id="version-171">Version 1.7.1</h2>
       <p>
-        <em>January 18, 2017</em> -
+        <em>January 18, 2018</em> -
         <a href="https://search.maven.org/#search%7Cga%7C1%7Cv%3A%221.7.1%22%20AND%20(g%3A%22com.sap.cloud.s4hana%22%20OR%20g%3A%22com.sap.cloud.s4hana.datamodel%22%20OR%20g%3A%22com.sap.cloud.s4hana.archetypes%22%20OR%20g%3A%22com.sap.cloud.s4hana.cloudplatform%22%20OR%20g%3A%22com.sap.cloud.s4hana.frameworks%22%20OR%20g%3A%22com.sap.cloud.s4hana.plugins%22%20OR%20g%3A%22com.sap.cloud.s4hana.quality%22)">Maven Central</a>
       </p>
 
