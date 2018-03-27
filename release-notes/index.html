@@ -64,6 +64,66 @@
 -->
 <!-- Visual Studio Code: select content, Ctrl+Shift+Space > link | code | link+code -->
 
+  <!-- Version 1.9.4 -->
+  <div>
+      <h2 id="version-194">Version 1.9.4</h2>
+      <p>
+        <em>March 29, 2018</em> -
+        <a href="https://search.maven.org/#search%7Cga%7C1%7Cv%3A%221.9.4%22%20AND%20(g%3A%22com.sap.cloud.s4hana%22%20OR%20g%3A%22com.sap.cloud.s4hana.datamodel%22%20OR%20g%3A%22com.sap.cloud.s4hana.archetypes%22%20OR%20g%3A%22com.sap.cloud.s4hana.cloudplatform%22%20OR%20g%3A%22com.sap.cloud.s4hana.frameworks%22%20OR%20g%3A%22com.sap.cloud.s4hana.plugins%22%20OR%20g%3A%22com.sap.cloud.s4hana.quality%22)">Maven Central</a>
+      </p>
+
+      <p>
+        <div class="alert alert-danger">
+          <strong>Known Issues:</strong>
+          <ul>
+              <li>Authentication via OAuth2 SAML bearer flow on SAP Cloud Platform Cloud Foundry does not yet work with Spring security configuration.</li>
+          </ul>
+        </div>
+      </p>
+
+      <p>
+        <div class="alert alert-warning">
+          <strong>Compatibility Notes:</strong>
+          <ul>
+              <li>This version contains the Virtual Data Model (VDM) generator for OData services as a preview release. The preview of the VDM generator is meant to gather feedback, but not yet meant for productive use. The API and functionality of the later full release may differ from the preview release.</li>
+          </ul>
+        </div>
+      </p>
+
+      <h4>New Functionality</h4>
+      <ul>
+          <li>Support for OAuth2 SAML bearer flow with destination service of SAP Cloud Platform Cloud Foundry environment.</li>
+          <li>Generate Java virtual data model for custom OData services with the preview release of the the VDM generator for OData services.
+            <ul>
+              <li>Command line interface of generator available as module <code><a href="https://search.maven.org/#artifactdetails%7Ccom.sap.cloud.s4hana.datamodel%7Codata-generator-cli%7C1.9.4%7Cjar">com.sap.cloud.s4hana.datamodel:odata-generator-cli</a></code> as a <a href="https://search.maven.org/remotecontent?filepath=com/sap/cloud/s4hana/datamodel/odata-generator-cli/1.9.4/odata-generator-cli-1.9.4.jar">fat jar</a> that can be called via <code>java -jar odata-generator-cli-1.9.4.jar</code>.</li>
+              <li>Maven plugin available as module <code><a href="https://search.maven.org/#artifactdetails%7Ccom.sap.cloud.s4hana.datamodel%7Codata-generator-maven-plugin%7C1.9.4%7Cjar">com.sap.cloud.s4hana.datamodel:odata-generator-maven-plugin</a></code>, bound to the <code>generate-sources</code> phase.</li>
+              <li>Calling the generator from any Java program is supported via the <code><a href="[TODO]">DataModelGenerator</a></code> builder class.</li>
+            </ul>
+          </li>
+      </ul>
+
+      <h4>Improvements</h4>
+      <ul>
+          <li>Update all archetypes with <a href="https://blogs.sap.com/2018/03/15/sap-s4hana-cloud-sdk-version-1.9.3-is-available/">latest version of the Continuous Delivery toolkit</a> (<code>cx-server</code>).
+            <ul>
+              <li>Introduce support for backup and restore operations in <code>cx-server</code> script.</li>
+              <li>Introduce a local download cache for Maven and npm dependencies.</li>
+            </ul>
+          </li>
+      </ul>
+
+      <h4>Fixed Issues</h4>
+      <ul>
+          <li>Fix issue where a <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.9.4/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/exception/DestinationAccessException.html">DestinationAccessException</a></code> occurred on SAP Cloud Platform Cloud Foundry when a subaccount had an on-premise destination configured and the application was not bound to a connectivity service instance, even if this destination was never used.
+            <ul>
+              <li>To circumvent this, on-premise proxy configuration (related to Cloud Connector) is now resolved lazily before sending a request instead of being resolved when parsing destinations.</li>
+              <li>Accordingly, the method <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.9.4/javadoc-api/com/sap/cloud/sdk/cloudplatform/connectivity/Destination.html#getProxyConfiguration--">Destination#getProxyConfiguration</a></code> may now throw a <code>DestinationAccessException</code> to indicate an issue while accessing the destination.</li>
+            </ul>
+          </li>
+          <li>Preconfigure the Docker image for Neo deployments used by the Continuous Delivery toolkit in the <code>scp-neo-javaee7</code> archetype.</li>
+      </ul>
+  </div>
+
   <!-- Version 1.9.3 -->
 
   <div>
@@ -134,7 +194,7 @@
               This includes completely new services (available as usual from package <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.9.2/javadoc-api/com/sap/cloud/sdk/s4hana/datamodel/odata/services/package-summary.html">com.sap.cloud.sdk.s4hana.datamodel.odata.services</a></code>), new operations in previously existing services, and new entity types.
               The SDK supports all OData services listed in the <a href="https://api.sap.com/shell/discover/contentpackage/SAPS4HANACloud">SAP API Business Hub for SAP S/4HANA Cloud</a>.
           </li>
-          <li>Support for AppToAppSSO authentication in destination service (beta) on SAP Cloud Platform Cloud Foundry.</li>
+          <li>Support for AppToAppSSO authentication in destination service on SAP Cloud Platform Cloud Foundry.</li>
           <li>Support <a href="https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/f16df12fab9f4fe1b8a4122f0fd54b6e.html">SAP Cloud Connector location ID</a> on SAP Cloud Platform Neo.</li>
           <li>Introduce a new module <code><a href="https://search.maven.org/#search%7Cga%7C1%7C(g%3A%22com.sap.cloud.s4hana.frameworks%22%20AND%20a%3A%22spring-web%22)">com.sap.cloud.s4hana.frameworks:spring-web</a></code> that provides a ready-to-use <code><a href="https://sap.github.io/cloud-s4-sdk-examples/docs/1.9.2/javadoc-api/com/sap/cloud/sdk/frameworks/spring/response/SpringExceptionMapper.html">exception mapper for Spring applications</a></code>. The exception mapper logs all unhandled exceptions with a reference ID and fills the response with the error description, without the stacktrace.</li>
       </ul>
@@ -318,7 +378,7 @@ getAllBusinessPartner().select(
                   to retrieve all business partners with their roles (all fields of role) and the country field of their addresses.</li>
               </ul>
           </li>
-          <li>SAP Cloud Platform Cloud Foundry: Retrieve destinations including credentials from <a href="https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/7e306250e08340f89d6c103e28840f30.html">destination service (beta)</a> and support basic authentication flows via the <a href="https://blogs.sap.com/2017/09/19/deep-dive-3-cloud-platform-abstractions-in-the-sap-s4hana-cloud-sdk/">Cloud Platform abstractions</a> that were already available on SAP Cloud Platform Neo.</li>
+          <li>SAP Cloud Platform Cloud Foundry: Retrieve destinations including credentials from <a href="https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/7e306250e08340f89d6c103e28840f30.html">destination service</a> and support basic authentication flows via the <a href="https://blogs.sap.com/2017/09/19/deep-dive-3-cloud-platform-abstractions-in-the-sap-s4hana-cloud-sdk/">Cloud Platform abstractions</a> that were already available on SAP Cloud Platform Neo.</li>
       </ul>
 
       <h4>Improvements</h4>
