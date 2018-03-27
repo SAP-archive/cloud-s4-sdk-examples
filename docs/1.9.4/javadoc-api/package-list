@@ -52,6 +52,11 @@ com.sap.cloud.sdk.s4hana.datamodel.bapi.structures
 com.sap.cloud.sdk.s4hana.datamodel.bapi.types
 com.sap.cloud.sdk.s4hana.datamodel.odata.adapter
 com.sap.cloud.sdk.s4hana.datamodel.odata.exception
+com.sap.cloud.sdk.s4hana.datamodel.odata.generator
+com.sap.cloud.sdk.s4hana.datamodel.odata.generator.codemodel
+com.sap.cloud.sdk.s4hana.datamodel.odata.generator.helpers
+com.sap.cloud.sdk.s4hana.datamodel.odata.generator.models
+com.sap.cloud.sdk.s4hana.datamodel.odata.generator.models.codemodel
 com.sap.cloud.sdk.s4hana.datamodel.odata.helper
 com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.accountingdocument
 com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.activitytype
@@ -156,6 +161,10 @@ com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.workcenterdata
 com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.workforceavailability
 com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.workforcetimesheet
 com.sap.cloud.sdk.s4hana.datamodel.odata.services
+com.sap.cloud.sdk.s4hana.generator
+com.sap.cloud.sdk.s4hana.generator.codemodel
+com.sap.cloud.sdk.s4hana.generator.helpers
+com.sap.cloud.sdk.s4hana.generator.models
 com.sap.cloud.sdk.s4hana.serialization
 com.sap.cloud.sdk.s4hana.types
 com.sap.cloud.sdk.s4hana.util
