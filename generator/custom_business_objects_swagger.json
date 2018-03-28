@@ -1,0 +1,40 @@
+{
+  "basePath": "/s4hanacloud/sap/opu/odata/--path--/--ODATA-SERVICE-NAME--",
+  "paths": {
+    "/--ODATA-ENTITY-SET--": {
+      "get": {},
+      "post": {}
+    },
+    "/--ODATA-ENTITY-SET--()": {
+      "get": {},
+      "patch": {},
+      "delete": {}
+    }
+  },
+  "info": {
+    "title": "Service Java Class and Package Name",
+    "description": "Some description text for service class javadocs.",
+    "version": "1"
+  },
+  "externalDocs": {
+    "description": "link text for URL",
+    "url": "http://any.url"
+  },
+  "x-sap-software-min-version": "S/4HANA Cloud release version number",
+  "x-sap-ext-overview": [
+    {
+      "name": "table entry",
+      "values": [
+        "some text",
+        {
+          "text": "some text",
+          "format": "plain"
+        },
+        {
+          "text": "[link text for URL](http://any.url \"double quotes for pattern matcher\")",
+          "format": "markdown"
+        }
+      ]
+    }
+  ]
+}

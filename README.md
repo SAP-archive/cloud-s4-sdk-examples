@@ -1,2 +1,4 @@
 # SAP S/4HANA Cloud SDK - Templates
-This branch hosts different templates that are relevant when working with the [SAP S/4HANA Cloud SDK](https:://www.sap.com/s4sdk).
+This branch hosts different templates that are relevant when working with the [SAP S/4HANA Cloud SDK](https://www.sap.com/s4sdk).
+
+* [Swagger templates for generator of Java virtual data model for OData services](./generator/)
