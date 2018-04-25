@@ -1,0 +1,40 @@
+#Project Setup
+general:
+  productiveBranch: 'master'
+
+#Steps Specific Configuration
+steps:
+  executeMaven:
+#    dockerImage: 'maven:3.5.0-jdk-8'
+    projectSettingsFile : ''
+
+  deployToCfWithCli:
+#    dockerImage: 's4sdk/docker-cf-cli'
+    smokeTestStatusCode: '200'
+
+
+#Stage Specific Configurations
+stages:
+  staticCodeChecks:
+    findbugsExcludesFile: '' #Path to findbugs exclude file
+    pmdExcludes: '' # List or ANT style patterns
+
+#  integrationTests:
+#    credentials:
+#      - alias: ''
+#        credentialId: ''
+
+#  s4SdkQualityChecks:
+#    jacocoExcludes:
+#      - ''
+#    nonErpDestinations:
+#      - ''
+
+#  productionDeployment:
+#    cfTargets:
+#      - org: 'org'
+#        space: 'Productive'
+#        apiEndpoint: 'https://'
+#        appName: 'appName'
+#        manifest: 'manifest.yml'
+#        credentialsId: 'credentialsId'
