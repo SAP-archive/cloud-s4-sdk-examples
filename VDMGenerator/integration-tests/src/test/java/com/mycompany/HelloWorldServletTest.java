@@ -1,6 +1,6 @@
 package com.mycompany;
 
-import com.jayway.restassured.RestAssured;
+import io.restassured.RestAssured;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -11,13 +11,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import java.net.URL;
 
+import com.mycompany.HelloWorldServlet;
 import com.sap.cloud.sdk.testutil.MockUtil;
 
-import static com.jayway.restassured.RestAssured.given;
+import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith( Arquillian.class )
-public class HelloWorldServiceTest
+public class HelloWorldServletTest
 {
     private static final MockUtil mockUtil = new MockUtil();
 

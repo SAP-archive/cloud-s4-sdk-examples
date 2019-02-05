@@ -4,11 +4,11 @@ general:
 
 #Steps Specific Configuration
 steps:
-  executeMaven:
-#    dockerImage: 'maven:3.5.0-jdk-8'
+  mavenExecute:
+#    dockerImage: 'maven:3.6.0-jdk-8'
     projectSettingsFile : ''
 
-  deployToCfWithCli:
+  cloudFoundryDeploy:
 #    dockerImage: 's4sdk/docker-cf-cli'
     smokeTestStatusCode: '200'
 

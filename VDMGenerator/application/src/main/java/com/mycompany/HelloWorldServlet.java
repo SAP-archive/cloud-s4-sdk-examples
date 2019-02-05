@@ -2,7 +2,6 @@ package com.mycompany;
 
 import org.slf4j.Logger;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,7 @@ public class HelloWorldServlet extends HttpServlet
 
     @Override
     protected void doGet( final HttpServletRequest request, final HttpServletResponse response )
-        throws ServletException, IOException
+        throws IOException
     {
         logger.info("I am running!");
         response.getWriter().write("Hello World!");

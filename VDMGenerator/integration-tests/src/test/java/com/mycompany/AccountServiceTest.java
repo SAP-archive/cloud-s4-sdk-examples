@@ -1,6 +1,7 @@
 package com.mycompany;
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.http.ContentType;
+
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -17,11 +18,11 @@ import java.net.URL;
 
 import com.sap.cloud.sdk.testutil.MockUtil;
 
-import static com.jayway.restassured.RestAssured.when;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.hamcrest.Matchers.not;
+import static io.restassured.RestAssured.when;
 
 @RunWith( Arquillian.class )
 public class AccountServiceTest
