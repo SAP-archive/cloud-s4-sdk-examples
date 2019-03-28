@@ -9,6 +9,7 @@
     "start:local": "npx node src/",
     "watch:local": "nodemon -e js -w ./src -x npm run serve-debug",
     "serve-debug": "node --inspect src/index.js",
+    "ci-build": "exit 0",
     "ci-package": "mkdir -p deployment/ && npm prune --production && cp -r node_modules src package.json index.html deployment/",
     "ci-backend-unit-test": "mocha test/unit-tests/*.spec.js --reporter mocha-junit-reporter --reporter-options mochaFile=./s4hana_pipeline/reports/backend-unit/results.xml",
     "ci-integration-test": "mocha test/integration-tests/*.spec.js --reporter mocha-junit-reporter --reporter-options mochaFile=./s4hana_pipeline/reports/integration/results.xml"
