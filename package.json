@@ -1,0 +1,36 @@
+{
+  "name": "cloud-sdk-starter-app",
+  "version": "1.0.0",
+  "description": "Starter project using the SAP S/4HANA Cloud SDK and Express.js",
+  "main": "src/index.js",
+  "scripts": {
+    "init": "npm i && node initialize.js",
+    "test": "mocha test/**/*.spec.js",
+    "start:local": "npx node src/",
+    "watch:local": "nodemon -e js -w ./src -x npm run serve-debug",
+    "serve-debug": "node --inspect src/index.js",
+    "ci-package": "mkdir -p deployment/ && npm prune --production && cp -r node_modules src package.json index.html deployment/",
+    "ci-backend-unit-test": "mocha test/unit-tests/*.spec.js --reporter mocha-junit-reporter --reporter-options mochaFile=./s4hana_pipeline/reports/backend-unit/results.xml",
+    "ci-integration-test": "mocha test/integration-tests/*.spec.js --reporter mocha-junit-reporter --reporter-options mochaFile=./s4hana_pipeline/reports/integration/results.xml"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "js-yaml": "^3.13.0",
+    "mocha": "^5.2.0",
+    "mocha-junit-reporter": "^1.18.0",
+    "node-mocks-http": "^1.7.3",
+    "nodemon": "^1.18.10",
+    "sinon": "^7.2.7",
+    "sinon-chai": "^3.3.0"
+  },
+  "dependencies": {
+    "@sap/cloud-sdk-core": "^1.0.0",
+    "express": "^4.16.4"
+  },
+  "engines": {
+    "node": "11.9.0"
+  }
+}

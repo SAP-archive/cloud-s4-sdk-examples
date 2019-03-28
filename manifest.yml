@@ -1,0 +1,7 @@
+applications:
+  - name: cloud-sdk-starter-app
+    path: deployment/
+    buildpacks:
+      - nodejs_buildpack
+    memory: 256M
+    command: node src/index.js
