@@ -3,3 +3,8 @@ node_modules
 dist
 *.idea
 .env
+/coverage
+/.nyc_output
+/.vscode
+**credentials.json
+/s4hana_pipeline
