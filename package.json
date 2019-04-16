@@ -11,8 +11,8 @@
     "serve-debug": "node --inspect src/index.js",
     "ci-build": "exit 0",
     "ci-package": "mkdir -p deployment/ && npm prune --production && cp -r node_modules src package.json index.html deployment/",
-    "ci-backend-unit-test": "nyc --report-dir ./s4hana_pipeline/reports/coverage-reports/backend-unit/ --reporter cobertura mocha -r ts-node/register test/unit-tests/*.spec.ts --reporter mocha-junit-reporter --reporter-options mochaFile=./s4hana_pipeline/reports/backend-unit/results.xml",
-    "ci-integration-test": "nyc --report-dir ./s4hana_pipeline/reports/coverage-reports/backend-integration/ --reporter cobertura mocha -r ts-node/register test/integration-tests/*.spec.ts --reporter mocha-junit-reporter --reporter-options mochaFile=./s4hana_pipeline/reports/backend-integration/results.xml"
+    "ci-backend-unit-test": "nyc --report-dir ./s4hana_pipeline/reports/coverage-reports/backend-unit/ --reporter cobertura mocha test/unit-tests/*.spec.js --reporter mocha-junit-reporter --reporter-options mochaFile=./s4hana_pipeline/reports/backend-unit/results.xml",
+    "ci-integration-test": "nyc --report-dir ./s4hana_pipeline/reports/coverage-reports/backend-integration/ --reporter cobertura mocha test/integration-tests/*.spec.js --reporter mocha-junit-reporter --reporter-options mochaFile=./s4hana_pipeline/reports/backend-integration/results.xml"
   },
   "author": "",
   "license": "ISC",
