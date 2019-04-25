@@ -1,7 +1,7 @@
 {
   "name": "cloud-sdk-starter-app",
   "version": "1.0.0",
-  "description": "Starter project using the SAP S/4HANA Cloud SDK and Express.js",
+  "description": "Starter project using the SAP Cloud SDK and Express.js",
   "main": "src/index.js",
   "scripts": {
     "init": "npm i && node initialize.js",
