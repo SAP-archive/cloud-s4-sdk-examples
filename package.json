@@ -29,7 +29,7 @@
     "sinon-chai": "^3.3.0"
   },
   "dependencies": {
-    "@sap/cloud-sdk-core": "^1.0.0",
+    "@sap/cloud-sdk-core": "^1.2.1",
     "express": "^4.16.4"
   },
   "engines": {
