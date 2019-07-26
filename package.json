@@ -10,7 +10,7 @@
     "watch:local": "nodemon -e ts -w ./src -x npm run serve-debug",
     "serve-debug": "node -r ts-node/register --inspect src/index.ts",
     "ci-build": "npx tsc",
-    "ci-package": "mkdir -p deployment/ && npm prune --production && cp -r node_modules dist package.json index.html deployment/",
+    "ci-package": "mkdir -p deployment/ && cp -r node_modules dist package.json index.html deployment/ && rm -rf deployment/node_modules && npm i --production --prefix deployment",
     "ci-backend-unit-test": "nyc --extension .ts --report-dir ./s4hana_pipeline/reports/coverage-reports/backend-unit/ --reporter cobertura mocha -r ts-node/register test/unit-tests/*.spec.ts --reporter mocha-junit-reporter --reporter-options mochaFile=./s4hana_pipeline/reports/backend-unit/results.xml",
     "ci-integration-test": "nyc --extension .ts --report-dir ./s4hana_pipeline/reports/coverage-reports/backend-integration/ --reporter cobertura mocha -r ts-node/register test/integration-tests/*.spec.ts --reporter mocha-junit-reporter --reporter-options mochaFile=./s4hana_pipeline/reports/backend-integration/results.xml"
   },
@@ -37,7 +37,7 @@
     "typescript": "^3.3.4000"
   },
   "dependencies": {
-    "@sap/cloud-sdk-core": "^1.2.1",
+    "@sap/cloud-sdk-core": "^1.6.1",
     "express": "^4.16.4"
   },
   "engines": {
