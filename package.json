@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@sap/cloud-sdk-core": "^1.6.1",
+    "@sap/cloud-sdk-test-util": "^1.6.1",
     "express": "^4.16.4"
   },
   "engines": {
