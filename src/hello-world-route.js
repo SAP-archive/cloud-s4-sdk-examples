@@ -1,6 +1,6 @@
-const { executeHttpRequest, HttpMethod } = require('@sap/cloud-sdk-core');
+const { executeHttpRequest, HttpMethod } = require("@sap/cloud-sdk-core");
 
-exports.helloWorld = async function(req, res) {
+async function helloWorld(req, res) {
   await doSomething({
     url: "http://example.com"
   }).then(greeting => {
@@ -8,10 +8,13 @@ exports.helloWorld = async function(req, res) {
   });
 }
 
-exports.doSomething = function (destination) {
+function doSomething(destination) {
   return executeHttpRequest(destination, {
     method: HttpMethod.GET
   })
   .then(() => "Hello")
   .catch(() => "Bye");
 }
+
+exports.helloWorld = helloWorld;
+exports.doSomething = doSomething;
