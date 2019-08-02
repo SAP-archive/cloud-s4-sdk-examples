@@ -23,6 +23,7 @@ describe("hello world route", () => {
     doSomething(getTestDestinationByAlias("EXAMPLE")).then(response => {
       expect(response).to.equal("Hello");
       done();
-    });
+    })
+    .catch(done);
   });
 });
