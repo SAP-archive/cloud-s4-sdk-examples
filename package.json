@@ -2,27 +2,21 @@
   "name": "cloud-sdk-starter-app",
   "version": "1.0.0",
   "description": "Starter project using the SAP Cloud SDK and Express.js",
-  "main": "src/index.ts",
+  "main": "src/index.js",
   "scripts": {
     "init": "npm i && node initialize.js",
-    "test": "mocha -r ts-node/register test/**/*.spec.ts",
-    "start:local": "npx ts-node src/",
-    "watch:local": "nodemon -e ts -w ./src -x npm run serve-debug",
-    "serve-debug": "node -r ts-node/register --inspect src/index.ts",
-    "ci-build": "npx tsc",
-    "ci-package": "mkdir -p deployment/ && cp -r node_modules dist package.json index.html deployment/ && rm -rf deployment/node_modules && npm i --production --prefix deployment",
-    "ci-backend-unit-test": "nyc --extension .ts --report-dir ./s4hana_pipeline/reports/coverage-reports/backend-unit/ --reporter cobertura mocha -r ts-node/register test/unit-tests/*.spec.ts --reporter mocha-junit-reporter --reporter-options mochaFile=./s4hana_pipeline/reports/backend-unit/results.xml",
-    "ci-integration-test": "nyc --extension .ts --report-dir ./s4hana_pipeline/reports/coverage-reports/backend-integration/ --reporter cobertura mocha -r ts-node/register test/integration-tests/*.spec.ts --reporter mocha-junit-reporter --reporter-options mochaFile=./s4hana_pipeline/reports/backend-integration/results.xml"
+    "test": "mocha test/**/*.spec.js",
+    "start:local": "npx node src/",
+    "watch:local": "nodemon -e js -w ./src -x npm run serve-debug",
+    "serve-debug": "node --inspect src/index.js",
+    "ci-build": "exit 0",
+    "ci-package": "mkdir -p deployment/ && npm prune --production && cp -r node_modules src package.json index.html deployment/",
+    "ci-backend-unit-test": "nyc --report-dir ./s4hana_pipeline/reports/coverage-reports/backend-unit/ --reporter cobertura mocha test/unit-tests/*.spec.js --reporter mocha-junit-reporter --reporter-options mochaFile=./s4hana_pipeline/reports/backend-unit/results.xml",
+    "ci-integration-test": "nyc --report-dir ./s4hana_pipeline/reports/coverage-reports/backend-integration/ --reporter cobertura mocha test/integration-tests/*.spec.js --reporter mocha-junit-reporter --reporter-options mochaFile=./s4hana_pipeline/reports/backend-integration/results.xml"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/chai": "^4.1.7",
-    "@types/chai-http": "^4.2.0",
-    "@types/express": "^4.16.1",
-    "@types/mocha": "^5.2.6",
-    "@types/sinon": "^7.0.10",
-    "@types/sinon-chai": "^3.2.2",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
     "js-yaml": "^3.13.0",
@@ -32,12 +26,10 @@
     "nodemon": "^1.18.10",
     "nyc": "^13.3.0",
     "sinon": "^7.2.7",
-    "sinon-chai": "^3.3.0",
-    "ts-node": "^8.0.3",
-    "typescript": "^3.3.4000"
+    "sinon-chai": "^3.3.0"
   },
   "dependencies": {
-    "@sap/cloud-sdk-core": "^1.6.1",
+    "@sap/cloud-sdk-core": "^1.2.1",
     "express": "^4.16.4"
   },
   "engines": {
