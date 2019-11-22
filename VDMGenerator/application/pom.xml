@@ -154,7 +154,7 @@
                             <goal>usage-analytics</goal>
                         </goals>
                         <configuration>
-                            <skipUsageAnalytics>false</skipUsageAnalytics>
+                            <skipUsageAnalytics>true</skipUsageAnalytics>
                             <generateSalt>true</generateSalt>
                             <!--
                             Note: A random salt is auto-generated once the project is built for the first time.
@@ -162,7 +162,7 @@
 
                             To learn more, visit: https://blogs.sap.com/2018/10/23/usage-analytics-s4sdk/
                             -->
-                            <salt>30e1f1031b01982481c9776b304b1d07d731062ab2dccd80a5a00d763696d969</salt>
+                            <salt />
                         </configuration>
                     </execution>
                 </executions>
