@@ -1,0 +1,4 @@
+steps:
+
+  mavenExecute:
+    dockerImage: 'maven:3.6-jdk-11-alpine'
