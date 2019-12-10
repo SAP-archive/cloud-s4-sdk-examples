@@ -2,3 +2,10 @@ steps:
 
   mavenExecute:
     dockerImage: 'maven:3.6-jdk-11-alpine'
+   
+stages:
+  backendIntegrationTests:
+    credentials:
+      - alias: 'MOCK_SYSTEM'
+        credentialId: 'MY-MOCK-ERP'
+   
