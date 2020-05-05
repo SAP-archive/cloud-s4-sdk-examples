@@ -2,7 +2,7 @@ steps:
   # Should be overritten by the projects if projects only support jdk 8
   # TestCase: Test that project (book address manager) has precedence
   mavenExecute:
-    dockerImage: 'maven:3.6-jdk-11-alpine'
+    dockerImage: 'maven:3.6.3-jdk-11-slim'
 
 stages:
   # Is required by project
