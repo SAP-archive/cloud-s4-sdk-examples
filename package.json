@@ -10,13 +10,14 @@
     "watch:local": "nodemon -e ts -w ./src -x npm run serve-debug",
     "serve-debug": "node -r ts-node/register --inspect src/index.ts",
     "ci-build": "npx tsc",
-    "ci-package": "mkdir -p deployment/ && cp -r node_modules dist package.json index.html .npmrc deployment/ && rm -rf deployment/node_modules && npm i --production --prefix deployment",
+    "ci-package": "sap-cloud-sdk package --include=dist/**/*,package.json,package-lock.json,frontend/**/*,index.html",
     "ci-backend-unit-test": "nyc --extension .ts --report-dir ./s4hana_pipeline/reports/coverage-reports/backend-unit/ --reporter cobertura mocha -r ts-node/register test/unit-tests/*.spec.ts --reporter mocha-junit-reporter --reporter-options mochaFile=./s4hana_pipeline/reports/backend-unit/results.xml",
     "ci-integration-test": "nyc --extension .ts --report-dir ./s4hana_pipeline/reports/coverage-reports/backend-integration/ --reporter cobertura mocha -r ts-node/register test/integration-tests/*.spec.ts --reporter mocha-junit-reporter --reporter-options mochaFile=./s4hana_pipeline/reports/backend-integration/results.xml"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@sap-cloud-sdk/cli": "^0.1.9",
     "@sap/cloud-sdk-test-util": "^1.7.0",
     "@types/chai": "^4.1.7",
     "@types/chai-http": "^4.2.0",
