@@ -10,13 +10,14 @@
     "watch:local": "nodemon -e js -w ./src -x npm run serve-debug",
     "serve-debug": "node --inspect src/index.js",
     "ci-build": "exit 0",
-    "ci-package": "mkdir -p deployment/ && cp -r node_modules src package.json index.html .npmrc deployment/ && npm i --production --prefix deployment",
+    "ci-package": "sap-cloud-sdk package --include=dist/**/*,package.json,package-lock.json,frontend/**/*,index.html",
     "ci-backend-unit-test": "nyc --report-dir ./s4hana_pipeline/reports/coverage-reports/backend-unit/ --reporter cobertura mocha test/unit-tests/*.spec.js --reporter mocha-junit-reporter --reporter-options mochaFile=./s4hana_pipeline/reports/backend-unit/results.xml",
     "ci-integration-test": "nyc --report-dir ./s4hana_pipeline/reports/coverage-reports/backend-integration/ --reporter cobertura mocha test/integration-tests/*.spec.js --reporter mocha-junit-reporter --reporter-options mochaFile=./s4hana_pipeline/reports/backend-integration/results.xml"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@sap-cloud-sdk/cli": "^0.1.9",
     "@sap/cloud-sdk-test-util": "^1.7.0",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
