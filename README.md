@@ -69,6 +69,12 @@ We recommend to use [Intellij IDEA](https://www.jetbrains.com/idea/#chooseYourEd
 
 When the IDE is installed, refer to additonal README files in the projects to proceed with the build and deployment procedures.
 
+### Want to learn more? Check out our [Documentation](https://sap.github.io/cloud-sdk/)
+For general overview check the [About section](https://sap.github.io/cloud-sdk/docs/overview/about)
+[Getting started](https://sap.github.io/cloud-sdk/docs/java/getting-started) guide for SAP Cloud SDK for Java
+[Getting started](https://sap.github.io/cloud-sdk/docs/js/getting-started) guide for SAP Cloud SDK for JavaScript
+Look into other helpful feature documentation, guides and video-tutorials in respective section of documentation portal or use a smart search feature in the right top corner.
+
 ## Known Issues
  Currently, there are no known issues.
 
