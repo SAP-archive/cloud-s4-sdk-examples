@@ -81,6 +81,3 @@ Look into other helpful feature documentation, guides and video-tutorials in res
 ## How to obtain support
  If you need any support, have any question, or have found a bug, please report it as an issue in the repository.
 
-## License
- Copyright (c) 2017 SAP SE or an SAP affiliate company. All rights reserved.
- This file is licensed under the Apache Software License, v. 2 except as noted otherwise in the [LICENSE file](LICENSE).
