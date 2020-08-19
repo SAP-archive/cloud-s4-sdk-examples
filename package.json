@@ -12,7 +12,7 @@
     "ci-build": "npx tsc",
     "ci-package": "sap-cloud-sdk package --include=dist/**/*,package.json,package-lock.json,frontend/**/*,index.html",
     "ci-backend-unit-test": "nyc --extension .ts --report-dir ./s4hana_pipeline/reports/coverage-reports/backend-unit/ --reporter cobertura mocha -r ts-node/register test/unit-tests/*.spec.ts --reporter mocha-junit-reporter --reporter-options mochaFile=./s4hana_pipeline/reports/backend-unit/results.xml",
-    "ci-integration-test": "nyc --extension .ts --report-dir ./s4hana_pipeline/reports/coverage-reports/backend-integration/ --reporter cobertura mocha -r ts-node/register test/integration-tests/*.spec.ts --reporter mocha-junit-reporter --reporter-options mochaFile=./s4hana_pipeline/reports/backend-integration/results.xml"
+    "ci-it-backend": "nyc --extension .ts --report-dir ./s4hana_pipeline/reports/coverage-reports/backend-integration/ --reporter cobertura mocha -r ts-node/register test/integration-tests/*.spec.ts --reporter mocha-junit-reporter --reporter-options mochaFile=./s4hana_pipeline/reports/backend-integration/results.xml"
   },
   "author": "",
   "license": "ISC",
