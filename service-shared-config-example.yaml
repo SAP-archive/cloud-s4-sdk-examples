@@ -3,9 +3,8 @@ steps:
   # TestCase: Test that project (book address manager) has precedence
   mavenExecute:
     dockerImage: 'maven:3.6.3-jdk-11-slim'
-    
-  steps:
-    writeTemporaryCredentials:
-      credentials:
-        - alias: 'MOCK_SYSTEM'
-          credentialId: 'MY-MOCK-ERP'   
+
+  writeTemporaryCredentials:
+    credentials:
+      - alias: 'MOCK_SYSTEM'
+        credentialId: 'MY-MOCK-ERP'   
