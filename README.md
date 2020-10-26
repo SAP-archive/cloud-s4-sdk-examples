@@ -3,7 +3,7 @@ Runnable example applications that showcase the usage of the SAP S/4HANA Cloud S
 
  ## Description
 
- The [SAP S/4HANA Cloud SDK](https://sap.com/s4sdk) helps to develop SAP S/4HANA extension application on the SAP Cloud Platform. 
+ The [SAP Cloud SDK](https://sap.github.io/cloud-sdk/) helps to develop SAP S/4HANA and other  extension application on the SAP Cloud Platform. 
 
  This repository contains example projects that demonstrate, how developers can use SAP S/4HANA Cloud SDK components to build extensions for SAP S/4HANA on SAP Cloud Platform.  
  ### The following applications are included:
