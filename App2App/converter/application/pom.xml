@@ -49,7 +49,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>4.0.9.RELEASE</version>
+            <version>4.2.7.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>com.sap.security.nw.sso.linuxx86_64.opt</groupId>
