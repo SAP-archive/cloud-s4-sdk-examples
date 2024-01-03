@@ -1,9 +1,12 @@
+![](https://img.shields.io/badge/STATUS-NOT%20CURRENTLY%20MAINTAINED-red.svg?longCache=true&style=flat)
+
+# Important Notice
+This public repository is read-only and no longer maintained.
+
 # SAP S/4HANA Cloud SDK - Examples and Documentation
 Runnable example applications that showcase the usage of the SAP S/4HANA Cloud SDK.
 
-[![REUSE status](https://api.reuse.software/badge/github.com/SAP/cloud-s4-sdk-examples)](https://api.reuse.software/info/github.com/SAP/cloud-s4-sdk-examples)
-
- ## Description
+## Description
 
  The [SAP Cloud SDK](https://sap.github.io/cloud-sdk/) helps to develop SAP S/4HANA and other  extension application on the SAP Cloud Platform. 
 
